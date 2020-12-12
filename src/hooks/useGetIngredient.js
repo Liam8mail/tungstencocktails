@@ -22,7 +22,7 @@ export default function useGetIngredient(input){
                     let ingredient = await getIngredient(input);
                   
                     if(isMounted){
-                        //console.log(ingredient);  
+                        console.log(ingredient);  
                         setIngredient(ingredient);                      
                         setStatus('received');
                     }

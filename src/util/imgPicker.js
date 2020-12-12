@@ -8,6 +8,11 @@ export default function imgPicker(type, ing){
 
 }
 
+export function ingImageUrl(type, ing){ 
+    return `url(https://www.thecocktaildb.com/images/ingredients/${ing}-Small.png)`; //  (100x100 pixels)
+
+}
+
 // Pantry Component
 export const loadPantryUrl = "https://media.giphy.com/media/LUeU77YRMp5b0hgd5R/giphy.gif"; // loading gif displayed when loading pantry ingredients
 

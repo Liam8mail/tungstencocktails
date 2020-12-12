@@ -11,8 +11,6 @@ export default function NavBar(props){
         props.setOnlineStatus(false);   //calls parent logout in app.js etc..
     }
     const LoginStatus = useLoginStatus;
-
-    console.log(LoginStatus);
     
     return ( 
             <div className="menu-outer">

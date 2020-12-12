@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getUserObject } from '../services/authService';
-import { updatePantry } from '../services/userService';
+import { updateUserPantry } from '../services/userService';
 import { getCancelToken } from '../services/httpService';
 
 
@@ -18,7 +18,7 @@ export default function useUpdateUser(){
             try{
                 let currentUser = getUserObject();
                 if(!isMounted || !currentUser || typeof currentUser === 'undefined') return setUser(null);
-                currentUser = await updatePantry(currentUser, { cancelToken: source.token });
+                currentUser = await updateUserPantry(currentUser, { cancelToken: source.token });
                 console.log(currentUser);
             }
             catch(err){

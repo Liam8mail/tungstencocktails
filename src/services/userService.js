@@ -25,4 +25,6 @@ export function updateUserPantry(user,pantry) {
     return http.put(`${apiUserEndpoint}pantry/:${user._id}`, {'pantry': pantry});
 };
 
-
+export function ping(){
+    return http.get(apiUrl);
+}

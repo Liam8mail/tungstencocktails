@@ -4,6 +4,7 @@ import Pantry from './components/Pantry';
 import LoginForm from './components/LoginForm';
 import { getToken } from './services/authService';
 import NavBar from "./components/SimpleNav";
+import { ping } from './services/userService';
 import './index.css';
 
 
@@ -43,5 +44,8 @@ export default App;
 //   apiFetch("/lookup.php?iid=10");
 // }
 
-
-
+const pingSer = async() =>{
+  await ping(); // loads server if unloaded  at init.
+  //console.log(result);
+}
+pingSer();

@@ -10,10 +10,10 @@ import { updateUserPantry } from '../services/userService';
 export default function Pantry(props){
     
     const  [pantry, setPantry] = useState();
-    
+    const  [selected, setSelected] = useState([]);
     const {status, ingredients} = useGetPantry(); // possible to add a refresh button to recall database values using dependancy prop
 
-    const updatePantry = async(ingredient) => { // called from AddIngredient
+    const addIngredients = async(ingredient) => { // called from AddIngredient modal ok clicked
         try{
             if (ingredients.some(i => i.idIngredient === ingredient.idIngredient)) return; //if ingredient is already in pantry; Note show some message
             let newPantry = [...ingredients,ingredient]; //has to be mutable
@@ -31,21 +31,45 @@ export default function Pantry(props){
         }
     }
     
+    const removeIngredients = async() => {
+        try{
+            let newPantry = ingredients.filter(i => !selected.some(e => e.idIngredient === i.idIngredient));
+            setPantry(newPantry);
+           
+            let cachedIng = [...ingredients]; 
+            ingredients.length = 0;
 
+            newPantry.forEach(e => { ingredients.push(e); }); // all other methods where unreliable
+            const cachedSelected = [...selected];
+            selected.length = 0;
+            
+            if (!await updateDB(newPantry)){
+                cachedSelected.forEach(e => ingredients.push(e));
+                setSelected(cachedSelected);
+                setPantry(cachedIng); // set to original
+                // Note display some friendly error
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+
+    }
+    
     try{
-        if (!props.isAuthed) // will never be calle because we are removing function by logged in status condition instead
+        if (!props.isAuthed) // will never be called because we are removing function by logged in status condition instead
         return  <h1> Please Login </h1>
         
         switch(status){
             
             case 'init':
-            return renderLoading(updatePantry);
+            return renderLoading(addIngredients);
 
             case 'requesting':
-            return renderLoading(updatePantry);
+            return renderLoading(addIngredients);
 
             case 'received': 
-            return renderPantry(updatePantry,ingredients,pantry);
+            return renderPantry(pantry, addIngredients, selected, setSelected, ingredients, removeIngredients);
        
             case 'invalid token': // Need to test 
             return  <h1> Please Login </h1>
@@ -54,12 +78,12 @@ export default function Pantry(props){
             throw new Error();
 
             default:
-            return <><h1 style={style}>No items</h1><AddIngredient update={updatePantry}/></>
+            return <><h1 style={style}>No items</h1><AddIngredient update={addIngredients}/></>
 
             }
         }catch(err){
                 console.log(err);
-                return <><h1 style={style}>Oops :(</h1><AddIngredient update={updatePantry}/></>
+                return <><h1 style={style}>Oops :(</h1><AddIngredient update={addIngredients}/></>
         }
 
 }
@@ -85,14 +109,16 @@ const updateDB = async newPantry => {
 
 
 
-    const renderPantry = (updatePantry,ingredients,pantry) => {
+    const renderPantry = (pantry, updatePantry,selected, setSelected, ingredients, removeIngredients) => {
         let choice = pantry === undefined? ingredients : pantry; // pantry will always be undefined at init. we want to use database ingredients from useGetPantry. 
         if (choice.length > 0) // if we have something to show
-        return (<><h1 className="ingredient-text" style={style}>
-                Ingredients<ul> {choice.sort((a,b) => sortIng(a.strIngredient,b.strIngredient)).map(i => <button key={i.idIngredient} style={ingstyle} >
-            <span style={btntxt}>{i.strIngredient}</span>{imgPicker(i.strType, i.strIngredient)}</button>)}</ul> </h1><AddIngredient update={updatePantry}/></>);
+        return (<div style={style}><strong className="ingredient-text" >
+                Ingredients</strong>{selected.length > 0 && <button style={removeStyle} onClick={()=>removeIngredients()}>remove</button>}<ul> {choice.sort((a,b) => sortIng(a.strIngredient,b.strIngredient)).map(i => 
+                <button key={i.idIngredient} style={buttonStyle(i, selected)} onMouseOver={e => buttonHovered(e,i,selected)} onMouseLeave={e => buttonUnhovered(e,i,selected)}
+                onClick={(e) => onSelect(i,selected,setSelected,e)}><span style={btntxt}>{i.strIngredient}</span>{imgPicker(i.strType, i.strIngredient)}</button>)}
+                </ul> <AddIngredient update={updatePantry}/></div>);
 
-        return <><AddIngredient update={updatePantry}/><h1 style={style}><AddIngredient update={updatePantry}/>No items :(</h1></> 
+        return <><AddIngredient update={updatePantry}/><h1 style={style}>No items :(</h1></> 
 }
 
 
@@ -109,19 +135,82 @@ const updateDB = async newPantry => {
         if(a < b) return -1
         return 0;
     }
+
+
+
+
+
+
+
+
+
+    function buttonStyle(i, selected){
+        //console.log(selected.includes(i));
+        return selected.includes(i) ? ingstyleSel : ingStyle
+}
+
+    function buttonHovered({currentTarget: button},i,selected) {
+        if (selected.includes(i)) return;
+    
+    button.style.background = 'linear-gradient(130deg, white 50%, hsla(120, 60%, 70%, 0.2)100%)'
+}
+
+
+    function buttonUnhovered({currentTarget: button},i,selected) {
+        if (selected.includes(i)) return;
+        button.style.border = ingStyle.border;
+        button.style.padding = ingStyle.padding;
+        button.style.background = ingStyle.background;
+}
+
+
+
+
+    function onSelect(ing, selected, setSelected){
+        const index = selected.findIndex(i => i.idIngredient === ing.idIngredient);
+        
+        let newSelection = [...selected]
+
+        if (index === -1) // notFound;
+            newSelection = [...selected, ing]
+        else
+            newSelection.splice(index,1);
+        setSelected(newSelection);
+        console.log(selected);
+
+    }
     
 
     
 const style = {
     textAlign: 'center',
+    padding: '32px 0'
 }
 
-const ingstyle = {
+const ingStyle = {
     backgroundColor: 'transparent',
+    background: 'transparent',
     margin: "5px",
-    borderRadius: '10%',
-    border: 'none'
+    borderRadius: '2%',
+    border: 'none',
+    fontSize: '12px',
+    padding: '8px',
+    outline:'none'
 }
+
+const ingstyleSel =  {
+    backgroundColor: 'transparent',
+    background: 'linear-gradient(20deg, white 50%, hsla(180, 60%, 70%, 0.2)100%)',
+    margin: "5px",
+    borderRadius: '2%',
+    border: '',
+    borderWidth: '1px',
+    fontSize: '12px',
+    padding: '7px',
+    outline:'none'
+}
+
+
 const btntxt = {
     height: "100px",
     margin: "5px",
@@ -135,12 +224,16 @@ const imgStyle = {
 }
 
 
-
-
-
-
-
-
+const removeStyle = {
+    // Button
+  
+    backgroundColor: "transparent",
+    //display: "inline-block",
+    fontSize: "12px",
+    border: '',
+    borderWidth : '1px',
+    float: 'right',
+  };
 
 
 

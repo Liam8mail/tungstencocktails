@@ -22,7 +22,7 @@ export default function useGetIngredient(input){
                     let ingredient = await getIngredient(input);
                   
                     if(isMounted){
-                        console.log(ingredient);  
+                        //console.log(ingredient);  
                         setIngredient(ingredient);                      
                         setStatus('received');
                     }
@@ -51,7 +51,7 @@ async function getIngredient(input){
     try{
         //throw new Error('Oops'); 
         const res = await apiFetch(`/search.php?i=${input}`); // calls to server to process using apiFetch
-        console.log(res)
+        //console.log(res)
         return res.ingredients !== null ? res.ingredients[0] : null; //return ingredient data from Json array
      
     }

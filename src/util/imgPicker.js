@@ -2,11 +2,18 @@ import sAdd from '../img/sAdd.png';
 
 
 
-export default function imgPicker(type, ing){ 
+export default function imgPicker(ing){ 
     const url = `https://www.thecocktaildb.com/images/ingredients/${ing}-Small.png`; //  (100x100 pixels)
-    return  <img src={url} alt="tungsten" width="50" height="50" onError={handleOnError()}></img>
+    return  <img src={url} alt="tungsten" width="50" height="50" onError={handleOnError()} key={ing}></img>
 
 }
+
+
+export function ingredientButtons(i,index, buttonHandler){ return <button key={index} style={ingStyle}
+          onClick={() => buttonHandler(i)}>{imgPicker(i)}<h4 style={btntxt}>{i}</h4></button>
+}
+
+
 
 export function ingImageUrl(type, ing){ 
     return `url(https://www.thecocktaildb.com/images/ingredients/${ing}-Small.png)`; //  (100x100 pixels)
@@ -71,7 +78,23 @@ const sAddButton = {
 
 // }
 
+const ingStyle = {
+    backgroundColor: 'transparent',
+    background: 'transparent',
+    margin: "5px",
+    borderRadius: '2%',
+    border: 'none',
+    fontSize: '12px',
+    padding: '8px',
+    outline:'none'
+}
 
+
+const btntxt = {
+    height: "10px",
+    margin: "10px",
+    fontWeight: 'normal'
+  }
 
 
 

@@ -1,0 +1,47 @@
+h1,
+p {
+  font-family: Lato;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+button.go,
+button.goclear {
+  padding: 11px 17px 10px 17px;
+  font-size: 140%;
+  border-radius: 10px;
+  border-width: 5px;
+}
+button.go {
+  background-color: rgb(100, 210, 50);
+  border-color: rgba(90, 195, 45, 0.5);
+  margin-right: 15px;
+  font-size: 140%;
+}
+button.goclear {
+  background-color: rgb(240, 240, 240);
+  border-color: rgba(230, 230, 230, 0.5);
+}
+
+.orange {
+  background-color: rgb(220, 80, 40);
+  border-radius: 10px;
+  border-color: rgb(220, 80, 40);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: white;
+}
+
+button.orange:hover {
+  background-color: orange;
+}
+
+button.orange:active {
+  background-color: rgb(220, 150, 0);
+}

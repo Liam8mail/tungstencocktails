@@ -19,8 +19,8 @@ export default function NavBar(props){
                         {props.onLineStatus &&<li><LoginStatus isAuthed={props.onLineStatus}></LoginStatus></li>} {/* remove conditional to show logged out status ==>  props.onLineStatus &&  */}
                         {!props.onLineStatus && <li><button> <Link to="/login">Login</Link></button></li>}
                         {props.onLineStatus && <li><button><Link to="/pantry">My Pantry</Link></button></li>}
-                        <li><button><Link to="/something">Something</Link></button></li>
-                        <li><button><Link to="/something">Something Else</Link></button></li>
+                        <li><button><Link to="/search">Search</Link></button></li>
+                        <li><button><Link to="/something">Favorites</Link></button></li>
                         <li><button><Link to="/about">About</Link></button></li>
                         {props.onLineStatus && <li><button onClick={() => setLoggingout()}>Logout</button></li>}
                     </ul>

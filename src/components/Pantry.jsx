@@ -1,4 +1,4 @@
-import useGetPantry from '../hooks/usePantry';
+import useGetPantry from '../hooks/useGetPantry';
 import {useState} from 'react';
 import '../index.css';
 import AddIngredient from './AddIngredient';
@@ -115,7 +115,7 @@ const updateDB = async newPantry => {
         return (<div style={style}><strong className="ingredient-text" >
                 Ingredients</strong>{selected.length > 0 && <button style={removeStyle} onClick={()=>removeIngredients()}>remove</button>}<ul> {choice.sort((a,b) => sortIng(a.strIngredient,b.strIngredient)).map(i => 
                 <button key={i.idIngredient} style={buttonStyle(i, selected)} onMouseOver={e => buttonHovered(e,i,selected)} onMouseLeave={e => buttonUnhovered(e,i,selected)}
-                onClick={(e) => onSelect(i,selected,setSelected,e)}><span style={btntxt}>{i.strIngredient}</span>{imgPicker(i.strType, i.strIngredient)}</button>)}
+                onClick={(e) => onSelect(i,selected,setSelected,e)}>{imgPicker(i.strIngredient)}<h4 style={btntxt}>{i.strIngredient}</h4></button>)}
                 </ul> <AddIngredient update={updatePantry}/></div>);
 
         return <><AddIngredient update={updatePantry}/><h1 style={style}>No items :(</h1></> 
@@ -211,10 +211,12 @@ const ingstyleSel =  {
 }
 
 
+
 const btntxt = {
-    height: "100px",
-    margin: "5px",
-}
+    height: "10px",
+    margin: "10px",
+    fontWeight: 'normal'
+  }
 
 const imgStyle = {
     display:'block',

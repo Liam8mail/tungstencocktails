@@ -22,11 +22,12 @@ import RecipeViewer from "./recipe-viewer"; // This component displays a specifi
 import apiFetch from '../../services/apiService';
 //
 import '../../style/style.css'; // CSS
+import '../../index.css';
 import useGetPantry from "../../hooks/useGetPantry";
-import imgPicker from '../../util/imgPicker';
+import imgPicker,{pantryIconUrl} from '../../util/imgPicker';
 
 
-const API_KEY = process.env.REACT_APP_API_KEY; // import API key from .env file
+const API_KEY = true; // import API key from .env file
 
 export default function SearchCocktail(props) {
  
@@ -182,10 +183,10 @@ export default function SearchCocktail(props) {
   }
 
   function makeResultsURL() { // function to make URL out of chosen filters, which will then get loaded by recipe-results
-    if(API_KEY !== undefined){ // if API key is included, get real results
+    if(API_KEY){ // if API key is included, get real results
       if(filters.length > 0){ // if there are filters to search with, go ahead and make the URL with them.
-
-        let resultsEARL = `https://www.thecocktaildb.com/api/json/v2/${API_KEY}/filter.php?i=`; // base URL format
+        console.log(API_KEY);
+        let resultsEARL = `/filter.php?i=`; // base URL format
         // Append base URL with ingredients (replacing spaces with underscores):
         filters.map(a => {
             resultsEARL += a.strIngredient1.replace(" ", "_")+",";
@@ -196,12 +197,12 @@ export default function SearchCocktail(props) {
         resultsEARL = resultsEARL.substring(0, resultsEARL.length-1); // need to chop off the comma from the end of the string now. Easier than watching for the last filters item and treating it differently.
         console.log("Results URL is:" + resultsEARL);
         setResultsURL(resultsEARL); // update state to carry the URL
+        setDisplay("recipe-results");
 
       } else { // otherwise, file a complaint to console. 
         // NB: This should be forwarded to the DOM. The user should be informed of their transgression, and given a chance to rectify their mistake.
         console.log("active filters is empty. Please select some ingredients");
       }
-      setDisplay("recipe-results");
     } else { // if API is not included, use dummy results.
       console.log("API key not present, using fixed results");
       setResultsURL ("");
@@ -213,7 +214,7 @@ export default function SearchCocktail(props) {
     // The resulting URL will provide the JSON data for the cocktail recipe.
     console.log("Recipe chosen: "+idDrink);
     if(idDrink){ // this attempts to identify a null value for making the URL ( which may break the API call )
-      let recipeEARL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+      let recipeEARL = "/lookup.php?i=";
       recipeEARL += idDrink;
       console.log("Recipe URL to input is: "+recipeEARL+" ...");
       console.log("State RecipeURL before set is: \""+recipeURL+"\"");
@@ -235,14 +236,14 @@ export default function SearchCocktail(props) {
       This might be made easier with some additional javascript. Could be cool. Or the image could appear on hover... or turn into colour on hover, instead of no colour. stng like that.
     */ 
     return (
-      <div className="App">
+      <div className="searchCocktail">
         {display === "searchPage" &&
           <div>
             <h1>Search Cocktails By Ingredient</h1>
             <p>Click on an ingredient from the Ingredients List, to add it to your search filters. Then, click GO to search for cocktails which contain those ingredients!</p>
             <div>
               <h3>Selected Ingredients</h3>
-              {filters.length === 0 && <strong> choose your ingredients </strong>}
+              {filters.length === 0 && <h4 style={{fontWeight: 'lighter', padding:'29px'}}> choose your ingredients </h4>}
 
               {filters.sort(compareAbc).map( i => <button key={`${i.strIngredient1}filt`} style={ingStyle}
                 onClick={() => removeFilter(i.strIngredient1)}>{imgPicker(i.strIngredient1)}<h4 style={btntxt}>{i.strIngredient1}</h4></button>)}
@@ -257,6 +258,7 @@ export default function SearchCocktail(props) {
               ))} */}
 
               <p>When you're ready, click GO to search for cocktail recipes with these ingredients, or, click on your active filters to remove them one-by-one. Click clear to remove them all, and start again.</p>
+              <div style={{textAlign: 'center'}}>
               <button
                 onClick={() => makeResultsURL()}
                 className="go"
@@ -269,14 +271,19 @@ export default function SearchCocktail(props) {
               >
                 Clear
               </button>
+              <button className="pantryOption"
+                onClick={() => {setUsePantry(!usePantry); clearActiveFilters()}}
+              >&nbsp;
+              
+              </button>
+              </div>
             </div>
             <h3>Ingredients List</h3>
-            <button onClick={() => {setUsePantry(!usePantry); clearActiveFilters()}}>UsePantry</button>
             <SearchForm
               searchTerm={searchTerm}
               onChange={onSearchFormChange}
             />
-            { !usePantry && <SearchResults
+            { !usePantry && <SearchResults style={{minHeight: '200px'}}
               searchTerm={searchTerm}
               //globalArray={globalArray}
               buttonHandler={handleFilterSelection}
@@ -333,4 +340,14 @@ const btntxt = {
   height: "10px",
   margin: "10px, 0",
   fontWeight: 'normal'
+}
+
+const pantryIconStyle = {
+  
+  border: '2px solid #383838',
+  borderWidth: '1px',
+  background: 'transparent',
+  width: '20px',
+  height: 'auto',
+  borderRadius: '50%',
 }

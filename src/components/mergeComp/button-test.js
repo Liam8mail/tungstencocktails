@@ -34,7 +34,7 @@ class App extends Component {
         <h3>This is the parent-level component. </h3>
         The current value for <b>this.state.number </b>
         is: <br />
-        <span class="highlight">{this.state.number}</span>
+        <span className="highlight">{this.state.number}</span>
         <Forward buttonHandler={this.handleForwardClick} />
         <Reset buttonHandler={this.handleResetClick} />
         <Backward buttonHandler={this.handleBackwardClick} />

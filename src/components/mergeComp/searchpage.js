@@ -109,7 +109,7 @@ class searchpage extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <h1>Search Cocktails By Ingredient</h1>
         <p>Click on an ingredient from the Ingredients List, to add it to your search filters. Then, click GO to search for cocktails which contain those ingredients!</p>
         {
@@ -187,7 +187,7 @@ class SearchResults extends Component {
             <button
               onClick={() => buttonHandler(a.strIngredient1)}
               key={a.strIngredient1 + "srch"}
-              class="orange"
+              className="orange"
             >
               <b>{a.strIngredient1}</b>
             </button>

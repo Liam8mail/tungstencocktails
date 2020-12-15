@@ -55,7 +55,7 @@ export default function AddIngredient(props) {
                   onClick={() => props.update(ing)}
                 >
                   <span style={btntxt}>{ing.strIngredient}</span>
-                  {imgPicker(ing.strType, ing.strIngredient)}
+                  {imgPicker(ing.strIngredient, ing.strType)}
                   {addIng()}
                 </button>
               </>
@@ -86,7 +86,8 @@ export default function AddIngredient(props) {
         onAfterOpen={afterOpenModal}
         onRequestClose={close}
         style={customStyles}
-      >
+      > 
+      <div style={{minHeight:'220px'}}>
         <button onClick={close} style={{ margin: "0px 0px 0px 200px" }}>
           close
         </button>{" "}
@@ -97,6 +98,7 @@ export default function AddIngredient(props) {
           search
         </button>
         <div style={{ textAlign: "center" }}>{displayResult()}</div>
+        </div>
       </Modal>
     </div>
   );
@@ -107,7 +109,7 @@ const customStyles = {
 
   overlay: {
     position: "fixed",
-    top: 0,
+    top: 100,
     left: 0,
     right: 0,
     bottom: 0,
@@ -116,7 +118,7 @@ const customStyles = {
 
   content: {
     top: "40%",
-    left: "30%",
+    left: "20%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
@@ -136,8 +138,8 @@ const addsty = {
   fontSize: "64px",
   borderRadius: "50%",
   position: "fixed",
-  bottom: "20%",
-  right: "50%"
+  bottom: "10%",
+  right: "60%"
 };
 
 const ingstyle = {

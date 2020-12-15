@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {ingredientButtons} from '../../util/imgPicker';
+import '../../index.css';
 
 class SearchResults extends Component {
   ingredientFilterFunction(searchTerm) {
@@ -23,13 +24,13 @@ class SearchResults extends Component {
     ).length;
      
     return (
-      <div className="SearchResultsDisplay">
+      <div>
         <p>Number of ingredients found {numberResults}<br /></p>
-       
+
+          <div className="ingredient-list">
           {cocktailIngredList.filter(ingredientFilterFunction(searchTermFromProps)).sort(compareAbc).map(i => 
           ingredientButtons(i.strIngredient1, i.strIngredient1, buttonHandler))}
-       
-          
+          </div>
 
         {/* {cocktailIngredList
           .filter(this.ingredientFilterFunction(searchTermFromProps)).sort(compareAbc).map(a => (

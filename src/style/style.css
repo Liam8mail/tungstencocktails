@@ -8,21 +8,43 @@ h4 {
   padding: 0;
 }
 button.go,
-button.goclear {
+button.goclear,
+button.pantryOption {
+  transition: background-color linear 0.2s;
   padding: 11px 17px 10px 17px;
   font-size: 140%;
-  border-radius: 10px;
-  border-width: 5px;
+  border-radius: 5%;
+  border-width: 2px;
 }
 button.go {
-  background-color: rgb(100, 210, 50);
-  border-color: rgba(90, 195, 45, 0.5);
+  background: rgb(193, 230, 193);
   margin-right: 15px;
   font-size: 140%;
 }
 button.goclear {
-  background-color: rgb(240, 240, 240);
-  border-color: rgba(230, 230, 230, 0.5);
+  background: rgb(206, 185, 219);
+}
+
+
+button.pantryOption {
+  background-color: rgb(193, 230, 193);
+  background: url('https://icon-library.com/images/chef-icon-png/chef-icon-png-4.jpg') no-repeat;
+  background-size: cover; 
+  width: 70px; 
+  margin-left: 15px;
+}
+
+button.pantryOption:focus {
+  outline:none;
+  transition-property: opacity, left;
+  transition-duration: 2s, 4s;
+  
+}
+
+button.goclear:hover,
+button.go:hover {
+  background-color: rgb(230, 240, 241);
+  transition-duration: 0.2s; /* applies to the transition *to* the :hover state */
 }
 
 .orange {
@@ -38,10 +60,32 @@ button.goclear {
   color: white;
 }
 
-button.orange:hover {
-  background-color: orange;
-}
 
 button.orange:active {
   background-color: rgb(220, 150, 0);
+}
+
+
+.searchCocktail {
+  padding: 0 0 0 0;
+  text-align: center;
+
+}
+
+.recipeIngList {
+    list-style-type: none;
+    display: inline-block;
+
+}
+
+
+.font {
+  font-family: Georgia, serif;
+}
+
+
+.cocktails {
+  background: transparent;
+  border: none;
+
 }

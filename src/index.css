@@ -13,11 +13,12 @@ code {
 }
 .menu-outer {
   height: 84px;
+  padding: 0 0 30px 0;
 }
 
 .table {
 	display: table;   /* Allow the centering to work */
-	margin: 0 auto;
+  margin: 0 auto;
 }
 
 ul#horizontal-list {
@@ -28,14 +29,37 @@ ul#horizontal-list {
 	}
 	ul#horizontal-list li {
     display: inline;
-    margin: 10px;
+    margin: 35px;
   }
   
   .ingredient-list {
-    height: 128px;
-    color:blue;
+    min-height: 800px;
+    display: inline-block;
+    overflow-y: auto;
+    overflow-anchor: auto;
+    overflow-x: scroll;
   }
 
 .width {
   width: 40%;
+}
+
+
+.nav-bar {
+  background-color: black;
+  
+}
+
+
+.nav-icon {
+  
+  color: #FFFFFF;
+  background: transparent;
+ 
+  border: none;
+}
+
+.nav-text {
+  text-decoration: none;
+  font-family: Georgia, serif;
 }

@@ -23,8 +23,7 @@ function App (){
 
 
     return (
-      <div className="App" >
-          <section className="width">
+      <div className="width" >
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar>
             <Route path="/about"/>
             <Route path="/signup"/>
@@ -33,7 +32,6 @@ function App (){
             { !onLineStatus && <Route path="/login" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}
             { !onLineStatus && <Route path="/signup" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}
             { onLineStatus &&   <Route path="/pantry" render={(props) => (<Pantry {...props} isAuthed={onLineStatus} />)}/>}
-          </section>
       </div>
     );
   }

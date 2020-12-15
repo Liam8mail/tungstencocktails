@@ -24,7 +24,7 @@ export default function NavBar(props){
                         <li><button className="nav-icon"><Link to="/search" className="nav-text">Search{searchNav()}</Link></button></li>
                         <li><button className="nav-icon"><Link to="/fav" className="nav-text">Fav{likeNav()}</Link></button></li>
                         <li><button className="nav-icon"><Link to="/about" className="nav-text">About</Link></button></li>
-                        {props.onLineStatus && <li><button onClick={() => setLoggingout()}>Logout</button></li>}
+                        {props.onLineStatus && <li><button className="logout" onClick={() => setLoggingout()}><p>Logout</p></button></li>}
                     </ul>
                 </div>
             </div> 

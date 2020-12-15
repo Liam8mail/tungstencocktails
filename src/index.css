@@ -63,3 +63,11 @@ ul#horizontal-list {
   text-decoration: none;
   font-family: Georgia, serif;
 }
+
+button.logout {
+  background-color: rgba(237, 228, 238, 0.781);
+  padding: 0px 11px 0px 11px;
+  font-size: 90%;
+  border-radius: 5%;
+  border-width: 0px;
+}

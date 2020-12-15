@@ -21,7 +21,7 @@ class RecipeResults extends Component {
         const testItem = {drinks:"None Found"};
         const API_URL = this.props.resultsURL;
         console.log(API_URL);
-        // const response = await fetch("https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=Dry_Vermouth,Gin,Anis");
+        
         // const jsonResult = await response.json();
         const jsonResult = await apiFetch(API_URL);
         console.log("jsonResult received:");

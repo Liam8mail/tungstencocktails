@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { login } from '../services/authService';
 import { createAccount } from '../services/userService';
 import useFormInput from '../hooks/useFormInput';
-import { loggingWait } from '../util/imgPicker';
+import { loadIngredientUrl } from '../util/imgPicker';
 import { useLocation, Link } from 'react-router-dom';
 import '../style/style.css';
 
+// responsible for logging in or creating a user account and then navigating the user to the page that they came from. 
 
 export default function Loginform(props) {
     
@@ -16,6 +17,7 @@ export default function Loginform(props) {
 
     const submit = () => setStatus('logging'); // form submit button funtion call
     const [status, setStatus] = useState('idle');
+    const [error, setError] = useState('');
 
     const location = useLocation().pathname;
     const signupPage = '/signup';
@@ -60,11 +62,12 @@ export default function Loginform(props) {
                 
                 if (err.response && err.response.status ===400){
                   setStatus('error'); // Need To Implement
-                  console.log(err.response.data); // use this result to display reason : ie password too short etc // Should do client side validation
+                  setError(err.response.data);
+                  //console.log(err.response.data); // use this result to display reason : ie password too short etc // Should do client side validation
                   return err.response.data; 
                 }
                 setStatus('error');
-                console.log(err) // Internal Error
+                //console.log(err) // Internal Server Error // display friendly error
                 return err 
                 
               }
@@ -74,7 +77,6 @@ export default function Loginform(props) {
         return () => {
             setStatus('idle');
             isMounted = false;
-            console.log('called');
         };
 
         
@@ -85,22 +87,15 @@ export default function Loginform(props) {
       return (
           
           <div className="boxme">
-            {location === loginPage  && <h1 style={{textAlign:'center'}}>Login</h1>}
-            {location === signupPage  && <h1 style={{textAlign:'center'}}>Create Account</h1>}
-                {status === 'logging' && loggingWait()} {/* conditional for loading image upon submit log request */}
-                {status === 'idle' && <>
+          {/* conditionally render header */}
+            {location === loginPage ? <h1 style={{textAlign:'center'}}>Login</h1> : location === signupPage? <h1 style={{textAlign:'center'}}>Create Account</h1> : <></>} 
+                <>
+                    {loggingImages(status)} {/* {function below} */}
 
-
-                <img
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                alt="profile-img"
-                className="profile-img-card"
-                style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', borderRadius: '12%', marginBottom: '36px'}}
-                />
                      {location === signupPage &&
                     <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
                         <input {...name} type="text" className="form-control" id="InputName" aria-describedby="nameHelp" placeholder="Name"></input>
-                        <small id="emailHelp" className="form-text text-muted"></small>
+                        <small id="nameHelp" className="form-text text-muted" role="alert"></small>
                     </div>}
 
                     <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
@@ -116,21 +111,30 @@ export default function Loginform(props) {
                         <small id="passwordHelp" className="form-text text-muted"></small>
                     </div>
 
+                    <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
+                        <small id="help" className="form-text text-muted">{error}</small>
+                    </div>
+
 
                     <div style={{display: "flex", justifyContent: "center",textAlign: "left", margin:'32px'}}>
                         <button onClick={() => submit()} type="submit" className="btn btn-primary" >Sign in</button>
                     </div> 
                         <div style={{ textAlign: "center", margin: "64px 0 0 0" }}>
-                        {location === loginPage && <Link to="/signup">Create Account</Link>}
-                        {location === signupPage && <Link to="/login">previous</Link>}
+                        {location === loginPage ? <Link to="/signup">Create Account</Link> : location === signupPage ? <Link to="/login">previous</Link> : <></>}
                          </div>
 
 
             </>
-            }
+            
         </div>
     );
 
     
+}
+
+const loggingImages = (status) => { // function that retruns the log in image conditionally based on login status
+    return <img src={status === 'idle'? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : loadIngredientUrl} alt="profile-img" className="profile-img-card" width="200px"
+    style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', borderRadius: '12%', marginBottom: '36px'}}
+    />
 }
 

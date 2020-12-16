@@ -4,6 +4,7 @@ import { getUser } from '../services/userService';
 import { getCancelToken } from '../services/httpService';
 import  apiFetch  from '../services/apiService';
 
+// responsible for getting the pantry from users in database.
 
 export default function useGetPantry(){
 
@@ -12,7 +13,7 @@ export default function useGetPantry(){
 
     useEffect(() => {
         let isMounted = true;
-        const source = getCancelToken();
+        const source = getCancelToken(); // we need to cancel the request if user the component unmounts. 
         
             async function requestUserIngredients(){
                 try {
@@ -24,7 +25,7 @@ export default function useGetPantry(){
                     currentUser = await getUser(currentUser, { cancelToken: source.token}); // Authenticating User + refreshing Pantry
                    
                     const ingredients = await Promise.all(
-                        currentUser.data.pantry.map(id => getIngredient(id))
+                        currentUser.data.pantry.map(id => getIngredient(id)) // This will change in future to use a list instead of individual calls 
                     ).catch(
 
                     );
@@ -68,7 +69,7 @@ async function getIngredient(id){
 }
 
 function checkItem(i) {
-    return i !== undefined;
+    return i !== undefined; //checking items just in case there are blanks
 }
 
 

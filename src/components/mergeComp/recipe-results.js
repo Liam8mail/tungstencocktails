@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import apiFetch from '../../services/apiService';
 import { drinks } from "./staticJSONsearchResults";
 import { loadGen, backButtonUrl, ingredientButtons, ingCheckButtons } from '../../util/imgPicker';
+import TungstenLogo_s from '../../img/TungstenLogo_s.png';
 
 class RecipeResults extends Component {
   constructor(props){
@@ -11,9 +12,20 @@ class RecipeResults extends Component {
       errorMsg: "",
       recipeListApiData: drinks,
       status: "idle",
+      loaded:false,
     };
+    this.image = React.createRef();
   }
+
+  handleImageLoaded = () => {
+    if(!this.state.loaded){
+      this.setState({ loaded: true});
+    }
+  }
+
+
   async componentDidMount(){
+     const img = this.image.current;
     //if (this.props.resultsURL.length > 1) {
       //console.log("API key is present...");
       try {
@@ -32,6 +44,10 @@ class RecipeResults extends Component {
           this.setState({ recipeListApiData: [] });
           // Otherwise it will fill it with data in the wrong format.
           // This way it is easy to identify empty results. 
+        if(img && img.complete){
+          this.handleImageLoaded();
+        }
+        
         }
         else this.setState({ recipeListApiData: jsonResult.drinks });
         //console.log("Mount attempt successful. Data Loaded:");
@@ -69,8 +85,8 @@ class RecipeResults extends Component {
           <span>Active Ingredients:</span><br/>
             {filters.sort(this.compareAbc).map((i,index) => {
                 if (isAuthed && userPantry.some(e => e.strIngredient1 === i.strIngredient1)) // Checking ingredients against ingredients in pantry
-                return ingCheckButtons(i.strIngredient1,i.strIngredient1+index,function(){});
-                return ingredientButtons(i.strIngredient1,i.strIngredient1+index,function(){});
+                return ingCheckButtons(i.strIngredient1,i.strIngredient1+index,function(){}); //add in pantry icon
+                return ingredientButtons(i.strIngredient1,i.strIngredient1+index,function(){}); // defualt icon
             })}
           </div>
         <h1>Cocktail Recipes</h1>
@@ -83,7 +99,7 @@ class RecipeResults extends Component {
               key={index+"-recl"}
               className="cocktails"
             >
-              <img src={a.strDrinkThumb} key={a.idDrink+index} style={cocktail} alt='tungsten'></img><b style={{maxWidth: '10px', textAlign: 'center',margin: '30px' }}>{a.strDrink}</b>
+              <img src={this.state.loaded? a.strDrinkThumb : TungstenLogo_s} key={a.idDrink+index} style={cocktail} alt='tungsten' ref={this.image} onLoad={this.handleImageLoaded}></img><b style={{maxWidth: '10px', textAlign: 'center',margin: '30px' }}>{a.strDrink}</b>
             </button>
           ))}
       </div>

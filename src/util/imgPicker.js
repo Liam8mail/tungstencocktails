@@ -32,7 +32,7 @@ export const loadPantryUrl = "https://media.giphy.com/media/LUeU77YRMp5b0hgd5R/g
 
 // Add Ingredient Component
 
-const loadIngredientUrl = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" // loading gif displayed when searching ingredient in Pantry
+export const loadIngredientUrl = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" // loading gif displayed when searching ingredient in Pantry
 
 export const loadIng = () => { return( <img src={loadIngredientUrl} alt="tungsten" style={imgStyle}  width="100" height="100"></img>)}
 

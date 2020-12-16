@@ -32,7 +32,7 @@ export default function Pantry(props){
     
     const removeIngredients = async() => {
         try{
-            let newPantry = ingredients.filter(i => !selected.some(e => e.idIngredient === i.idIngredient));
+            let newPantry = ingredients.filter(i => !selected.some(e => e.idIngredient === i.idIngredient)); //removing selected ingredients from pantry on delete
             setPantry(newPantry);
            
             let cachedIng = [...ingredients]; 
@@ -62,13 +62,13 @@ export default function Pantry(props){
         switch(status){
             
             case 'init':
-            return renderLoading(addIngredients);
+            return renderLoading(addIngredients); // shows loading display
 
             case 'requesting':
             return renderLoading(addIngredients);
 
             case 'received': 
-            return renderPantry(pantry, addIngredients, selected, setSelected, ingredients, removeIngredients);
+            return renderPantry(pantry, addIngredients, selected, setSelected, ingredients, removeIngredients); //if ingredients recieved from database then we can render them.
        
             case 'invalid token': // Need to test 
             return  <h1> Please Login </h1>
@@ -107,7 +107,7 @@ const updateDB = async newPantry => {
 }
 
 
-
+    // responsibe for rendering the list of ingredients
     const renderPantry = (pantry, updatePantry,selected, setSelected, ingredients, removeIngredients) => {
         let choice = pantry === undefined? ingredients : pantry; // pantry will always be undefined at init. we want to use database ingredients from useGetPantry. 
         if (choice.length > 0) // if we have something to show
@@ -116,8 +116,8 @@ const updateDB = async newPantry => {
                 </div>
                 <div  style={style}>
                 <ul className="ingredient-list" style={{marginTop: '24px'}}> {choice.sort((a,b) => sortIng(a.strIngredient,b.strIngredient)).map(i => 
-                <button key={i.idIngredient} style={buttonStyle(i, selected)} onMouseOver={e => buttonHovered(e,i,selected)} onMouseLeave={e => buttonUnhovered(e,i,selected)}
-                onClick={(e) => onSelect(i,selected,setSelected,e)}>{imgPicker(i.strIngredient)}<h4 style={btntxt}>{i.strIngredient}</h4></button>)}
+                <button key={i.idIngredient} style={buttonStyle(i, selected)} onMouseOver={e => buttonHovered(e,i,selected)} onMouseLeave={e => buttonUnhovered(e,i,selected)}  
+                onClick={(e) => onSelect(i,selected,setSelected,e)}>{imgPicker(i.strIngredient)}<h4 style={btntxt}>{i.strIngredient}</h4></button>)} {/* handling selected ingredients -> onselect */}
                 </ul> <AddIngredient update={updatePantry}/></div></React.Fragment>
                 );
 
@@ -133,7 +133,7 @@ const updateDB = async newPantry => {
             </>)
 }
 
-    function sortIng(a, b){
+    function sortIng(a, b){ //simple sorting that may be handled by default but i coded it for future mods.
         if(a > b) return 1
         if(a < b) return -1
         return 0;
@@ -143,13 +143,13 @@ const updateDB = async newPantry => {
     function onSelect(ing, selected, setSelected){ // adds, removes selected items from list.
         const index = selected.findIndex(i => i.idIngredient === ing.idIngredient);
         
-        let newSelection = [...selected]
+        let newSelection = [...selected] // copying array
 
         if (index === -1) // notFound;
             newSelection = [...selected, ing]
         else
-            newSelection.splice(index,1);
-        setSelected(newSelection);
+            newSelection.splice(index,1); // removing ingredient from array if deselected
+        setSelected(newSelection); // updating state
         //console.log(selected);
 
     }
@@ -171,7 +171,7 @@ const updateDB = async newPantry => {
 }
 
 
-    function buttonUnhovered({currentTarget: button},i,selected) {
+    function buttonUnhovered({currentTarget: button},i,selected) { //styling  selected ingredients.
         if (selected.includes(i)) return;
         button.style.border = ingStyle.border;
         button.style.padding = ingStyle.padding;

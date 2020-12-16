@@ -5,6 +5,7 @@ import {logout} from '../services/authService';
 import { likeNav, searchNav, pantryNav } from '../util/imgPicker';
 import '../index.css';
 
+// A simple nav system for routing menu buttons to react router
 
 export default function NavBar(props){
 
@@ -12,8 +13,9 @@ export default function NavBar(props){
         logout(); // deletes jwt token from storage
         props.setOnlineStatus(false);   //calls parent logout in app.js etc..
     }
-    const LoginStatus = useLoginStatus;
+    const LoginStatus = useLoginStatus; // retrives user name
     const logged = props.onLineStatus;
+
     // implemented conditional place holders for quick styling 
     return ( 
             <div className="menu-outer">

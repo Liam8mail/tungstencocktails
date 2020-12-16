@@ -62,13 +62,13 @@ export const loggingWait = () => { return( <img src={loadIngredientUrl} alt="tun
 export const backButtonUrl = "https://icon-library.com/images/back-button-icon-png/back-button-icon-png-26.jpg";
 
 const likeIconUrl = "https://icon-library.com/images/heart-icon-free/heart-icon-free-21.jpg";
-export const likeNav = () => { return ( <img src={likeIconUrl} alt="tungsten" style={navIconStyle}></img> )}
+export const likeNav = () => { return ( <img src={likeIconUrl} alt="tungsten" style={navIconActiveStyle}></img> )}
 
 const searchIconUrl = "https://icon-library.com/images/search-icon-ios/search-icon-ios-18.jpg";
-export const searchNav = () => { return ( <img src={searchIconUrl} alt="tungsten" style={navIconStyle}></img> )}
+export const searchNav = () => { return ( <img src={searchIconUrl} alt="tungsten" style={navIconActiveStyle}></img> )}
 
 export const pantryIconUrl = "https://icon-library.com/images/chef-icon-png/chef-icon-png-4.jpg";
-export const pantryNav = () => { return ( <img src={pantryIconUrl} alt="tungsten" style={navIconStyle}></img> )}
+export const pantryNav = (status) => { return ( <img src={pantryIconUrl} alt="tungsten" style={status? navIconActiveStyle : navIconUnactiveStyle }></img> )}
 
 
 const imgStyle = {
@@ -92,10 +92,17 @@ const sAddButton = {
     width: '16px'
 }
 
-const navIconStyle = {
+const navIconActiveStyle = {
     background: 'transparent',
     width: '25px',
-    margin: '0 0 0 20px'
+    margin: '0 0 0 20px',
+}
+
+const navIconUnactiveStyle = {
+    background: 'transparent',
+    width: '25px',
+    margin: '0 0 0 20px',
+    opacity: '0.2',
 }
 
 // const addsty = {

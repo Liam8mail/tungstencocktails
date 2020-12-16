@@ -11,11 +11,12 @@ class SearchForm extends Component {
     return (
       <div className="SearchFormForm">
         <form>
-          <h4>Search this list: </h4> 
+          <h4 style={{margin: '0 0 12px 0'}}>Search this list: </h4> 
           <input
-            type="text"
+            type="search"
             value={searchTermFromProps}
             onChange={onChangeFromProps}
+            placeholder="Search"
           />
         </form>
       </div>

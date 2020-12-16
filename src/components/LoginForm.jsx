@@ -4,6 +4,7 @@ import { createAccount } from '../services/userService';
 import useFormInput from '../hooks/useFormInput';
 import { loggingWait } from '../util/imgPicker';
 import { useLocation, Link } from 'react-router-dom';
+import '../style/style.css';
 
 
 export default function Loginform(props) {
@@ -36,22 +37,22 @@ export default function Loginform(props) {
                         if (isMounted){
                             props.history.replace('/');
                             props.history.go(-1);
-                            console.log('created');
+                            //console.log('created');
                         }
                         break;
 
                     case loginPage:
                         const result = await login({email: email.value, password: password.value}); // auth user details as json object
-                        if (result && isMounted){
+                        if (result && isMounted){ // Will do for now
                         }
-                        break
+                        break;
                         default: break;
                     }
                     
                     props.history.replace('/'); // https://reactrouter.com/web/api/history // remove login page from history 
                     props.history.go(-1); // return to the page they where viewing before logging in
                     setStatus('complete');
-                    console.log('logged');
+                    //console.log('logged');
                     props.isAuthed(true);
 
                 }
@@ -77,56 +78,52 @@ export default function Loginform(props) {
         };
 
         
-      },[status, email.value, password.value, props,location,name.value]); // dependencys
+      },[status, email.value, password.value, props,location, name.value]); // dependencys
       
 
      
       return (
           
-          <div>
+          <div className="boxme">
             {location === loginPage  && <h1 style={{textAlign:'center'}}>Login</h1>}
             {location === signupPage  && <h1 style={{textAlign:'center'}}>Create Account</h1>}
                 {status === 'logging' && loggingWait()} {/* conditional for loading image upon submit log request */}
                 {status === 'idle' && <>
 
 
-                 {/* Please Fix This Shitty Form XD*/}
-
                 <img
                 src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                 alt="profile-img"
                 className="profile-img-card"
-                style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}}
+                style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', borderRadius: '12%', marginBottom: '36px'}}
                 />
                      {location === signupPage &&
                     <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
-                        <label htmlFor="InputName">Name  </label>
-                        <input {...name} type="default" className="form-control" id="InputName" aria-describedby="nameHelp"></input>
+                        <input {...name} type="text" className="form-control" id="InputName" aria-describedby="nameHelp" placeholder="Name"></input>
                         <small id="emailHelp" className="form-text text-muted"></small>
                     </div>}
 
                     <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
-                        <label htmlFor="InputEmail">Email address  </label>
-                        <input {...email} type="default" className="form-control" id="InputEmail" aria-describedby="emailHelp"></input>
+                       
+                        <input {...email} type="text" className="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Email"></input>
                         <small id="emailHelp" className="form-text text-muted"></small>
                     </div>
 
 
                     <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
-                        <label htmlFor="InputPassword">Password   </label>
-                        <input {...password} type="password" className="form-control" id="InputPassword"></input>
+                      
+                        <input {...password} type="password" className="form-control" id="InputPassword" placeholder="Password"></input>
                         <small id="passwordHelp" className="form-text text-muted"></small>
                     </div>
 
 
-                    <div style={{display: "flex", justifyContent: "center",textAlign: "center", margin:'32px'}}>
-                        <button onClick={() => submit()} type="submit" className="btn btn-primary" >Submit</button>
+                    <div style={{display: "flex", justifyContent: "center",textAlign: "left", margin:'32px'}}>
+                        <button onClick={() => submit()} type="submit" className="btn btn-primary" >Sign in</button>
                     </div> 
                         <div style={{ textAlign: "center", margin: "64px 0 0 0" }}>
                         {location === loginPage && <Link to="/signup">Create Account</Link>}
                         {location === signupPage && <Link to="/login">previous</Link>}
                          </div>
-                {/* --------- */}
 
 
             </>

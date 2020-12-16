@@ -111,11 +111,11 @@ const updateDB = async newPantry => {
     const renderPantry = (pantry, updatePantry,selected, setSelected, ingredients, removeIngredients) => {
         let choice = pantry === undefined? ingredients : pantry; // pantry will always be undefined at init. we want to use database ingredients from useGetPantry. 
         if (choice.length > 0) // if we have something to show
-        return (<React.Fragment><div style={{textAlign:'center'}}><strong className='pantry-header'>
+        return (<React.Fragment><div style={{textAlign:'center', marginTop:'32px'}}><strong className='pantry-header'>
                 Ingredients</strong><button style={buttonRemoveStyle(selected)} onClick={()=>removeIngredients()}></button>
                 </div>
                 <div  style={style}>
-                <ul className="ingredient-list" style={{marginTop: '48px'}}> {choice.sort((a,b) => sortIng(a.strIngredient,b.strIngredient)).map(i => 
+                <ul className="ingredient-list" style={{marginTop: '24px'}}> {choice.sort((a,b) => sortIng(a.strIngredient,b.strIngredient)).map(i => 
                 <button key={i.idIngredient} style={buttonStyle(i, selected)} onMouseOver={e => buttonHovered(e,i,selected)} onMouseLeave={e => buttonUnhovered(e,i,selected)}
                 onClick={(e) => onSelect(i,selected,setSelected,e)}>{imgPicker(i.strIngredient)}<h4 style={btntxt}>{i.strIngredient}</h4></button>)}
                 </ul> <AddIngredient update={updatePantry}/></div></React.Fragment>

@@ -78,7 +78,7 @@ class RecipeViewer extends Component {
     return(
       <div className="RecipeViewer">
           <div>
-          <div style={{minHeight:'400px'}}><img src= {drink.strDrinkThumb} alt="tungsten" style={imgStyle}/></div>
+          <div style={{minHeight:'360px', marginTop:'24px'}}><img src= {drink.strDrinkThumb} alt="tungsten" style={imgStyle}/></div>
             <h1 style={{padding: '0 0 12px 0'}}>Recipe: {drink.strDrink}</h1>
             <h3>Ingredients:</h3>
             {ingredientNames.sort(this.compareAbc).map((i,index) => { //Quick Merge -- // Checking ingredients against ingredients in pantry

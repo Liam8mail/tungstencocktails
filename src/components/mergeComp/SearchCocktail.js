@@ -24,7 +24,7 @@ import apiFetch from '../../services/apiService';
 import '../../style/style.css'; // CSS
 import '../../index.css';
 import useGetPantry from "../../hooks/useGetPantry";
-import imgPicker,{pantryIconUrl} from '../../util/imgPicker';
+import imgPicker from '../../util/imgPicker';
 
 
 const API_KEY = true; // import API key from .env file
@@ -272,7 +272,7 @@ export default function SearchCocktail(props) {
                 Clear
               </button>
               <button className="pantryOption" style={pantryButtonStyle(usePantry)}
-                onClick={() => {setUsePantry(!usePantry); clearActiveFilters();}}
+                onClick={() => { if(props.isAuthed){setUsePantry(!usePantry); clearActiveFilters();}}}
               >&nbsp;
               
               </button>

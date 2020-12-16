@@ -13,18 +13,19 @@ export default function NavBar(props){
         props.setOnlineStatus(false);   //calls parent logout in app.js etc..
     }
     const LoginStatus = useLoginStatus;
-    
+    const logged = props.onLineStatus;
+    // implemented conditional place holders for quick styling 
     return ( 
             <div className="menu-outer">
                 <div className="table">
                     <ul id="horizontal-list">
-                        {props.onLineStatus &&<li><LoginStatus isAuthed={props.onLineStatus}></LoginStatus></li>} {/* remove conditional to show logged out status ==>  props.onLineStatus &&  */}
-                        {!props.onLineStatus && <li><button className="nav-icon"> <Link to="/login" className="nav-text">Login</Link></button></li>}
-                        {props.onLineStatus && <li><button className="nav-icon"><Link to="/pantry" className="nav-text">My Pantry{pantryNav()}</Link></button></li>}
+                        {logged && <li><LoginStatus className="user-status" isAuthed={logged}></LoginStatus></li>}
+                        {!logged && <li><button className="user-status"> <Link to="/login" className="nav-text">Login</Link></button></li>}
+                        <li className={logged? "show" : "inactive"}><button className="nav-icon"><Link to="/pantry" className="nav-text">My Pantry{pantryNav(logged)}</Link></button></li>
                         <li><button className="nav-icon"><Link to="/search" className="nav-text">Search{searchNav()}</Link></button></li>
                         <li><button className="nav-icon"><Link to="/fav" className="nav-text">Fav{likeNav()}</Link></button></li>
                         <li><button className="nav-icon"><Link to="/about" className="nav-text">About</Link></button></li>
-                        {props.onLineStatus && <li><button className="logout" onClick={() => setLoggingout()}><p>Logout</p></button></li>}
+                        <li className={logged? "show" : "hide"}><button className={"logout"} onClick={() => logged? setLoggingout() : null}><p>Logout</p></button></li>
                     </ul>
                 </div>
             </div> 

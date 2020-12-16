@@ -117,23 +117,23 @@ const backSty = {
   right: "90%"
 };
 
-const ingStyle = {
-  backgroundColor: 'transparent',
-  background: 'transparent',
-  margin: "0px",
-  borderRadius: '0%',
-  border: 'none',
-  fontSize: '12px',
-  padding: '8px',
-  outline:'none'
-}
+// const ingStyle = {
+//   backgroundColor: 'transparent',
+//   background: 'transparent',
+//   margin: "0px",
+//   borderRadius: '0%',
+//   border: 'none',
+//   fontSize: '12px',
+//   padding: '8px',
+//   outline:'none'
+// }
 
-const btntxt = {
-  height: "10px",
-  margin: "10px, 0",
-  fontWeight: 'normal',
+// const btntxt = {
+//   height: "10px",
+//   margin: "10px, 0",
+//   fontWeight: 'normal',
 
-}
+// }
 
 const cocktail = {
   display:'block',

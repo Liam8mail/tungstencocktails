@@ -1,4 +1,5 @@
 import sAdd from '../img/sAdd.png';
+import TungstenLogo from '../img/TungstenLogo.png';
 
 
 
@@ -13,6 +14,11 @@ export function ingredientButtons(i,index, buttonHandler){ return <button key={i
           onClick={() => buttonHandler(i)}>{imgPicker(i)}<h4 style={btntxt}>{i}</h4></button>
 }
 
+export function ingCheckButtons(i,index, buttonHandler){ return <button key={index} style={ingStyle}
+          onClick={() => buttonHandler(i)}><div style={{marginLeft:'10px'}}>{imgPicker(i)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle}></img></div><h4 style={btntxt}>{i}</h4></button>
+}
+
+export const logo = () => { return (<div style={{textAlign: 'center', marginTop: '100px'}}><img src={TungstenLogo} alt="tungsten" style={logoStyle}></img></div>)}
 
 
 export function ingImageUrl(ing){ 
@@ -122,6 +128,18 @@ const btntxt = {
     margin: "10px",
     fontWeight: 'normal'
   }
+
+const ingCheckButtonStyle = {
+    background: 'transparent',
+    width: '20px',
+    margin: '0 0 25px 0px',
+    
+}
+
+const logoStyle = {
+    width: '30%',
+    height: 'auto'
+}
 
 
 

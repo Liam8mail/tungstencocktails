@@ -32,13 +32,6 @@ ul#horizontal-list {
     margin: 35px;
   }
   
-  .ingredient-list {
-    min-height: 800px;
-    display: inline-block;
-    overflow-y: auto;
-    overflow-anchor: auto;
-    overflow-x: scroll;
-  }
 
 .width {
   width: 40%;

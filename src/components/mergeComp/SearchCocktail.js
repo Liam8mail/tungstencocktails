@@ -185,7 +185,7 @@ export default function SearchCocktail(props) {
   function makeResultsURL() { // function to make URL out of chosen filters, which will then get loaded by recipe-results
     if(API_KEY){ // if API key is included, get real results
       if(filters.length > 0){ // if there are filters to search with, go ahead and make the URL with them.
-        console.log(API_KEY);
+        //console.log(API_KEY);
         let resultsEARL = `/filter.php?i=`; // base URL format
         // Append base URL with ingredients (replacing spaces with underscores):
         filters.map(a => {
@@ -195,16 +195,16 @@ export default function SearchCocktail(props) {
         })
 
         resultsEARL = resultsEARL.substring(0, resultsEARL.length-1); // need to chop off the comma from the end of the string now. Easier than watching for the last filters item and treating it differently.
-        console.log("Results URL is:" + resultsEARL);
+        //console.log("Results URL is:" + resultsEARL);
         setResultsURL(resultsEARL); // update state to carry the URL
         setDisplay("recipe-results");
 
       } else { // otherwise, file a complaint to console. 
         // NB: This should be forwarded to the DOM. The user should be informed of their transgression, and given a chance to rectify their mistake.
-        console.log("active filters is empty. Please select some ingredients");
+        //console.log("active filters is empty. Please select some ingredients");
       }
     } else { // if API is not included, use dummy results.
-      console.log("API key not present, using fixed results");
+      //console.log("API key not present, using fixed results");
       setResultsURL ("");
       setDisplay("recipe-results"); // there is a default JSON file that will be used by recipe-results if resultsURL.length is too short   
     }
@@ -212,15 +212,15 @@ export default function SearchCocktail(props) {
 
   function makeInstructionsURL(idDrink) { // this is a simpler URL making function, since it only adds one value to the URL.
     // The resulting URL will provide the JSON data for the cocktail recipe.
-    console.log("Recipe chosen: "+idDrink);
+    //console.log("Recipe chosen: "+idDrink);
     if(idDrink){ // this attempts to identify a null value for making the URL ( which may break the API call )
       let recipeEARL = "/lookup.php?i=";
       recipeEARL += idDrink;
-      console.log("Recipe URL to input is: "+recipeEARL+" ...");
-      console.log("State RecipeURL before set is: \""+recipeURL+"\"");
+      // console.log("Recipe URL to input is: "+recipeEARL+" ...");
+      // console.log("State RecipeURL before set is: \""+recipeURL+"\"");
 
       setRecipeURL(recipeEARL);
-      console.log("State RecipeURL is now: " + recipeURL);
+      //console.log("State RecipeURL is now: " + recipeURL);
       setDisplay("recipe-viewer");
 
     }
@@ -271,8 +271,8 @@ export default function SearchCocktail(props) {
               >
                 Clear
               </button>
-              <button className="pantryOption"
-                onClick={() => {setUsePantry(!usePantry); clearActiveFilters()}}
+              <button className="pantryOption" style={pantryButtonStyle(usePantry)}
+                onClick={() => {setUsePantry(!usePantry); clearActiveFilters();}}
               >&nbsp;
               
               </button>
@@ -305,6 +305,8 @@ export default function SearchCocktail(props) {
         }
         {display === "recipe-results" &&
           <RecipeResults
+            isAuthed={props.isAuthed}
+            userPantry={ingredients}
             returnToSearch={returnToSearch}
             makeInstructionsURL = {makeInstructionsURL}
             filters = {filters}
@@ -313,6 +315,8 @@ export default function SearchCocktail(props) {
         }
         {display === "recipe-viewer" &&
           <RecipeViewer
+            isAuthed={props.isAuthed}
+            userPantry={ingredients}
             returnFromRecipe={returnFromRecipe}
             recipeURL = {recipeURL}
           />
@@ -342,12 +346,18 @@ const btntxt = {
   fontWeight: 'normal'
 }
 
-const pantryIconStyle = {
-  
-  border: '2px solid #383838',
-  borderWidth: '1px',
-  background: 'transparent',
-  width: '20px',
-  height: 'auto',
-  borderRadius: '50%',
+const pantryButtonStyle = (usePantry) => {
+
+  if (usePantry){ return{ backgroundColor: '#FFD700'}
+    }else{ return{ backgroundColor: '#87979A'} }
 }
+
+// const pantryButtonToggle = ({currentTarget: button},usePantry) => {
+//   if (!usePantry)
+//     button.style.backgroundColor = '#FFD700'
+//   else
+//     button.style.backgroundColor = '#87979A'
+
+//     console.log(usePantry);
+
+// }

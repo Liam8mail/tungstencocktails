@@ -1,11 +1,10 @@
 import useGetPantry from '../hooks/useGetPantry';
-import {useState} from 'react';
-import '../index.css';
+import React, {useState} from 'react';
+import '../style/style.css'
 import AddIngredient from './AddIngredient';
 import imgPicker, {loadPantryUrl} from '../util/imgPicker';
 import { getUserObject } from '../services/authService';
 import { updateUserPantry } from '../services/userService';
-
 
 export default function Pantry(props){
     
@@ -112,11 +111,15 @@ const updateDB = async newPantry => {
     const renderPantry = (pantry, updatePantry,selected, setSelected, ingredients, removeIngredients) => {
         let choice = pantry === undefined? ingredients : pantry; // pantry will always be undefined at init. we want to use database ingredients from useGetPantry. 
         if (choice.length > 0) // if we have something to show
-        return (<div style={style}><strong className="ingredient-text" >
-                Ingredients</strong>{selected.length > 0 && <button style={removeStyle} onClick={()=>removeIngredients()}>remove</button>}<ul> {choice.sort((a,b) => sortIng(a.strIngredient,b.strIngredient)).map(i => 
+        return (<React.Fragment><div style={{textAlign:'center'}}><strong className='pantry-header'>
+                Ingredients</strong><button style={buttonRemoveStyle(selected)} onClick={()=>removeIngredients()}></button>
+                </div>
+                <div  style={style}>
+                <ul className="ingredient-list" style={{marginTop: '48px'}}> {choice.sort((a,b) => sortIng(a.strIngredient,b.strIngredient)).map(i => 
                 <button key={i.idIngredient} style={buttonStyle(i, selected)} onMouseOver={e => buttonHovered(e,i,selected)} onMouseLeave={e => buttonUnhovered(e,i,selected)}
                 onClick={(e) => onSelect(i,selected,setSelected,e)}>{imgPicker(i.strIngredient)}<h4 style={btntxt}>{i.strIngredient}</h4></button>)}
-                </ul> <AddIngredient update={updatePantry}/></div>);
+                </ul> <AddIngredient update={updatePantry}/></div></React.Fragment>
+                );
 
         return <><AddIngredient update={updatePantry}/><h1 style={style}>No items :(</h1></> 
 }
@@ -136,12 +139,24 @@ const updateDB = async newPantry => {
         return 0;
     }
 
+    
+    function onSelect(ing, selected, setSelected){ // adds, removes selected items from list.
+        const index = selected.findIndex(i => i.idIngredient === ing.idIngredient);
+        
+        let newSelection = [...selected]
+
+        if (index === -1) // notFound;
+            newSelection = [...selected, ing]
+        else
+            newSelection.splice(index,1);
+        setSelected(newSelection);
+        //console.log(selected);
+
+    }
 
 
 
-
-
-
+    // Quick styling
 
 
     function buttonStyle(i, selected){
@@ -164,27 +179,42 @@ const updateDB = async newPantry => {
 }
 
 
+    function buttonRemoveStyle(selected){ 
+        if (selected && !selected.length > 0){
+            return {
 
+                backgroundColor: "transparent",
+                width: '40px',
+                marginRight: '80px',
+                height: '40px',
+                border: 'none',
+                borderWidth : '1px',
+                float: 'right',
+                opacity: '0',
+            }
+        }else{
+            return {
 
-    function onSelect(ing, selected, setSelected){
-        const index = selected.findIndex(i => i.idIngredient === ing.idIngredient);
-        
-        let newSelection = [...selected]
-
-        if (index === -1) // notFound;
-            newSelection = [...selected, ing]
-        else
-            newSelection.splice(index,1);
-        setSelected(newSelection);
-        console.log(selected);
-
+                background: `url('https://icon-library.com/images/trash-bin-icon/trash-bin-icon-7.jpg') no-repeat`,
+                backgroundSize: 'contain',
+                marginRight: '80px',
+                width: '40px',
+                height: '40px',
+                border: 'none',
+                borderWidth : '1px',
+                float: 'right',
+                opacity: '100',
+            }
+        }
+       
     }
-    
+
+
 
     
 const style = {
     textAlign: 'center',
-    padding: '32px 0'
+    padding: '48px 0',
 }
 
 const ingStyle = {
@@ -224,18 +254,6 @@ const imgStyle = {
     marginRight: 'auto',
     width: '50%',
 }
-
-
-const removeStyle = {
-    // Button
-  
-    backgroundColor: "transparent",
-    //display: "inline-block",
-    fontSize: "12px",
-    border: '',
-    borderWidth : '1px',
-    float: 'right',
-  };
 
 
 

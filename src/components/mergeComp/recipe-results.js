@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import apiFetch from '../../services/apiService';
 import { drinks } from "./staticJSONsearchResults";
-import imgPicker, { loadGen, backButtonUrl } from '../../util/imgPicker';
+import { loadGen, backButtonUrl, ingredientButtons, ingCheckButtons } from '../../util/imgPicker';
 
 class RecipeResults extends Component {
   constructor(props){
@@ -15,30 +15,30 @@ class RecipeResults extends Component {
   }
   async componentDidMount(){
     //if (this.props.resultsURL.length > 1) {
-      console.log("API key is present...");
+      //console.log("API key is present...");
       try {
         this.setState({status: "requesting"});
         const testItem = {drinks:"None Found"};
         const API_URL = this.props.resultsURL;
-        console.log(API_URL);
+        //console.log(API_URL);
         
         // const jsonResult = await response.json();
         const jsonResult = await apiFetch(API_URL);
-        console.log("jsonResult received:");
+        //console.log("jsonResult received:");
         this.setState({status: "received"});
-        console.log(jsonResult);
+        //console.log(jsonResult);
         if(jsonResult.drinks === testItem.drinks){
-          console.log("Test case hit - blank results page");
+          //console.log("Test case hit - blank results page");
           this.setState({ recipeListApiData: [] });
           // Otherwise it will fill it with data in the wrong format.
           // This way it is easy to identify empty results. 
         }
         else this.setState({ recipeListApiData: jsonResult.drinks });
-        console.log("Mount attempt successful. Data Loaded:");
-        console.log(this.state.recipeListApiData);
+        //console.log("Mount attempt successful. Data Loaded:");
+        //console.log(this.state.recipeListApiData);
         this.setState({ isFetched: true });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
         this.setState({ isFetched: false });
         this.setState({ errorMsg: error });
       }
@@ -54,38 +54,50 @@ class RecipeResults extends Component {
     const recipeList = this.state.recipeListApiData;
     const filters = this.props.filters;
     const makeInstructionsURL = this.props.makeInstructionsURL;
+    const userPantry = this.props.userPantry;
+    const status = this.state.status;
+    const isAuthed = this.props.isAuthed;
 
-    if (this.state.status === 'received')
+    if (status === 'received')
     return(
       
       <div>
         <button style= {backSty} onClick={returnToSearch}>
         <img src={backButtonUrl} alt="tungsten" width='50' height='auto'></img>
         </button>
+        <div style={{margin:'20px'}}>
+          <span>Active Ingredients:</span><br/>
+            {filters.sort(this.compareAbc).map((i,index) => {
+                if (isAuthed && userPantry.some(e => e.strIngredient1 === i.strIngredient1)) // Checking ingredients against ingredients in pantry
+                return ingCheckButtons(i.strIngredient1,i.strIngredient1+index,function(){});
+                return ingredientButtons(i.strIngredient1,i.strIngredient1+index,function(){});
+            })}
+          </div>
         <h1>Cocktail Recipes</h1>
         <p style={{margin: '10px'}}>Number of cocktails found: {recipeList.length}</p><br />
           
             <br />
-          {recipeList.map(a => (
+          {recipeList.map((a,index) => (
             <button
               onClick={() => makeInstructionsURL(a.idDrink)}
-              key={a.idDrink+"-recl"}
+              key={index+"-recl"}
               className="cocktails"
             >
-              <img src={a.strDrinkThumb} style={cocktail} alt='tungsten'></img><b style={{maxWidth: '10px', textAlign: 'center',margin: '30px' }}>{a.strDrink}</b>
+              <img src={a.strDrinkThumb} key={a.idDrink+index} style={cocktail} alt='tungsten'></img><b style={{maxWidth: '10px', textAlign: 'center',margin: '30px' }}>{a.strDrink}</b>
             </button>
           ))}
-          <div style={{margin:'80px'}}>
-          <span>Active Ingredients:</span><br/>
-            {filters.sort(this.compareAbc).map(a => (
-                  <button  style={ingStyle} >{imgPicker(a.strIngredient1)}<h4 style={btntxt}>{a.strIngredient1}</h4></button>
-              ))}
-          </div>
       </div>
     );
-    else if (this.state.status === 'requesting' || this.state.status === 'idle')
+    else if (status === 'requesting')
     return(
       loadGen()
+    )
+    else return(
+      <div>
+        <button style= {backSty} onClick={returnToSearch}>
+        <img src={backButtonUrl} alt="tungsten" width='50' height='auto'></img>
+        </button>
+      </div>
     )
   }
 }

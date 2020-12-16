@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {ingredientButtons} from '../../util/imgPicker';
-import '../../index.css';
+import '../../style/style.css';
 
 class SearchResults extends Component {
   ingredientFilterFunction(searchTerm) {

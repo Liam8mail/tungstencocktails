@@ -10,7 +10,7 @@ h4 {
 button.go,
 button.goclear,
 button.pantryOption {
-  transition: background-color linear 0.2s;
+  transition: background-color linear 0.25s;
   padding: 11px 17px 10px 17px;
   font-size: 140%;
   border-radius: 5%;
@@ -18,7 +18,7 @@ button.pantryOption {
 }
 button.go {
   background: rgb(193, 230, 193);
-  margin-right: 15px;
+  margin-right: 35px;
   font-size: 140%;
 }
 button.goclear {
@@ -28,19 +28,12 @@ button.goclear {
 
 
 button.pantryOption {
-  background-color: rgb(193, 230, 193);
   background: url('https://icon-library.com/images/chef-icon-png/chef-icon-png-4.jpg') no-repeat;
   background-size: cover; 
   width: 70px; 
-  margin-left: 15px;
+  margin-left: 35px;
 }
 
-button.pantryOption:focus {
-  outline:none;
-  transition-property: opacity, left;
-  transition-duration: 2s, 4s;
-  
-}
 
 button.goclear:hover,
 button.go:hover {
@@ -89,4 +82,22 @@ button.orange:active {
   background: transparent;
   border: none;
 
+}
+
+
+.ingredient-list {
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+  min-height: 800px;
+  display: inline-block;
+  overflow-y: auto;
+  overflow-anchor: auto;
+}
+
+.pantry-header {
+  text-align: center;
+  margin-left: 120px;
+  font-weight: 300;
+  font-size: x-large;
 }

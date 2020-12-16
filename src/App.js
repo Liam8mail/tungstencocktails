@@ -6,7 +6,8 @@ import LoginForm from './components/LoginForm';
 import { getToken } from './services/authService';
 import NavBar from "./components/SimpleNav";
 import { ping } from './services/userService';
-import './index.css';
+import { logo } from './util/imgPicker';
+
 
 
 function App (){
@@ -25,7 +26,7 @@ function App (){
     return (
       <div className="width" >
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar>
-            <Route path="/about"/>
+            <Route path="/about" render ={() => (logo())}/>
             <Route path="/signup"/>
             <Route path="/somethingelse"/>
             <Route path="/search" render={(props) => (<SearchCocktail {...props} isAuthed={onLineStatus} />)} />
@@ -44,7 +45,7 @@ export default App;
 // }
 
 const pingSer = async() =>{
-  await ping(); // loads server if unloaded  at init.
+  await ping(); // loads server if unloaded  at init. A perk of free hosting 
   //console.log(result);
 }
 pingSer();

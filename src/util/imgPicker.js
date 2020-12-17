@@ -4,6 +4,9 @@ import TungstenLogo from '../img/TungstenLogo.png';
 // Place to manage urls for img elements etc. 
 
 export default function imgPicker(ing){ 
+    if (ing === 'Midori') //doesn't exist in api database
+    ing = 'Midori Melon Liqueur';
+
     const url = `https://www.thecocktaildb.com/images/ingredients/${ing}-Small.png`; //  (100x100 pixels)
     return  <img src={url} alt="tungsten" width="50" height="50" onError={handleOnError()} key={ing}></img>
 

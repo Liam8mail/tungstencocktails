@@ -283,7 +283,7 @@ export default function SearchCocktail(props) {
               searchTerm={searchTerm}
               onChange={onSearchFormChange}
             />
-            { !usePantry && <SearchResults style={{minHeight: '200px'}}
+            { !usePantry && <SearchResults style={{minHeight: '200px'}}  // Quick Merge
               searchTerm={searchTerm}
               //globalArray={globalArray}
               buttonHandler={handleFilterSelection}
@@ -297,7 +297,7 @@ export default function SearchCocktail(props) {
               cocktailIngredList={apiData}
               compareAbc={compareAbc}
             />}
-            { usePantry && !props.isAuthed &&  // Quick Merge
+            { usePantry && !props.isAuthed && 
               <>{(setUsePantry(false), clearActiveFilters())}</>
             }
            
@@ -351,13 +351,3 @@ const pantryButtonStyle = (usePantry) => {
   if (usePantry){ return{ backgroundColor: '#FFD700'}
     }else{ return{ backgroundColor: '#87979A'} }
 }
-
-// const pantryButtonToggle = ({currentTarget: button},usePantry) => {
-//   if (!usePantry)
-//     button.style.backgroundColor = '#FFD700'
-//   else
-//     button.style.backgroundColor = '#87979A'
-
-//     console.log(usePantry);
-
-// }

@@ -37,7 +37,7 @@ class RecipeViewer extends Component {
       
 
       this.setState({status: "received"});
-      console.log(this.state.status);
+      //console.log(this.state.status);
       // console.log("jsonResult received:");
       // console.log(jsonResult);
       this.setState({ recipeInstructionsApiData: jsonResult });
@@ -64,13 +64,17 @@ class RecipeViewer extends Component {
     const isAuthed = this.props.isAuthed;
     const status = this.state.status;
     
-    const ingredientNames = []; // getting ingredient values from drink props // small amount of data to process 
+
+
+    const ingredientNames = []; // getting ingredient values from drink props for rendering images // small amount of data to process // nice to automate it
     if (status === 'received'){
         for (const prop in drink){
-          if (drink && prop.match(/^strIngredient/) && drink[prop] !== ''  && drink[prop] !== null && !ingredientNames.some(i => i === drink[prop])){
-            ingredientNames.push(drink[prop]);
+          if (drink && prop.match(/^strIngredient/) && drink[prop] !== ''  && drink[prop] !== null && !ingredientNames.some(i => i === drink[prop])){ //checking prop is stringredient
+            const measurement = drink[`strMeasure${prop.slice(-1)}`]; //getting corresponding measurement using number values at end of prop name
+            measurement != null ? ingredientNames.push({name : drink[prop], measure : measurement}) : ingredientNames.push({name : drink[prop]});  // pushing info as object  
           }
         }
+        //console.log(ingredientNames);
     }
 
 
@@ -82,9 +86,9 @@ class RecipeViewer extends Component {
             <h1 style={{padding: '0 0 12px 0'}}>Recipe: {drink.strDrink}</h1>
             <h3>Ingredients:</h3>
             {ingredientNames.sort(this.compareAbc).map((i,index) => { //Quick Merge -- // Checking ingredients against ingredients in pantry
-                if (isAuthed && userPantry && userPantry.some(e => e.strIngredient.toLowerCase() === i.toLowerCase())) // cocktail api has some issues with consistency in naming 
-                return ingCheckButtons(i,i+index,function(){}); //displays pantry icon beside ing that user has
-                return ingredientButtons(i,i+index,function(){});//displays reg ing
+                if (isAuthed && userPantry && userPantry.some(e => e.strIngredient.toLowerCase() === i.name.toLowerCase())) // cocktail api has some issues with consistency in naming 
+                return ingCheckButtons(i.name,i.name+index,function(){},i.measure); //displays pantry icon beside ing that user has
+                return ingredientButtons(i.name,i.name+index,function(){},i.measure);//displays reg ing
                 
             })}
             { drink.strGlass !== null &&

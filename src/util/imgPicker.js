@@ -10,12 +10,13 @@ export default function imgPicker(ing){
 }
 
 
-export function ingredientButtons(i,index, buttonHandler){ return <button key={index} style={ingStyle}
-          onClick={() => buttonHandler(i)}>{imgPicker(i)}<h4 style={btntxt}>{i}</h4></button>
+export function ingredientButtons(i,index, buttonHandler,measure){ return <button key={index} style={ingStyle}
+          onClick={() => buttonHandler(i)}>{imgPicker(i)}<h4 style={btntxt}>{i}</h4>{measure!==undefined && <h4 style={btntxt}>{measure}</h4>}</button>
 }
 
-export function ingCheckButtons(i,index, buttonHandler){ return <button key={index} style={ingStyle}
-          onClick={() => buttonHandler(i)}><div style={{marginLeft:'10px'}}>{imgPicker(i)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle}></img></div><h4 style={btntxt}>{i}</h4></button>
+export function ingCheckButtons(i,index, buttonHandler,measure){ return <button key={index} style={ingStyle}
+          onClick={() => buttonHandler(i)}><div style={{marginLeft:'10px'}}>{imgPicker(i)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle}></img></div><h4 style={btntxt}>{i}</h4>
+          {measure!==undefined && <h4 style={btntxt}>{measure}</h4>}</button>
 }
 
 export const logo = () => { return (<div style={{textAlign: 'center', marginTop: '100px'}}><img src={TungstenLogo} alt="tungsten" style={logoStyle}></img></div>)}

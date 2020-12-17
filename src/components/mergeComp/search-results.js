@@ -49,28 +49,3 @@ class SearchResults extends Component {
 
 export default SearchResults;
 
-
-
-
-
-
-
-   
-    
-
-
-const btntxt = {
-  height: "100px",
-  margin: "5px",
-}
-
-const ingStyle = {
-  backgroundColor: 'transparent',
-  background: 'transparent',
-  margin: "5px",
-  borderRadius: '2%',
-  border: 'none',
-  fontSize: '12px',
-  padding: '8px',
-  outline:'none'
-}

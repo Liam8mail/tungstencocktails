@@ -86,7 +86,7 @@ class RecipeResults extends Component {
             {filters.sort(this.compareAbc).map((i,index) => {
                 if (isAuthed && userPantry.some(e => e.strIngredient1 === i.strIngredient1)) // Checking ingredients against ingredients in pantry
                 return ingCheckButtons(i.strIngredient1,i.strIngredient1+index,function(){}); //add in pantry icon
-                return ingredientButtons(i.strIngredient1,i.strIngredient1+index,function(){}); // defualt icon
+                return ingredientButtons(i.strIngredient1,i.strIngredient1+index,function(){}); // default icon
             })}
           </div>
         <h1>Cocktail Recipes</h1>
@@ -99,7 +99,8 @@ class RecipeResults extends Component {
               key={index+"-recl"}
               className="cocktails"
             >
-              <img src={this.state.loaded? a.strDrinkThumb : TungstenLogo_s} key={a.idDrink+index} style={cocktail} alt='tungsten' ref={this.image} onLoad={this.handleImageLoaded}></img><b style={{maxWidth: '10px', textAlign: 'center',margin: '30px' }}>{a.strDrink}</b>
+              <img src={this.state.loaded? a.strDrinkThumb : TungstenLogo_s} key={a.idDrink+index} style={cocktail} alt='tungsten' ref={this.image} onLoad={this.handleImageLoaded}></img>
+              <b style={{maxWidth: '10px', textAlign: 'center',margin: '30px' }}>{a.strDrink}</b>
             </button>
           ))}
       </div>
@@ -132,24 +133,6 @@ const backSty = {
   bottom: "84%",
   right: "90%"
 };
-
-// const ingStyle = {
-//   backgroundColor: 'transparent',
-//   background: 'transparent',
-//   margin: "0px",
-//   borderRadius: '0%',
-//   border: 'none',
-//   fontSize: '12px',
-//   padding: '8px',
-//   outline:'none'
-// }
-
-// const btntxt = {
-//   height: "10px",
-//   margin: "10px, 0",
-//   fontWeight: 'normal',
-
-// }
 
 const cocktail = {
   display:'block',

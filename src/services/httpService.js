@@ -2,11 +2,11 @@
 import axios from "axios";
 import { getToken } from './authService';
 
+// wrapper for axios. In future another service can easy easy replace this. 
 
-axios.defaults.headers.common['x-auth-token'] = getToken(); // header for storing token
+axios.defaults.headers.common['x-auth-token'] = getToken(); // header required for storing token
 
-axios.interceptors.request.use(req => {
-
+axios.interceptors.request.use(req => { // intercept req and add key
 
   req.headers.common['x-auth-token'] = getToken();
   return req;
@@ -34,7 +34,7 @@ export function getCancelToken(){
 
 }
 
-export default {
+export default { // exporting methods
 
   get: axios.get,
   post: axios.post,

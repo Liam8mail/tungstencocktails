@@ -32,14 +32,14 @@ export default function AddIngredient(props) {
   };
 
   const submit = (input) => {
-    setQuery(input.value);
+    setQuery(input.value); // state will trigger useGetIngredient to retrive ingredient from cocktail db
   };
 
   const displayResult = () => {
     try {
-      switch (status) {
+      switch (status) { 
         case "init":
-          return <h2> </h2>;
+          return <h2> </h2>; //initial state -> nothing to show
 
         case "requesting":
           return loadIng(); // imgPicker
@@ -127,7 +127,7 @@ const customStyles = {
 };
 
 const addsty = {
-  // Button
+  // Quick add Button
 
   backgroundColor: "#4CAF50",
   border: "none",

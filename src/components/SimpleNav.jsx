@@ -14,7 +14,7 @@ export default function NavBar(props){
         props.setOnlineStatus(false);   //calls parent logout in app.js etc..
     }
     const LoginStatus = useLoginStatus; // retrives user name
-    const logged = props.onLineStatus;
+    const logged = props.onLineStatus; // current login status from app.js for conditional rendering. perhaps use a context
 
     // implemented conditional place holders for quick styling 
     return ( 

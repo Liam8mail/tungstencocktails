@@ -25,13 +25,13 @@ export default function useGetPantry(){
                     currentUser = await getUser(currentUser, { cancelToken: source.token}); // Authenticating User + refreshing Pantry
                    
                     const ingredients = await Promise.all(
-                        currentUser.data.pantry.map(id => getIngredient(id)) // This will change in future to use a list instead of individual calls 
+                        currentUser.data.pantry.map(id => getIngredient(id)) // This will change in future to get a list instead of individual calls // at the moment only way to retrive fll ingredient details for sorting which also needs to implemented
                     ).catch(
 
                     );
                     if(isMounted){
-                        const ingredientsF = ingredients.filter(i => checkItem(i));
-                        setIngredients(ingredientsF);
+                        const ingredientsFound = ingredients.filter(i => checkItem(i));
+                        setIngredients(ingredientsFound);
                         setStatus('received');
                     }
                 }
@@ -55,7 +55,7 @@ export default function useGetPantry(){
     }
 }
 
-async function getIngredient(id){
+async function getIngredient(id){ // req cocktail db
 
     try{
         //console.log(id);

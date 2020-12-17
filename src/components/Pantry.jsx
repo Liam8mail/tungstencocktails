@@ -9,7 +9,7 @@ import { updateUserPantry } from '../services/userService';
 export default function Pantry(props){
     
     const  [pantry, setPantry] = useState();
-    const  [selected, setSelected] = useState([]);
+    const  [selected, setSelected] = useState([]); // selected ingredients state
     const {status, ingredients} = useGetPantry(); // possible to add a refresh button to recall database values using dependancy prop
 
     const addIngredients = async(ingredient) => { // called from AddIngredient modal ok clicked
@@ -29,28 +29,29 @@ export default function Pantry(props){
             console.log(err);
         }
     }
-    
+
+    // responsible for removing ingredients from user document in the database and updating ui. 
     const removeIngredients = async() => {
         try{
             let newPantry = ingredients.filter(i => !selected.some(e => e.idIngredient === i.idIngredient)); //removing selected ingredients from pantry on delete
-            setPantry(newPantry);
+            setPantry(newPantry); //updating pantry state before altering db to display change // optimistic update
            
-            let cachedIng = [...ingredients]; 
-            ingredients.length = 0;
+            const cachedIng = [...ingredients];  //caching previous state
+            ingredients.length = 0; // clearing ingredients
 
-            newPantry.forEach(e => { ingredients.push(e); }); // all other methods where unreliable
-            const cachedSelected = [...selected];
-            selected.length = 0;
+            newPantry.forEach(e => { ingredients.push(e); }); // updating ingredients list to new pantry
+            const cachedSelected = [...selected]; //caching selected ingredients
+            selected.length = 0; // clearing selected/focused  ingredients array
             
-            if (!await updateDB(newPantry)){
-                cachedSelected.forEach(e => ingredients.push(e));
-                setSelected(cachedSelected);
-                setPantry(cachedIng); // set to original
-                // Note display some friendly error
+            if (!await updateDB(newPantry)){ //revert to previous state while keeping selected items focused
+                cachedSelected.forEach(e => ingredients.push(e)); // revert ingredients list
+                setSelected(cachedSelected); // refocus selected ingredients
+                setPantry(cachedIng); // set display to pre update
+                // Note display some friendly alert
             }
         }
         catch(err){
-            console.log(err);
+            //console.log(err);
         }
 
     }
@@ -77,12 +78,12 @@ export default function Pantry(props){
             throw new Error();
 
             default:
-            return <><h1 style={style}>No items</h1><AddIngredient update={addIngredients}/></>
+            return <><AddIngredient update={addIngredients}/><small style={style}>your pantry is empty</small></>
 
             }
         }catch(err){
                 console.log(err);
-                return <><h1 style={style}>Oops :(</h1><AddIngredient update={addIngredients}/></>
+                return <><AddIngredient update={addIngredients}/><h1 style={style}>Oops :(</h1></>
         }
 
 }
@@ -121,7 +122,7 @@ const updateDB = async newPantry => {
                 </ul> <AddIngredient update={updatePantry}/></div></React.Fragment>
                 );
 
-        return <><AddIngredient update={updatePantry}/><h1 style={style}>No items :(</h1></> 
+        return <><AddIngredient update={updatePantry}/><h4 style={emptyPantryStyle}>your pantry is empty</h4></> 
 }
 
 
@@ -179,7 +180,7 @@ const updateDB = async newPantry => {
 }
 
 
-    function buttonRemoveStyle(selected){ 
+    function buttonRemoveStyle(selected){  // will do for now , hides shows trash icon
         if (selected && !selected.length > 0){
             return {
 
@@ -215,6 +216,12 @@ const updateDB = async newPantry => {
 const style = {
     textAlign: 'center',
     padding: '48px 0',
+}
+
+const emptyPantryStyle = {
+    fontWeight: 'lighter',
+    textAlign: 'center',
+    padding: '512px 0 0 0'
 }
 
 const ingStyle = {

@@ -8,7 +8,7 @@ import NavBar from "./components/SimpleNav";
 import { ping } from './services/userService';
 import { logo } from './util/imgPicker';
 
-
+// responsible for rendering navbar, controlling online status and rendering the routes conditionally. 
 
 function App (){
 
@@ -16,7 +16,7 @@ function App (){
   const [onLineStatus, setOnlineStatus] = useState(false);
 
 
-  useEffect(() => { // -- QUICK IMPLEMENTATION -- 
+  useEffect(() => { // -- QUICK IMPLEMENTATION -- we should check token in server although any auth protected routes will reject invalid/modified tokens. 
     if (getToken()) 
     setOnlineStatus(true);
 
@@ -45,7 +45,7 @@ export default App;
 // }
 
 const pingSer = async() =>{
-  await ping(); // loads server if unloaded  at init. A perk of free hosting 
+  await ping(); // loads server if unloaded  at init. A perk of free hosting // will do for now
   //console.log(result);
 }
 pingSer();

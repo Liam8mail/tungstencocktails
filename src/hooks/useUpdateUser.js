@@ -30,7 +30,7 @@ export default function useUpdateUser(){
         
         return () => {
             isMounted = false;
-            source.cancel("canceled");
+            source.cancel("canceled"); //cancel request on unmount
         };
 
     },);

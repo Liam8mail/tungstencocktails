@@ -17,7 +17,7 @@ class RecipeResults extends Component {
     this.image = React.createRef();
   }
 
-  handleImageLoaded = () => {
+  handleImageLoaded = () => { // changes img source from placeholder once image has loaded
     if(!this.state.loaded){
       this.setState({ loaded: true});
     }

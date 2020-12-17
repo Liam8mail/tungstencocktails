@@ -1,7 +1,7 @@
 import sAdd from '../img/sAdd.png';
 import TungstenLogo from '../img/TungstenLogo.png';
 
-
+// Place to manage urls for img elements etc. 
 
 export default function imgPicker(ing){ 
     const url = `https://www.thecocktaildb.com/images/ingredients/${ing}-Small.png`; //  (100x100 pixels)
@@ -105,19 +105,6 @@ const navIconUnactiveStyle = {
     opacity: '0.2',
 }
 
-// const addsty = {
-
-//     backgroundColor: '#4CAF50',
-//     border: 'none',
-//     color: 'white',
-//     padding: '0px',
-//     textDecoration: 'none',
-//     display: 'inline-block',
-//     fontSize: '48px',
-//     margin: '4px 0 0 400px',
-//     borderRadius: '50%',
-
-// }
 
 const ingStyle = {
     backgroundColor: 'transparent',

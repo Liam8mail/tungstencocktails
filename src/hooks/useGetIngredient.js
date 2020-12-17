@@ -21,7 +21,7 @@ export default function useGetIngredient(input){
                     setStatus('requesting');
                     let ingredient = await getIngredient(input);
                   
-                    if(isMounted){ // will use ref in future
+                    if(isMounted){ // will use refs in future
                         console.log(ingredient);  
                         setIngredient(ingredient);                      
                         setStatus('received');

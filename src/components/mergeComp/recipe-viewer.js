@@ -66,7 +66,7 @@ class RecipeViewer extends Component {
     
 
 
-    const ingredientNames = []; // getting ingredient values from drink props for rendering images // small amount of data to process // nice to automate it
+    const ingredientNames = []; // getting ingredient values from drink props for rendering images // small amount of data to process // 
     if (status === 'received'){
         for (const prop in drink){
           if (drink && prop.match(/^strIngredient/) && drink[prop] !== ''  && drink[prop] !== null && !ingredientNames.some(i => i === drink[prop])){ //checking prop is stringredient

@@ -62,7 +62,7 @@ export const loggingWait = () => { return( <img src={loadIngredientUrl} alt="tun
 
 export const backButtonUrl = "https://icon-library.com/images/back-button-icon-png/back-button-icon-png-26.jpg";
 
-const likeIconUrl = "https://icon-library.com/images/heart-icon-free/heart-icon-free-21.jpg";
+const likeIconUrl = "https://icon-library.com/images/heart-icon-free/heart-icon-free-4.jpg";
 export const likeNav = () => { return ( <img src={likeIconUrl} alt="tungsten" style={navIconActiveStyle}></img> )}
 
 const searchIconUrl = "https://icon-library.com/images/search-icon-ios/search-icon-ios-18.jpg";

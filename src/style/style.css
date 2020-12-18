@@ -12,6 +12,16 @@ html{
   font-family: Helvetica, Arial, Sans-Serif;
   font-size:16px;
 }
+@media screen and (max-width: 480px){
+  html{
+    font-size:12px;
+  }
+}
+@media screen and (max-width: 640px){
+  html{
+    font-size:14px;
+  }
+}
 
 ul{
   padding:0;
@@ -68,25 +78,156 @@ a:hover, a:active{
   margin:0 auto;
 }
 
-button.cocktails{
-  width:60px;
-}
-
-.ingredient-list button{
+.ingredient-list button, button.signIn, button.cocktails{
   border-radius:100%;
   display:inline-block;
   width:180px;
   height:180px;
-  border-opacity: 0.05;
   color:white;
   margin:20px 30px 15px 30px;
   padding:20px;
+}
+
+.recResultsAll{
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.ingredient-list button, button.cocktails{
+  background: transparent;
+  width:120px;
+  text-align:center;
+}
+.ingredient-list button{
+  height:120px;
+}
+@media screen and (min-width: 600px){
+  .ingredient-list button{
+    height:180px;
+    width:180px;
+  }
+
+}
+
+button.cocktails{
+  border: none;
+  margin:0 auto;
+}
+
+.ingredient-list button img, button.cocktails img{
+  margin-bottom:8px;
+  width:75%;
+  height:auto;
+  border-radius: 30px;
+}
+
+button.signIn{
+  border-radius:8px;
+  height: auto;
+  width:auto;
+  padding:8px 13px;
+  color: rgb(100,100,100);
+  border-color:rgba(110,110,110, .25);
+  margin-top:8px;
+  margin-bottom:15px;
+  padding-bottom:7px;
+}
+
+div.boxme{
+  margin-bottom:50px;
+}
+
+.profile-img-card{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100%;
+  margin-bottom: 28px;
+  margin-top:20px;
+  width:100px;
+}
+
+.modalStyle{
+
+}
+
+.ReactModalPortal{
+/*  position:fixed;
+  top:0;
+  left:0;*/
+  top:0;
+  width:100%;
+  height:100%;
+}
+
+.ReactModal__Overlay {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
+.ReactModal__Content{
+/*  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);*/
+  height:300px;
+}
+.ReactModal__Content div{
+}
+
+.ReactModal__Content h4{
+  color:rgb(40,40,40);
+}
+.ReactModal__Content button{
+  color:rgb(40,40,40);
+
+}
+
+.create-link{
+  margin-bottom:50px;
 }
 
 .searchCocktail p{
   width: 480px;
   margin-left:auto;
   margin-right:auto;
+}
+@media screen and (max-width: 600px){
+  .searchCocktail p{
+    width: 240px;
+  }
+}
+
+
+.backButtonSty {
+    border: none;
+    padding: 0px;
+    background: transparent;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align:middle;
+    font-size:90%;
+    color: rgb(180,180,180);
+    margin-bottom:20px;
+    margin-top:10px;
+    border-radius:15px;
+    padding:7px;
+    padding-bottom:4px;
+  }
+.backButtonSty *{
+  vertical-align: middle;
+}
+.backButtonSty img{
+  padding-bottom:2px;
+  width:10px;
+  margin-right:3px;
+}
+.backButtonSty:hover, .backButtonSty:active{
+  color:white;
+  background:rgb(100,100,100);
 }
 
 .grey{
@@ -100,8 +241,23 @@ button.cocktails{
 
 .body{
   width:100%;
-  height:100%;
+/*  height:100%;*/
   position:absolute;
+}
+
+.pantryPlus{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 64px;
+  border-radius: 50%;
+  margin-top:30px;
+/*  position: fixed;
+  bottom: 10%;
+  right: 60%;*/
 }
 
 .logoDivTop{
@@ -116,6 +272,20 @@ button.cocktails{
   height:250px;
 }
 
+.recipeImage{
+  margin-bottom:36px;
+}
+
+.recipeImage img{
+  margin-top:15px;
+  width:160px;
+  height:auto;
+}
+
+.RecipeViewer{
+  padding-bottom:150px;
+}
+
 img.logoText{
   margin: 0 auto;
   width:255px;
@@ -125,6 +295,12 @@ img.logoText{
   font-size:48px;
   letter-spacing: 6px;
   margin-bottom:20px;
+}
+
+.ingredientButtons{
+  border:0;
+  border-radius:100%;
+  margin: 20px;
 }
 
 h4 {
@@ -147,6 +323,23 @@ button.pantryOption {
   color:white;
   font-weight:600;
   border-color:rgba(120,130,130,0.5);
+}
+
+@media screen and (max-width:600px){
+  button.go,
+  button.goclear,
+  button.pantryOption {
+    height:60px;
+    width:90px;
+  }
+}
+@media screen and (max-width:360px){
+  button.go,
+  button.goclear,
+  button.pantryOption {
+    height:40px;
+    width:60px;
+  }
 }
 /*button.go {
   background: rgb(100, 200, 90);
@@ -204,21 +397,16 @@ button.orange:active {
 
 }
 
-.cocktails {
-  background: transparent;
-  border: none;
-
-}
 
 
 .ingredient-list {
   display: table;
   margin: 0 auto;
   text-align: center;
-  min-height: 800px;
+/*  min-height: 800px;*/
   display: inline-block;
   overflow-y: auto;
-  overflow-anchor: auto;
+  overflow: auto;
 }
 
 .pantry-header {

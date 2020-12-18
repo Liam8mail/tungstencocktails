@@ -78,10 +78,10 @@ class RecipeResults extends Component {
     
     return(
       
-      <div>
+      <div class="recResultsAll">
         {backButton(returnToSearch)}
-        <div style={{margin:'20px'}}>
-          <span>Active Ingredients:</span><br/>
+        <div>
+          <h4>Active Ingredients:</h4><br />
             {filters.sort(this.compareAbc).map((i,index) => {
                 if (isAuthed && userPantry.some(e => e.strIngredient1 === i.strIngredient1)) // Checking ingredients against ingredients in pantry
                 return ingCheckButtons(i.strIngredient1,i.strIngredient1+index,function(){}); //add in pantry icon
@@ -89,9 +89,8 @@ class RecipeResults extends Component {
             })}
           </div>
         <h1>Cocktail Recipes</h1>
-        <p style={{margin: '10px'}}>Number of cocktails found: {recipeList.length}</p><br />
+        <p>Number of cocktails found: {recipeList.length}</p>
           
-            <br />
           {status === 'requesting' ? loadRecipes() : status !== 'idle' ? <></> :  <></>} {/* display loading gif while api data is being req*/ }
             {/* display recipes once api has been sucessfully loaded */ }
           {status === 'received' &&  recipeList.map((a,index) => ( 
@@ -100,7 +99,7 @@ class RecipeResults extends Component {
               key={index+"-recl"}
               className="cocktails"
             >
-              <img src={loaded? a.strDrinkThumb : TungstenLogo_s} key={a.idDrink+index} style={cocktail} alt='tungsten' ref={this.image} onLoad={this.handleImageLoaded}></img>
+              <img src={loaded? a.strDrinkThumb : TungstenLogo_s} key={a.idDrink+index} alt='tungsten' ref={this.image} onLoad={this.handleImageLoaded} /><br />
               <span className="IngredientsList">{a.strDrink}</span>
             </button>
           ))}
@@ -111,16 +110,3 @@ class RecipeResults extends Component {
 }
 
 export default RecipeResults;
-
-
-
-const cocktail = {
-  display:'block',
-  marginBottom:'20px',
-  marginTop:'40px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  width: '100px',
-  borderRadius: '30px',
-  alt: 'tungsten'
-}

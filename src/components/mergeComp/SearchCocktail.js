@@ -40,7 +40,7 @@ export default function SearchCocktail(props) {
     const  [errorMsg,setErrorMsg] = useState(null);  // if fail to mount API, this will store the error message.
     const  [resultsURL, setResultsURL] = useState("");  // this stores the URL to get the search results. It is given its value by a function, makeResultsURL, before mounting the results component.
     const  [recipeURL, setRecipeURL] = useState("");  // this stores the URL to get the specific recipe instructions. A similar function gives it its value: makeInstructionsURL.
-    const  [display,setDisplay] = useState("searchPage");  // this determines which component is displayed (values: "searchpage", "recipe-results", "recipe-viewer")
+    const  [display,setDisplay] = useState(props.setDisplay);  // this determines which component is displayed (values: "searchpage", "recipe-results", "recipe-viewer")
 
     const  [usePantry, setUsePantry] = useState();
     const  {status, ingredients} = useGetPantry(usePantry);

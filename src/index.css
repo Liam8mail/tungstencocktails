@@ -11,21 +11,21 @@ code {
     monospace;
 }
 .menu-outer {
-  height: 104px;
-  padding: 0 0 10px 0;
+  height: 110px;
+  width:100%;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-.table {
-	display: table;   /* Allow the centering to work */
-  margin: 0 auto;
-  margin-top: 0px;
-  
-}
 
 ul#horizontal-list {
 	list-style: none;
   text-align: center;
   vertical-align: bottom;
+  overflow: hidden;
+  white-space: nowrap;
 	}
 	ul#horizontal-list li {
     display: inline-block;
@@ -34,10 +34,56 @@ ul#horizontal-list {
     width:100px;
   }
   ul#horizontal-list li:first-of-type{
+/*    margin-right:calc(50px / 20%);*/
     margin-right:50px;
   }
   ul#horizontal-list li:last-of-type{
-    margin-left:50px;
+/*    margin-left:calc(50px / 20%);
+*/    margin-left:50px;
+
+  }
+  @media screen and (max-width: 400px) {
+
+    ul#horizontal-list li:first-of-type{
+      margin-right:10px;
+    }
+    ul#horizontal-list li:last-of-type{
+      margin-left:10px;
+    }
+  }
+  @media screen and (max-width: 800px){
+    ul#horizontal-list li:first-of-type{
+      margin-right:20px;
+    }
+    ul#horizontal-list li:last-of-type{
+      margin-left:20px;
+    }
+    ul#horizontal-list li {
+      text-align:middle;
+      width: 65px;
+      word-wrap: normal;
+
+    }
+    ul#horizontal-list li button {
+      text-align:middle;
+      width: 100%;
+      white-space: inherit;
+      word-wrap: normal;
+    }
+
+    ul#horizontal-list li button a {
+      text-align:middle;
+      display:inline-block;
+      width: 100%;
+      word-wrap: break-word;
+      white-space:initial;
+    }
+    ul#horizontal-list li button a img {
+      margin: 0 auto;
+      text-align:middle;
+    }
+  }
+  @media screen and (max-width: 800px){
   }
   
 
@@ -60,7 +106,7 @@ ul#horizontal-list {
 }
 
 .ingredient-list{
-  width:800px;
+  width:100%;
 }
 
 button.logout {

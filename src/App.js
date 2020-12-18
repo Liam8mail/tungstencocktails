@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from "react";
 import { Route } from 'react-router-dom';
 import Pantry from './components/Pantry';
+import Fav from './components/Fav';
 import SearchCocktail from './components/mergeComp/SearchCocktail';
 import LoginForm from './components/LoginForm';
 import { getToken } from './services/authService';
@@ -36,10 +37,11 @@ function App (){
               <Route path="/about" />
               <Route path="/signup"/>
               <Route path="/somethingelse"/>
-            <Route path="/search" render={(props) => (<SearchCocktail {...props} isAuthed={onLineStatus} />)} />
+              <Route path="/search" render={(props) => (<SearchCocktail {...props} isAuthed={onLineStatus} setDisplay={"searchPage"} key={Date.now()} />)} />
             { !onLineStatus && <Route path="/login" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}
             { !onLineStatus && <Route path="/signup" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}
             { onLineStatus &&   <Route path="/pantry" render={(props) => (<Pantry {...props} isAuthed={onLineStatus} />)}/>}
+            { onLineStatus &&   <Route path="/fav" render={(props) => (<Fav {...props} isAuthed={onLineStatus} />)}/>}
       </div>
     );
   }

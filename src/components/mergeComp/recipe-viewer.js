@@ -84,11 +84,13 @@ class RecipeViewer extends Component {
     return(
       <div className="RecipeViewer">
       {backButton(returnFromRecipe)}    
-      {status === 'idle' || status === 'requesting'  && <></>}   
+      {status === 'idle' || status === 'requesting'  && <div></div>}   
       {status === 'received' && <React.Fragment> {/* display details once api has been sucessfully loaded */ } 
-          <div style={{minHeight:'360px', marginTop:'24px'}}><img src= {loaded? drink.strDrinkThumb : TungstenLogo_s} alt="tungsten" style={imgStyle} ref={this.image} onLoad={this.handleImageLoaded}/></div>
-            <h1 style={{padding: '0 0 12px 0'}}>Recipe: {drink.strDrink}</h1>
-            <h3>Ingredients:</h3>
+          <div className="recipeImage" >
+            <h1>Recipe: {drink.strDrink}</h1><br />
+            <img src= {loaded? drink.strDrinkThumb : TungstenLogo_s} alt="tungsten" style={imgStyle} ref={this.image} onLoad={this.handleImageLoaded}/>
+          </div>
+            <h3>Ingredients:</h3><br />
             {ingredientNames.sort(this.compareAbc).map((i,index) => {// Checking ingredients against ingredients in pantry
                 if (isAuthed && userPantry && userPantry.some(e => e.strIngredient.toLowerCase() === i.name.toLowerCase())) // cocktail api has some issues with consistency in naming 
                 return ingCheckButtons(i.name,i.name+index,function(){},i.measure); //displays pantry icon beside ing that user has
@@ -99,15 +101,12 @@ class RecipeViewer extends Component {
 
              { status === 'received' && drink.strGlass !== null &&
               <div>
-                <h3>Type of glass:</h3>
-                  <p>
+                <h3>Type of glass:</h3><p>
                     { drink.strGlass }
-                    { !drink.strGlass && 'any' }          
-                  </p>
-            <h3 style = {{margin: '5% 0 0 0 '}}>Instructions:</h3>
-              <p className="font" style = {{ margin:'0 10%'}}>
+                    { !drink.strGlass && 'any' }
+                    </p>
+            <h3>Instructions:</h3>
                 { styleInstruction(drink.strInstructions) }
-              </p>
               </div>
           }   
       </div>
@@ -122,7 +121,7 @@ export default RecipeViewer;
 function styleInstruction(instructions){ // mapping instructions to single lines. //cause errors react key errors etc atm <p> elements stacked
 
   const lines = instructions.split('.');
-  return(<p style={{lineHeight: '200%', whitSpace: 'pre-wrap'}}>{lines.map((i,index )=> (
+  return(<p style={{lineHeight: '150%', whitSpace: 'pre-wrap'}}>{lines.map((i,index )=> (
     <p key={index}>{i}</p>
  ))}</p>
     
@@ -134,7 +133,7 @@ const imgStyle = {
   display:'block',
   marginLeft: 'auto',
   marginRight: 'auto',
-  width: '16%',
+  // width: '16%',
   borderRadius: '30px'
 }
 

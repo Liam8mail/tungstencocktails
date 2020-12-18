@@ -47,7 +47,7 @@ export default function AddIngredient(props) {
         case "received":
           if (ing !== null)
             return (
-              <>
+              <div>
                 <h1> </h1>
                 <button
                   key={ing.idIngredient}
@@ -58,7 +58,7 @@ export default function AddIngredient(props) {
                   {imgPicker(ing.strIngredient, ing.strType)}
                   {addIng()}
                 </button>
-              </>
+              </div>
             );
           else return noIngFound();
 
@@ -76,7 +76,7 @@ export default function AddIngredient(props) {
 
   return (
     <div className="width">
-      <button onClick={open} style={addsty}>
+      <button onClick={open} class="pantryPlus">
         {" "}
         &nbsp;+&nbsp;{" "}
       </button>{" "}
@@ -85,9 +85,9 @@ export default function AddIngredient(props) {
         isOpen={isOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={close}
-        style={customStyles}
+        //class="modalStyle"
       > 
-      <div style={{minHeight:'220px'}}>
+      <div>
         <button onClick={close} style={{ margin: "0px 0px 0px 200px" }}>
           close
         </button>{" "}
@@ -107,39 +107,23 @@ export default function AddIngredient(props) {
 const customStyles = {
   //modal style
 
-  overlay: {
-    position: "fixed",
-    top: 100,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(255, 255, 255, 0.75)"
-  },
+  // overlay: {
+  //   position: "fixed",
+  //   top: 100,
+  //   left: 0,
+  //   right: 0,
+  //   bottom: 0,
+  //   backgroundColor: "rgba(255, 255, 255, 0.75)"
+  // },
 
-  content: {
-    top: "40%",
-    left: "20%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
-  }
-};
-
-const addsty = {
-  // Quick add Button
-
-  backgroundColor: "#4CAF50",
-  border: "none",
-  color: "white",
-  padding: "0px",
-  textDecoration: "none",
-  display: "inline-block",
-  fontSize: "64px",
-  borderRadius: "50%",
-  position: "fixed",
-  bottom: "10%",
-  right: "60%"
+  // content: {
+  //   top: "40%",
+  //   left: "20%",
+  //   right: "auto",
+  //   bottom: "auto",
+  //   marginRight: "-50%",
+  //   transform: "translate(-50%, -50%)"
+  // }
 };
 
 const ingstyle = {

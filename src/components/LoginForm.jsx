@@ -88,8 +88,8 @@ export default function Loginform(props) {
           
           <div className="boxme">
           {/* conditionally render header */}
-            {location === loginPage ? <h1 style={{textAlign:'center'}}>Login</h1> : location === signupPage? <h1 style={{textAlign:'center'}}>Create Account</h1> : <></>} 
-                <>
+            {location === loginPage ? <h1 style={{textAlign:'center'}}>Login</h1> : location === signupPage? <h1 style={{textAlign:'center'}}>Create Account</h1> : <p></p>} 
+                <div>
                     {loggingImages(status)} {/* {function below} */}
 
                      {location === signupPage &&
@@ -116,15 +116,15 @@ export default function Loginform(props) {
                     </div>
 
 
-                    <div style={{display: "flex", justifyContent: "center",textAlign: "left", margin:'32px'}}>
-                        <button onClick={() => submit()} type="submit" className="btn btn-primary" >Sign in</button>
+                    <div>
+                        <button onClick={() => submit()} type="submit" className="signIn" >Sign in</button>
                     </div> 
-                        <div style={{ textAlign: "center", margin: "64px 0 0 0" }}>
-                        {location === loginPage ? <Link to="/signup">Create Account</Link> : location === signupPage ? <Link to="/login">previous</Link> : <></>}
-                         </div>
+                        <div>
+                        {location === loginPage ? <Link to="/signup" class="create-link">Create Account</Link> : location === signupPage ? <Link to="/login">previous</Link> : <p></p>}
+                    </div>
 
 
-            </>
+            </div>
             
         </div>
     );
@@ -133,8 +133,7 @@ export default function Loginform(props) {
 }
 
 const loggingImages = (status) => { // function that retruns the log in image conditionally based on login status
-    return <img src={status === 'idle'? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : loadIngredientUrl} alt="profile-img" className="profile-img-card" width="200px"
-    style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', borderRadius: '12%', marginBottom: '36px'}}
+    return <img src={status === 'idle'? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : loadIngredientUrl} alt="profile-img" className="profile-img-card"
     />
 }
 

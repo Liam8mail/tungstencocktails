@@ -1,5 +1,6 @@
 import sAdd from '../img/sAdd.png';
 import TungstenLogo from '../img/TungstenLogo-Final-01.png';
+import TungstenLogo_s from '../img/TungstenLogo_s.png';
 import searchIco from '../img/search-white.svg';
 import loginWhite from '../img/user-white.svg';
 import questionIcon from '../img/question-white.svg';
@@ -18,11 +19,11 @@ export default function imgPicker(ing){
 }
 
 
-export function ingredientButtons(i,index, buttonHandler,measure){ return <button key={index} style={ingStyle}
-          onClick={() => buttonHandler(i)}>{imgPicker(i)}<br /><span className="ingredientsList">{i}</span>{measure!==undefined && <span className="ingredientsList">{measure}</span>}</button>
+export function ingredientButtons(i,index, buttonHandler,measure){ return <button key={index} class="ingredientButtons" style={ingStyle}
+          onClick={() => buttonHandler(i)}>{imgPicker(i)}<br /><span className="ingredientsList">{i}</span><br />{measure!==undefined && <span className="ingredientsList">{" Measure: "+measure}</span>}</button>
 }
 
-export function ingCheckButtons(i,index, buttonHandler,measure){ return <button key={index} style={ingStyle}
+export function ingCheckButtons(i,index, buttonHandler,measure){ return <button className="ingCheckButton" key={index} style={ingStyle}
           onClick={() => buttonHandler(i)}><div style={{marginLeft:'10px'}}>{imgPicker(i)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle}></img></div><h4 style={btntxt}>{i}</h4>
           {measure!==undefined && <h4 style={btntxt}>{measure}</h4>}</button>
 }
@@ -56,7 +57,7 @@ export const noIngFound = () => { return <h2>Not Found :(</h2>} //Use Images?
 
 export const ingError = () => { return <h2>Oops :(</h2>} //Use Images?
 
-
+export const placeholder = TungstenLogo_s;
 // Image error handle
 
 const handleOnError = () => {
@@ -72,7 +73,7 @@ export const loggingWait = () => { return( <img src={loadIngredientUrl} alt="tun
 // menu/helper urls
 
 export const backButtonUrl = "https://www.pngjoy.com/pngl/266/5094894_hamburger-menu-icon-white-back-icon-png-png.png";
-export const backButton = (buttonHandler) => { return ( <button style= {backButtonSty} onClick={() => buttonHandler()}><img src={backButtonUrl} alt="tungsten" width='20' height='auto'></img></button> )}
+export const backButton = (buttonHandler) => { return ( <button class="backButtonSty" onClick={() => buttonHandler()}><img src={backButtonUrl} alt="tungsten"/> Return to search</button> )}
 
 //const likeIconUrl = "https://icon-library.com/images/heart-icon-free/heart-icon-free-4.jpg";
 const likeIconUrl = heart;
@@ -159,17 +160,6 @@ const logoStyle = {
 }
 
 
-const backButtonSty = {
-    // Button
-    border: "none",
-    padding: "0px",
-    background: 'transparent',
-    textDecoration: "none",
-    display: "inline-block",
-    position: "fixed",
-    bottom: "38.5%",
-    right: "70%"
-  };
 
 
 

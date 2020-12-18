@@ -78,12 +78,12 @@ export default function Pantry(props){
             throw new Error();
 
             default:
-            return <><AddIngredient update={addIngredients}/><small style={style}>your pantry is empty</small></>
+            return <div><AddIngredient update={addIngredients}/><small style={style}>your pantry is empty</small></div>
 
             }
         }catch(err){
                 console.log(err);
-                return <><AddIngredient update={addIngredients}/><h1 style={style}>Oops :(</h1></>
+                return <div><AddIngredient update={addIngredients}/><h1 style={style}>Oops :(</h1></div>
         }
 
 }
@@ -122,7 +122,7 @@ const updateDB = async newPantry => {
                 </ul> <AddIngredient update={updatePantry}/></div></React.Fragment>
                 );
 
-        return <><AddIngredient update={updatePantry}/><h4 style={emptyPantryStyle}>your pantry is empty</h4></> 
+        return <div><AddIngredient update={updatePantry}/><h4 style={emptyPantryStyle}>your pantry is empty</h4></div> 
 }
 
 
@@ -221,7 +221,7 @@ const style = {
 const emptyPantryStyle = {
     fontWeight: 'lighter',
     textAlign: 'center',
-    padding: '512px 0 0 0'
+    padding: '60px 0 200px 0'
 }
 
 const ingStyle = {

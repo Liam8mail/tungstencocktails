@@ -26,6 +26,11 @@ export function updateUserPantry(user,pantry) { // pretty obvious what this does
     return http.put(`${apiUserEndpoint}pantry/:${user._id}`, {'pantry': pantry});
 };
 
+export function updateUserFavs(user,favs) { 
+    
+    return http.put(`${apiUserEndpoint}favs/:${user._id}`, {'favs': favs});
+};
+
 export function ping(){ // sends call to the server to load it if free hosting service unloaded due to inactivity. called upon app init. 
     return http.get(apiUrl);
 }

@@ -23,7 +23,7 @@ function App (){
     setOnlineStatus(true);
 
   },[onLineStatus]);
-
+  // routing for paths to render components conditionally
 
     return (
       <div className="body" >

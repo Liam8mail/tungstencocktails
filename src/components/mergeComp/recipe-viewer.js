@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import apiFetch from '../../services/apiService';
-import {loadRecipes, ingredientButtons, backButton, ingCheckButtons} from '../../util/imgPicker';
+import {ingredientButtons, backButton, ingCheckButtons} from '../../util/imgPicker';
 import TungstenLogo_s from '../../img/TungstenLogo_s.png';
 
-
+// NB: the state item drinks, inside recipeInstructionsApiData, hsa been filled with blank data in a format that matches the actual JSON data we hope to render.
+    // this dummy data helps to correctly render the real JSON results, even if their is a delay before the JSON data can be read and the component needs to re-render with the new data.
 
 class RecipeViewer extends Component {
   constructor(props){
@@ -65,8 +66,8 @@ class RecipeViewer extends Component {
   render(){
 
     //console.log("API fetched yet? = "+this.state.isFetched);
-    const drink = this.state.recipeInstructionsApiData.drinks[0];
-    const { isAuthed, userPantry, returnFromRecipe } = this.props;
+    const drink = this.state.recipeInstructionsApiData.drinks[0];// This is the way the JSON data is stored for the recipes. It's only one recipe, but it returns as an array of recipes.
+    const { isAuthed, userPantry, returnFromRecipe } = this.props; // returnFromRecipe references a function in App.js which changes the active component back to the cocktails listed according to the chosen ingredients.
     const { status, loaded } = this.state;
 
 
@@ -84,7 +85,7 @@ class RecipeViewer extends Component {
     return(
       <div className="RecipeViewer">
       {backButton(returnFromRecipe)}    
-      {status === 'idle' || status === 'requesting'  && <div></div>}   
+      {(status === 'idle' || status === 'requesting')  && <div></div>}   
       {status === 'received' && <React.Fragment> {/* display details once api has been sucessfully loaded */ } 
           <div className="recipeImage" >
             <h1>Recipe: {drink.strDrink}</h1><br />
@@ -99,7 +100,7 @@ class RecipeViewer extends Component {
             </React.Fragment>
             }
 
-             { status === 'received' && drink.strGlass !== null &&
+             { status === 'received' && drink.strGlass !== null && // renders glass details 
               <div>
                 <h3>Type of glass:</h3><p>
                     { drink.strGlass }
@@ -118,7 +119,7 @@ class RecipeViewer extends Component {
 export default RecipeViewer;
 
 
-function styleInstruction(instructions){ // mapping instructions to single lines. //cause errors react key errors etc atm <p> elements stacked
+function styleInstruction(instructions){ // mapping instructions to single lines. //cause errors react key errors etc atm <p> elements stacked // will fix
 
   const lines = instructions.split('.');
   return(<p style={{lineHeight: '150%', whitSpace: 'pre-wrap'}}>{lines.map((i,index )=> (

@@ -82,7 +82,7 @@ export default function Loginform(props) {
         
       },[status, email.value, password.value, props,location, name.value]); // dependencys
       
-
+      // standard form nothing new here.
      
       return (
           

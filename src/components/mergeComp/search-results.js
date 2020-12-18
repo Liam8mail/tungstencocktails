@@ -9,12 +9,12 @@ class SearchResults extends Component {
       return ingredName.includes(searchTerm.toLowerCase());
     };
   }
-  
+  // This was the first button handler in my code. Hence the basic name. It exists in App.js, and triggers a couple of other functions. Those functions add the chosen filter to the state filters list, and remove it from the cocktailIngredList
   render() {
     const buttonHandler = this.props.buttonHandler;
-    const searchTermFromProps = this.props.searchTerm;
-    const cocktailIngredList = this.props.cocktailIngredList;
-    const compareAbc = this.props.compareAbc;
+    const searchTermFromProps = this.props.searchTerm;// described above
+    const cocktailIngredList = this.props.cocktailIngredList;// the list of possible ingredients
+    const compareAbc = this.props.compareAbc; // this is a function in App.js which alphabetically sorts the results.
     const ingredientFilterFunction = this.ingredientFilterFunction;
     
     // let's calculate how many elements or obejcts are

@@ -4,7 +4,8 @@ class SearchForm extends Component {
   render() {
     // this.props are the properties which are provided or passed
     // to this component. We have the searchTerm and we have the
-    // onChange function.
+    // onChange function. The searchTerm stores the user input into the search bar,
+    // the onChange updates state of App.js when user input changes. 
     const searchTermFromProps = this.props.searchTerm;
     const onChangeFromProps = this.props.onChange;
 

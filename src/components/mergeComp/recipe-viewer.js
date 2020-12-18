@@ -133,7 +133,6 @@ const imgStyle = {
   display:'block',
   marginLeft: 'auto',
   marginRight: 'auto',
-  // width: '16%',
   borderRadius: '30px'
 }
 

@@ -3,7 +3,7 @@ import { getUserObject } from '../services/authService';
 import { updateUserPantry } from '../services/userService';
 import { getCancelToken } from '../services/httpService';
 
-// Hook for retrieving user details from jwt token and updating users pantry in 
+// Hook for retrieving user details from jwt token and updating users pantry// not used at the moment
 export default function useUpdateUser(){
 
     const [user, setUser] = useState();

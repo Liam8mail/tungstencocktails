@@ -2,8 +2,8 @@
 import React, {useState} from 'react';
 import '../style/style.css'
 import useGetFavs from '../hooks/useGetFavs';
-import  {loadRecipes, placeholder} from '../util/imgPicker';
-// Very Quick Imp
+import  {loadRecipes, placeholder, likeIconUrl} from '../util/imgPicker';
+// Very Quick Imp -- basically the same as the pantry 
 
 export default function Fav(props){
    
@@ -64,6 +64,7 @@ export default function Fav(props){
               key={index}
               className="cocktails"
             >
+              <img src={likeIconUrl} alt="tungsten" style={favCheckButtonStyle}></img>
               <img src={loaded? i.strDrinkThumb : placeholder} key={i.idDrink+index} style={cocktail} alt='tungsten' ref={image} onLoad={handleImageLoaded}></img>
               <span className="IngredientsList">{i.strDrink}</span>
             </button>  
@@ -105,7 +106,15 @@ const style = {
 
 
 
-
+const favCheckButtonStyle = {
+  position: 'relative',
+  backgroundColor: 'transparent',
+  background: 'transparent',
+  width: '16px',
+  margin: '0 10% -70% 50px',
+  outline:'none'
+  
+}
 
 
 

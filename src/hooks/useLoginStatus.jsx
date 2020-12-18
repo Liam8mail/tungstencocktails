@@ -3,7 +3,7 @@ import { getUserObject } from '../services/authService';
 import { getUser } from '../services/userService';
 import { getCancelToken } from '../services/httpService';
 
-// resonposible for returning the users name as jsx 
+// responsible for returning the users name as jsx 
 
 export default function useLoginStatus(isAuthed){
 

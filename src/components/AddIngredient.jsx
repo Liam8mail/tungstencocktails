@@ -3,11 +3,11 @@ import Modal from "react-modal";
 import { useState } from "react";
 import useFormInput from "../hooks/useFormInput";
 import useGetIngredient from "../hooks/useGetIngredient";
+import '../style/style.css';
 import imgPicker, {
-  loadIng,
-  addIng,
+  loadIngredientUrl,
   ingError,
-  noIngFound
+  noIngFound,
 } from "../util/imgPicker";
 
 export default function AddIngredient(props) {
@@ -35,6 +35,10 @@ export default function AddIngredient(props) {
     setQuery(input.value); // state will trigger useGetIngredient to retrive ingredient from cocktail db
   };
 
+  const loading = () =>{
+    return <img src={loadIngredientUrl} alt="tungsten" style={ingStyle}  width="80" height="80"></img>
+  }
+
   const displayResult = () => {
     try {
       switch (status) { 
@@ -42,22 +46,17 @@ export default function AddIngredient(props) {
           return <h2> </h2>; //initial state -> nothing to show
 
         case "requesting":
-          return loadIng(); // imgPicker
+          return loading(); // imgPicker
 
         case "received":
           if (ing !== null)
             return (
               <div>
                 <h1> </h1>
-                <button
-                  key={ing.idIngredient}
-                  style={ingstyle}
-                  onClick={() => props.update(ing)}
-                >
-                  <span style={btntxt}>{ing.strIngredient}</span>
-                  {imgPicker(ing.strIngredient, ing.strType)}
-                  {addIng()}
-                </button>
+               
+                <button key={ing.idIngredient} class="ingredientButtons" style={ingStyle} 
+                onClick={() => props.update(ing)}>{imgPicker(ing.strIngredient)}<br /><span className="ingredientsList">{ing.strIngredient}</span><br /></button>
+                
               </div>
             );
           else return noIngFound();
@@ -75,7 +74,7 @@ export default function AddIngredient(props) {
   };
 
   return (
-    <div className="width">
+    <div >
       <button onClick={open} class="pantryPlus">
         {" "}
         &nbsp;+&nbsp;{" "}
@@ -85,45 +84,57 @@ export default function AddIngredient(props) {
         isOpen={isOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={close}
-        //class="modalStyle"
+        //style={customStyles}
+        className="modal"
+        overlayClassName="Overlay"
       > 
       <div>
-        <button onClick={close} style={{ margin: "0px 0px 0px 200px" }}>
+        {/* <button onClick={close} style={{ float:'right' }} className="signIn">
           close
-        </button>{" "}
+        </button>{" "} */}
         {/* Modal content */}
-        <h2>Add Ingredient</h2>
-        <input {...input} id="InputText" style={{ padding: "4px" }} />
-        <button onClick={() => submit(input)} style={{ fontSize: "16px" }}>
+        <div style={{textAlign:'center'}}>
+        <h2 style = {{margin: '8% 0'}}>Add Ingredient</h2>
+        <input {...input} id="InputText" type="search" />
+        <button className="signIn" onClick={() => submit(input)} style={{ display:'block', marginLeft:'45%' }}>
           search
         </button>
-        <div style={{ textAlign: "center" }}>{displayResult()}</div>
+        <div style={{marginBottom: '8%'}}>{displayResult()}</div>
+        </div>
         </div>
       </Modal>
     </div>
   );
 }
 
+const ingStyle = {
+    backgroundColor: 'transparent',
+    background: 'transparent',
+    outline:'none',
+    width:'120px'
+}
+
 const customStyles = {
   //modal style
 
-  // overlay: {
-  //   position: "fixed",
-  //   top: 100,
-  //   left: 0,
-  //   right: 0,
-  //   bottom: 0,
-  //   backgroundColor: "rgba(255, 255, 255, 0.75)"
-  // },
+  overlay: {
+    position: "fixed",
+    top: 100,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgb(80,80,40);"
+  },
 
-  // content: {
-  //   top: "40%",
-  //   left: "20%",
-  //   right: "auto",
-  //   bottom: "auto",
-  //   marginRight: "-50%",
-  //   transform: "translate(-50%, -50%)"
-  // }
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "rgb(80,80,40);"
+  }
 };
 
 const ingstyle = {

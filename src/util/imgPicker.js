@@ -6,6 +6,7 @@ import loginWhite from '../img/user-white.svg';
 import questionIcon from '../img/question-white.svg';
 import pant from '../img/save-white.svg';
 import heart from '../img/heart-white.svg';
+import trash from '../img/trash.svg';
 
 // Place to manage urls for img elements etc. 
 
@@ -14,7 +15,7 @@ export default function imgPicker(ing){
     ing = 'Midori Melon Liqueur';
 
     const url = `https://www.thecocktaildb.com/images/ingredients/${ing}-Small.png`; //  (100x100 pixels)
-    return  <img src={url} alt="tungsten" width="50" height="50" onError={handleOnError()} key={ing}></img>
+    return  <img src={url} alt="tungsten" width="120" height="120" onError={handleOnError()} key={ing}></img>
 
 }
 
@@ -23,9 +24,9 @@ export function ingredientButtons(i,index, buttonHandler,measure){ return <butto
           onClick={() => buttonHandler(i)}>{imgPicker(i)}<br /><span className="ingredientsList">{i}</span><br />{measure!==undefined && <span className="ingredientsList">{" Measure: "+measure}</span>}</button>
 }
 
-export function ingCheckButtons(i,index, buttonHandler,measure){ return <button className="ingCheckButton" key={index} style={ingStyle}
-          onClick={() => buttonHandler(i)}><div style={{marginLeft:'10px'}}>{imgPicker(i)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle}></img></div><h4 style={btntxt}>{i}</h4>
-          {measure!==undefined && <h4 style={btntxt}>{measure}</h4>}</button>
+export function ingCheckButtons(i,index, buttonHandler,measure){ return <button className="ingredientButtons" key={index} style={ingStyle}
+          onClick={() => buttonHandler(i)}>{imgPicker(i)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle}></img>
+          <br /><span className="ingredientsList">{i}</span><br />{measure!==undefined && <span className="ingredientsList">{" Measure: "+measure}</span>}</button>
 }
 
 export const logo = () => { return (<div style={{textAlign: 'center', marginTop: '100px'}}><img src={TungstenLogo} alt="tungsten" style={logoStyle}></img></div>)}
@@ -37,12 +38,12 @@ export function ingImageUrl(ing){
 }
 
 // Pantry Component
-export const loadPantryUrl = "https://media.giphy.com/media/LUeU77YRMp5b0hgd5R/giphy.gif"; // loading gif displayed when loading pantry ingredients
+export const loadPantryUrl = "https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif"; // loading gif displayed when loading pantry ingredients
 
 
 // Add Ingredient Component
 
-export const loadIngredientUrl = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" // loading gif displayed when searching ingredient in Pantry
+export const loadIngredientUrl = "https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif" // loading gif displayed when searching ingredient in Pantry
 
 export const loadIng = () => { return( <img src={loadIngredientUrl} alt="tungsten" style={imgStyle}  width="100" height="100"></img>)}
 
@@ -76,7 +77,7 @@ export const backButtonUrl = "https://www.pngjoy.com/pngl/266/5094894_hamburger-
 export const backButton = (buttonHandler) => { return ( <button class="backButtonSty" onClick={() => buttonHandler()}><img src={backButtonUrl} alt="tungsten"/> Return to search</button> )}
 
 //const likeIconUrl = "https://icon-library.com/images/heart-icon-free/heart-icon-free-4.jpg";
-const likeIconUrl = heart;
+export const likeIconUrl = heart;
 export const likeNav = () => { return ( <img src={likeIconUrl} alt="tungsten" style={navIconActiveStyle} /> )}
 
 const searchIconUrl = searchIco;
@@ -148,9 +149,13 @@ const btntxt = {
   }
 
 const ingCheckButtonStyle = {
+    position: 'absolute',
+    backgroundColor: 'transparent',
     background: 'transparent',
+    
     width: '20px',
-    margin: '0 0 25px 0px',
+    margin: '0 0 85% 0px',
+    outline:'none'
     
 }
 

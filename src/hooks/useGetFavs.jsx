@@ -4,7 +4,7 @@ import { getUser } from '../services/userService';
 import { getCancelToken } from '../services/httpService';
 import  apiFetch  from '../services/apiService';
 
-// responsible for getting the favs from users in database.
+// Quick Implementation responsible for getting the favs from users in database. // basically the same as useGetPantry
 
 export default function useGetFavs(){
 

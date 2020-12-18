@@ -168,7 +168,7 @@ const updateDB = async newPantry => {
     function buttonHovered({currentTarget: button},i,selected) {
         if (selected.includes(i)) return;
     
-    button.style.background = 'linear-gradient(130deg, white 50%, hsla(120, 60%, 70%, 0.2)100%)'
+    button.style.background = 'linear-gradient(130deg, transparent 50%, hsla(120, 60%, 70%, 0.5)100%)'
 }
 
 
@@ -184,26 +184,29 @@ const updateDB = async newPantry => {
         if (selected && !selected.length > 0){
             return {
 
+                position: 'absolute',
                 backgroundColor: "transparent",
-                width: '40px',
-                marginRight: '80px',
-                height: '40px',
+                width: '80px',
+                marginLeft: '20%',
+                minHeight: '80px',
                 border: 'none',
                 borderWidth : '1px',
-                float: 'right',
+                display: 'inlineBlock',
                 opacity: '0',
             }
         }else{
             return {
 
-                background: `url('https://icon-library.com/images/trash-bin-icon/trash-bin-icon-7.jpg') no-repeat`,
+                position: 'absolute',
+                top : '40%',
+                background: `url('https://media2.giphy.com/media/H9iBUt1bPrsfWBUeLQ/giphy.gif?cid=ecf05e47q3h6s7f77fnud3pa363x6nzi9lpbw8c6wy230sic&rid=giphy.gif') no-repeat`,
                 backgroundSize: 'contain',
-                marginRight: '80px',
-                width: '40px',
-                height: '40px',
+                marginLeft: '20%',
+                width: '80px',
+                height: '80px',
                 border: 'none',
                 borderWidth : '1px',
-                float: 'right',
+                display: 'inlineBlock',
                 opacity: '100',
             }
         }
@@ -232,19 +235,21 @@ const ingStyle = {
     border: 'none',
     fontSize: '12px',
     padding: '8px',
-    outline:'none'
+    outline:'none',
+    width:'120px'
 }
 
 const ingstyleSel =  {
     backgroundColor: 'transparent',
-    background: 'linear-gradient(20deg, white 50%, hsla(180, 60%, 70%, 0.2)100%)',
+    background: 'linear-gradient(20deg, transparent 50%, hsla(180, 60%, 70%, 0.2)100%)',
     margin: "5px",
     borderRadius: '2%',
     border: '',
     borderWidth: '1px',
     fontSize: '12px',
     padding: '7px',
-    outline:'none'
+    outline:'none',
+    width:'120px'
 }
 
 
@@ -259,7 +264,7 @@ const imgStyle = {
     display:'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '50%',
+    width: '10%',
 }
 
 

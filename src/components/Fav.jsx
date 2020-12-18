@@ -89,7 +89,8 @@ const cocktail = {
     marginTop:'40px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '100px',
+    // width: '100px',
+    width: '100%',
     borderRadius: '30px',
     alt: 'tungsten'
     }

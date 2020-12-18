@@ -86,6 +86,10 @@ a:hover, a:active{
   color:white;
   margin:20px 30px 15px 30px;
   padding:20px;
+  text-align:center;
+}
+.cocktails .IngredientsList{
+  text-align:center;
 }
 
 .recResultsAll{

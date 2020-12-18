@@ -25,7 +25,7 @@ class SearchResults extends Component {
      
     return (
       <div>
-        <p>Number of ingredients found {numberResults}<br /></p>
+        <p>Number of ingredients found: {numberResults}<br /></p>
 
           <div className="ingredient-list">
           {cocktailIngredList.filter(ingredientFilterFunction(searchTermFromProps)).sort(compareAbc).map(i => 

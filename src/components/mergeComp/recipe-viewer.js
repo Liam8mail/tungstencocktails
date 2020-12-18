@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import apiFetch from '../../services/apiService';
-import {loadGen, ingredientButtons, backButtonUrl, ingCheckButtons} from '../../util/imgPicker';
+import {loadRecipes, ingredientButtons, backButton, ingCheckButtons} from '../../util/imgPicker';
+import TungstenLogo_s from '../../img/TungstenLogo_s.png';
 
 
 
@@ -9,6 +10,7 @@ class RecipeViewer extends Component {
     super(props);
     this.state = {
       isFetched: false,
+      loaded:false,
       recipeInstructionsApiData: {
         drinks: [{
             strDrink: "",
@@ -27,6 +29,7 @@ class RecipeViewer extends Component {
       errorMsg:"",
       status: "idle",
     };
+    this.image = React.createRef();
   }
   async componentDidMount(){
     try {
@@ -52,18 +55,19 @@ class RecipeViewer extends Component {
     }
   }
 
+  handleImageLoaded = () => { // changes img source from placeholder once image has loaded
+    if(!this.state.loaded){
+      this.setState({ loaded: true});
+    }
+  }
  
 
   render(){
 
-
-    const returnFromRecipe = this.props.returnFromRecipe;
     //console.log("API fetched yet? = "+this.state.isFetched);
     const drink = this.state.recipeInstructionsApiData.drinks[0];
-    const userPantry = this.props.userPantry;
-    const isAuthed = this.props.isAuthed;
-    const status = this.state.status;
-    
+    const { isAuthed, userPantry, returnFromRecipe } = this.props;
+    const { status, loaded } = this.state;
 
 
     const ingredientNames = []; // getting ingredient values from drink props for rendering images // small amount of data to process // 
@@ -76,64 +80,43 @@ class RecipeViewer extends Component {
         }
         //console.log(ingredientNames);
     }
-
-
-    if (status === 'received')
+    
     return(
       <div className="RecipeViewer">
-          <div>
-          <div style={{minHeight:'360px', marginTop:'24px'}}><img src= {drink.strDrinkThumb} alt="tungsten" style={imgStyle}/></div>
+      {backButton(returnFromRecipe)}    
+      {status === 'idle' || status === 'requesting'  && <></>}   
+      {status === 'received' && <React.Fragment> {/* display details once api has been sucessfully loaded */ } 
+          <div style={{minHeight:'360px', marginTop:'24px'}}><img src= {loaded? drink.strDrinkThumb : TungstenLogo_s} alt="tungsten" style={imgStyle} ref={this.image} onLoad={this.handleImageLoaded}/></div>
             <h1 style={{padding: '0 0 12px 0'}}>Recipe: {drink.strDrink}</h1>
             <h3>Ingredients:</h3>
-            {ingredientNames.sort(this.compareAbc).map((i,index) => { //Quick Merge -- // Checking ingredients against ingredients in pantry
+            {ingredientNames.sort(this.compareAbc).map((i,index) => {// Checking ingredients against ingredients in pantry
                 if (isAuthed && userPantry && userPantry.some(e => e.strIngredient.toLowerCase() === i.name.toLowerCase())) // cocktail api has some issues with consistency in naming 
                 return ingCheckButtons(i.name,i.name+index,function(){},i.measure); //displays pantry icon beside ing that user has
                 return ingredientButtons(i.name,i.name+index,function(){},i.measure);//displays reg ing
-                
             })}
-            { drink.strGlass !== null &&
+            </React.Fragment>
+            }
+
+             { status === 'received' && drink.strGlass !== null &&
               <div>
                 <h3>Type of glass:</h3>
                   <p>
                     { drink.strGlass }
                     { !drink.strGlass && 'any' }          
                   </p>
-              </div>
-            }
             <h3 style = {{margin: '5% 0 0 0 '}}>Instructions:</h3>
               <p className="font" style = {{ margin:'0 10%'}}>
                 { styleInstruction(drink.strInstructions) }
               </p>
-          </div>
-          <p>
-            <button onClick={returnFromRecipe} style={backSty}>
-            <img src={backButtonUrl} alt="tungsten" width='50' height='auto'></img>
-            </button>           
-          </p>
+              </div>
+          }   
       </div>
     );
-    else if (status === 'requesting')
-    return(
-      loadGen()
-    )
-    else return(
-      <button onClick={returnFromRecipe} style={backSty}>
-      <img src={backButtonUrl} alt="tungsten" width='50' height='auto'></img>
-      </button>           
-    )
+    
   }
 }
 
 export default RecipeViewer;
-
-
-const imgStyle = {
-  display:'block',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  width: '33%',
-  borderRadius: '30px'
-}
 
 
 function styleInstruction(instructions){ // mapping instructions to single lines. //cause errors react key errors etc atm <p> elements stacked
@@ -147,14 +130,14 @@ function styleInstruction(instructions){ // mapping instructions to single lines
 }
 
 
-const backSty = {
-  // Button
-  border: "none",
-  padding: "0px",
-  background: 'transparent',
-  textDecoration: "none",
-  display: "inline-block",
-  position: "fixed",
-  bottom: "84%",
-  right: "90%"
-};
+const imgStyle = {
+  display:'block',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  width: '16%',
+  borderRadius: '30px'
+}
+
+
+
+

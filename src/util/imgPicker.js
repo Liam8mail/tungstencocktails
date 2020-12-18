@@ -1,5 +1,10 @@
 import sAdd from '../img/sAdd.png';
-import TungstenLogo from '../img/TungstenLogo.png';
+import TungstenLogo from '../img/TungstenLogo-Final-01.png';
+import searchIco from '../img/search-white.svg';
+import loginWhite from '../img/user-white.svg';
+import questionIcon from '../img/question-white.svg';
+import pant from '../img/save-white.svg';
+import heart from '../img/heart-white.svg';
 
 // Place to manage urls for img elements etc. 
 
@@ -14,7 +19,7 @@ export default function imgPicker(ing){
 
 
 export function ingredientButtons(i,index, buttonHandler,measure){ return <button key={index} style={ingStyle}
-          onClick={() => buttonHandler(i)}>{imgPicker(i)}<h4 style={btntxt}>{i}</h4>{measure!==undefined && <h4 style={btntxt}>{measure}</h4>}</button>
+          onClick={() => buttonHandler(i)}>{imgPicker(i)}<br /><span className="ingredientsList">{i}</span>{measure!==undefined && <span className="ingredientsList">{measure}</span>}</button>
 }
 
 export function ingCheckButtons(i,index, buttonHandler,measure){ return <button key={index} style={ingStyle}
@@ -40,9 +45,12 @@ export const loadIngredientUrl = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI
 
 export const loadIng = () => { return( <img src={loadIngredientUrl} alt="tungsten" style={imgStyle}  width="100" height="100"></img>)}
 
-export const loadGen = () => { return( <img src={loadIngredientUrl} alt="tungsten" style={loadStyle}></img>)}
+export const loadGen = () => { return( <img src={loadIngredientUrl} alt="tungsten" style={loadStyle} ></img>)}
 
 export const addIng = () => { return <img style={sAddButton} src={sAdd} alt="tungsten" onError={handleOnError()}></img> } //Small add icon for returned ingredient in search in Pantry Note: change to Image Url
+
+// loading display for the intial recipes
+export const loadRecipes = () => { return <img src="https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif" alt="tungsten" style={loadStyle} width="10%"></img> }
 
 export const noIngFound = () => { return <h2>Not Found :(</h2>} //Use Images?
 
@@ -63,16 +71,24 @@ export const loggingWait = () => { return( <img src={loadIngredientUrl} alt="tun
 
 // menu/helper urls
 
-export const backButtonUrl = "https://icon-library.com/images/back-button-icon-png/back-button-icon-png-26.jpg";
+export const backButtonUrl = "https://www.pngjoy.com/pngl/266/5094894_hamburger-menu-icon-white-back-icon-png-png.png";
+export const backButton = (buttonHandler) => { return ( <button style= {backButtonSty} onClick={() => buttonHandler()}><img src={backButtonUrl} alt="tungsten" width='20' height='auto'></img></button> )}
 
-const likeIconUrl = "https://icon-library.com/images/heart-icon-free/heart-icon-free-4.jpg";
-export const likeNav = () => { return ( <img src={likeIconUrl} alt="tungsten" style={navIconActiveStyle}></img> )}
+//const likeIconUrl = "https://icon-library.com/images/heart-icon-free/heart-icon-free-4.jpg";
+const likeIconUrl = heart;
+export const likeNav = () => { return ( <img src={likeIconUrl} alt="tungsten" style={navIconActiveStyle} /> )}
 
-const searchIconUrl = "https://icon-library.com/images/search-icon-ios/search-icon-ios-18.jpg";
-export const searchNav = () => { return ( <img src={searchIconUrl} alt="tungsten" style={navIconActiveStyle}></img> )}
+const searchIconUrl = searchIco;
+export const searchNav = () => { return ( <img src={searchIconUrl} alt="search icon" style={navIconActiveStyle} />)}
 
-export const pantryIconUrl = "https://icon-library.com/images/chef-icon-png/chef-icon-png-4.jpg";
-export const pantryNav = (status) => { return ( <img src={pantryIconUrl} alt="tungsten" style={status? navIconActiveStyle : navIconUnactiveStyle }></img> )}
+export const loginIcon = () => { return ( <img src={loginWhite} alt ="login icon" style={navIconActiveStyle} />)} ;
+
+export const qMark = () => { return ( <img src={questionIcon} alt = "about icon" style={navIconActiveStyle} /> )};
+
+
+//export const pantryIconUrl = "https://icon-library.com/images/chef-icon-png/chef-icon-png-4.jpg";
+export const pantryIconUrl = pant;
+export const pantryNav = (status) => { return ( <img src={pantryIconUrl} alt="tungsten" style={status? navIconActiveStyle : navIconUnactiveStyle }></img> )};
 
 
 const imgStyle = {
@@ -87,7 +103,7 @@ const loadStyle = {
     display:'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '25%',
+    
 }
 
 
@@ -98,8 +114,11 @@ const sAddButton = {
 
 const navIconActiveStyle = {
     background: 'transparent',
-    width: '25px',
-    margin: '0 0 0 20px',
+    width: '20px',
+    height:'20px',
+    margin: '0 0 0 0px',
+    fill: '#FFF',
+    padding:'10px'
 }
 
 const navIconUnactiveStyle = {
@@ -113,10 +132,10 @@ const navIconUnactiveStyle = {
 const ingStyle = {
     backgroundColor: 'transparent',
     background: 'transparent',
-    margin: "5px",
-    border: 'none',
-    fontSize: '12px',
-    padding: '8px',
+    // margin: '20px',
+    // border: 'none',
+    // fontSize: '12px',
+    // padding: '20px',
     outline:'none'
 }
 
@@ -140,6 +159,17 @@ const logoStyle = {
 }
 
 
+const backButtonSty = {
+    // Button
+    border: "none",
+    padding: "0px",
+    background: 'transparent',
+    textDecoration: "none",
+    display: "inline-block",
+    position: "fixed",
+    bottom: "38.5%",
+    right: "70%"
+  };
 
 
 

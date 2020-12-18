@@ -1,8 +1,7 @@
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Helvetica, Arial, Sans-Serif;;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,21 +24,25 @@ code {
 
 ul#horizontal-list {
 	list-style: none;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  box-shadow:0 0 2px 2px rgba(0,0,0,0.06);
-  
-
+  text-align: center;
+  vertical-align: bottom;
 	}
 	ul#horizontal-list li {
-    display: inline;
-    margin: 36px;
-    
+    display: inline-block;
+    text-align: center;
+    vertical-align: bottom;
+    width:100px;
+  }
+  ul#horizontal-list li:first-of-type{
+    margin-right:50px;
+  }
+  ul#horizontal-list li:last-of-type{
+    margin-left:50px;
   }
   
 
 .width {
-  width: 40%;
+  /*width: 40%;*/
 }
 
 
@@ -56,9 +59,8 @@ ul#horizontal-list {
   border: none;
 }
 
-.nav-text {
-  text-decoration: none;
-  font-family: Georgia, serif;
+.ingredient-list{
+  width:800px;
 }
 
 button.logout {
@@ -67,6 +69,8 @@ button.logout {
   font-size: 90%;
   border-radius: 5%;
   border-width: 0px;
+  color:rgb(40,40,40);
+  font-weight:400;
 }
 
 .show{
@@ -84,8 +88,7 @@ button.logout {
 .user-status{
   border:none;
   background: transparent;
-  width:100px;
   display: inline-block;
-  text-align: left;
+  text-align: center;
   overflow:hidden;
 }

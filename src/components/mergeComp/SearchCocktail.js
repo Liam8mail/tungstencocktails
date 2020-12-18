@@ -237,13 +237,15 @@ export default function SearchCocktail(props) {
     */ 
     return (
       <div className="searchCocktail">
+      <hr />
         {display === "searchPage" &&
-          <div>
+          <div className="searchPageMain">
             <h1>Search Cocktails By Ingredient</h1>
-            <p>Click on an ingredient from the Ingredients List, to add it to your search filters. Then, click GO to search for cocktails which contain those ingredients!</p>
+            <p>Click on an ingredient from the Ingredients list below, to add it to your search filters. Then, click GO to search for cocktails which contain those ingredients!</p>
+            <p>Use the search bar to narrow down the list.</p>
             <div>
-              <h3>Selected Ingredients</h3>
-              {filters.length === 0 && <h4 style={{fontWeight: 'lighter', padding:'29px'}}> choose your ingredients </h4>}
+              <h3>Selected Ingredients</h3><br />
+              {filters.length === 0 && <p className="grey">(Your chosen ingredients will appear here)</p>}
 
               {filters.sort(compareAbc).map( i => <button key={`${i.strIngredient1}filt`} style={ingStyle}
                 onClick={() => removeFilter(i.strIngredient1)}>{imgPicker(i.strIngredient1)}<h4 style={btntxt}>{i.strIngredient1}</h4></button>)}
@@ -257,8 +259,15 @@ export default function SearchCocktail(props) {
                 </button>
               ))} */}
 
-              <p>When you're ready, click GO to search for cocktail recipes with these ingredients, or, click on your active filters to remove them one-by-one. Click clear to remove them all, and start again.</p>
-              <div style={{textAlign: 'center'}}>
+              <p>
+                <br />When you're ready, click GO to search for cocktails using these ingredients. To remove active filters, click on them to remove them one-by-one, or click CLEAR to remove them all.
+              </p>
+              <div className="ButtonsUseFilters">
+              <button className="pantryOption" style={pantryButtonStyle(usePantry)}
+                onClick={() => { if(props.isAuthed){setUsePantry(!usePantry); clearActiveFilters();}}}
+              >PANTRY
+              
+              </button>
               <button
                 onClick={() => makeResultsURL()}
                 className="go"
@@ -270,11 +279,6 @@ export default function SearchCocktail(props) {
                 className="goclear" 
               >
                 Clear
-              </button>
-              <button className="pantryOption" style={pantryButtonStyle(usePantry)}
-                onClick={() => { if(props.isAuthed){setUsePantry(!usePantry); clearActiveFilters();}}}
-              >&nbsp;
-              
               </button>
               </div>
             </div>

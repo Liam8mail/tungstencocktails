@@ -1,6 +1,130 @@
-h1,
-p {
-  font-family: Lato;
+*{
+  /*background-color:black;*/
+}
+html{
+  width:100%;
+  height:100%;
+  text-align:center;
+  vertical-align: middle;
+  margin: 0 auto;
+  background-color:rgb(40,40,40);
+  color: rgb(220,220,220);
+  font-family: Helvetica, Arial, Sans-Serif;
+  font-size:16px;
+}
+
+ul{
+  padding:0;
+  padding-inline-start:0;
+}
+
+button{
+  text-align:center;
+}
+p{
+  margin-top:.5em;
+  margin-bottom:.5em;
+}
+
+hr{
+  border-color: rgb(100,100,100);
+  margin-top:15px;
+  width:70%;
+}
+
+button{
+  color:white;
+  font-size:1em;
+}
+
+h1{
+  color: white;
+  display: inline-block;
+  border-bottom: 1px solid white;
+  margin-top:50px;
+  padding-bottom:5px;
+}
+h3{
+  margin-top:25px;
+  display: inline-block;
+  border-bottom: 1px solid;
+  padding-bottom:4px;
+}
+
+a, a:visited, h2, h3{
+  color:orange;
+}
+a:hover, a:active{
+  color:yellow;
+}
+
+.SearchFormForm input{
+  background: rgb(60,60,60);
+  font-size:1em;
+}
+
+.searchCocktail{
+  width:100%;
+  margin:0 auto;
+}
+
+button.cocktails{
+  width:60px;
+}
+
+.ingredient-list button{
+  border-radius:100%;
+  display:inline-block;
+  width:180px;
+  height:180px;
+  border-opacity: 0.05;
+  color:white;
+  margin:20px 30px 15px 30px;
+  padding:20px;
+}
+
+.searchCocktail p{
+  width: 480px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.grey{
+  font-size: 80%;
+  opacity:0.5;
+}
+
+.ButtonsUseFilters{
+  margin-top:10px;
+}
+
+.body{
+  width:100%;
+  height:100%;
+  position:absolute;
+}
+
+.logoDivTop{
+  display:block;
+  position:relative;
+  margin: 0 auto;
+  margin-top:5%;
+}
+
+.logoDivTop img{
+  width:250px;
+  height:250px;
+}
+
+img.logoText{
+  margin: 0 auto;
+  width:255px;
+  height:34px;
+  display:block;
+  margin-top:20px;
+  font-size:48px;
+  letter-spacing: 6px;
+  margin-bottom:20px;
 }
 
 h4 {
@@ -10,35 +134,43 @@ h4 {
 button.go,
 button.goclear,
 button.pantryOption {
-  transition: background-color linear 0.25s;
+  /*transition: background-color linear 0.25s;*/
   padding: 11px 17px 10px 17px;
-  font-size: 140%;
-  border-radius: 5%;
-  border-width: 2px;
+  font-size: 110%;
+  border-radius: 15%;
+  border-width: 4px;
+  background-color:rgb(135, 151, 154);
+  margin-left:10px;
+  margin-right:10px;
+  height:80px;
+  width:120px;
+  color:white;
+  font-weight:600;
+  border-color:rgba(120,130,130,0.5);
 }
-button.go {
-  background: rgb(193, 230, 193);
+/*button.go {
+  background: rgb(100, 200, 90);
   margin-right: 35px;
   font-size: 140%;
+  border-color: rgb(80,180,80);
 }
 button.goclear {
-
-  background: rgb(206, 185, 219);
-}
+  background: rgb(200, 80, 80);
+  border-color: rgb(180, 70, 70);
+}*/
 
 
 button.pantryOption {
   background: url('https://icon-library.com/images/chef-icon-png/chef-icon-png-4.jpg') no-repeat;
   background-size: cover; 
-  width: 70px; 
-  margin-left: 35px;
+/*  width: 70px;*/
 }
 
 
 button.goclear:hover,
 button.go:hover {
-  background-color: rgb(230, 240, 241);
-  transition-duration: 0.2s; /* applies to the transition *to* the :hover state */
+/*  background-color: rgb(230, 240, 241);
+*/  /*transition-duration: 0.2s;  applies to the transition *to* the :hover state */
 }
 
 .orange {
@@ -71,12 +203,6 @@ button.orange:active {
     display: inline-block;
 
 }
-
-
-.font {
-  font-family: Georgia, serif;
-}
-
 
 .cocktails {
   background: transparent;
@@ -116,7 +242,8 @@ input[type=text] {
 }
 
 input[type=search] {
-  padding: 8px;
+  padding: 15px;
+  padding-bottom:14px;
   width: 250px;
   height: 40px;
   border-radius:26px;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import apiFetch from '../../services/apiService';
 import { drinks } from "./staticJSONsearchResults";
-import { loadGen, backButtonUrl, ingredientButtons, ingCheckButtons } from '../../util/imgPicker';
+import { loadRecipes, backButton, ingredientButtons, ingCheckButtons } from '../../util/imgPicker';
 import TungstenLogo_s from '../../img/TungstenLogo_s.png';
 
 class RecipeResults extends Component {
@@ -70,17 +70,16 @@ class RecipeResults extends Component {
     const recipeList = this.state.recipeListApiData;
     const filters = this.props.filters;
     const makeInstructionsURL = this.props.makeInstructionsURL;
-    const userPantry = this.props.userPantry;
-    const status = this.state.status;
-    const isAuthed = this.props.isAuthed;
 
-    if (status === 'received')
+    const { userPantry, isAuthed } = this.props
+    const { status, loaded } = this.state;
+    
+
+    
     return(
       
       <div>
-        <button style= {backSty} onClick={returnToSearch}>
-        <img src={backButtonUrl} alt="tungsten" width='50' height='auto'></img>
-        </button>
+        {backButton(returnToSearch)}
         <div style={{margin:'20px'}}>
           <span>Active Ingredients:</span><br/>
             {filters.sort(this.compareAbc).map((i,index) => {
@@ -93,46 +92,27 @@ class RecipeResults extends Component {
         <p style={{margin: '10px'}}>Number of cocktails found: {recipeList.length}</p><br />
           
             <br />
-          {recipeList.map((a,index) => (
+          {status === 'requesting' ? loadRecipes() : status !== 'idle' ? <></> :  <></>} {/* display loading gif while api data is being req*/ }
+            {/* display recipes once api has been sucessfully loaded */ }
+          {status === 'received' &&  recipeList.map((a,index) => ( 
             <button
               onClick={() => makeInstructionsURL(a.idDrink)}
               key={index+"-recl"}
               className="cocktails"
             >
-              <img src={this.state.loaded? a.strDrinkThumb : TungstenLogo_s} key={a.idDrink+index} style={cocktail} alt='tungsten' ref={this.image} onLoad={this.handleImageLoaded}></img>
-              <b style={{maxWidth: '10px', textAlign: 'center',margin: '30px' }}>{a.strDrink}</b>
+              <img src={loaded? a.strDrinkThumb : TungstenLogo_s} key={a.idDrink+index} style={cocktail} alt='tungsten' ref={this.image} onLoad={this.handleImageLoaded}></img>
+              <span className="IngredientsList">{a.strDrink}</span>
             </button>
           ))}
+
       </div>
     );
-    else if (status === 'requesting')
-    return(
-      loadGen()
-    )
-    else return(
-      <div>
-        <button style= {backSty} onClick={returnToSearch}>
-        <img src={backButtonUrl} alt="tungsten" width='50' height='auto'></img>
-        </button>
-      </div>
-    )
   }
 }
 
 export default RecipeResults;
 
 
-const backSty = {
-  // Button
-  border: "none",
-  padding: "0px",
-  background: 'transparent',
-  textDecoration: "none",
-  display: "inline-block",
-  position: "fixed",
-  bottom: "84%",
-  right: "90%"
-};
 
 const cocktail = {
   display:'block',

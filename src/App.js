@@ -6,7 +6,8 @@ import LoginForm from './components/LoginForm';
 import { getToken } from './services/authService';
 import NavBar from "./components/SimpleNav";
 import { ping } from './services/userService';
-import { logo } from './util/imgPicker';
+import TungstenLogo from './img/TungstenLogo-Final-01.png';
+import TungstenText from './img/TungstenText-01.png';
 
 // responsible for rendering navbar, controlling online status and rendering the routes conditionally. 
 
@@ -24,11 +25,17 @@ function App (){
 
 
     return (
-      <div className="width" >
+      <div className="body" >
+
+          
+          <div className="logoDivTop">
+            <img src={TungstenLogo} alt="tungsten logo" />
+            <img src={TungstenText} alt="tungsten" className="logoText"/>
+          </div>
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar>
-            <Route path="/about" render ={() => (logo())}/>
-            <Route path="/signup"/>
-            <Route path="/somethingelse"/>
+              <Route path="/about" />
+              <Route path="/signup"/>
+              <Route path="/somethingelse"/>
             <Route path="/search" render={(props) => (<SearchCocktail {...props} isAuthed={onLineStatus} />)} />
             { !onLineStatus && <Route path="/login" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}
             { !onLineStatus && <Route path="/signup" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}

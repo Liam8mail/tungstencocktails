@@ -9,6 +9,14 @@ class SearchResults extends Component {
       return ingredName.includes(searchTerm.toLowerCase());
     };
   }
+
+  componentDidMount(){
+    window.scrollTo({
+      top: window.innerHeight*0.33,
+      behavior: 'smooth'
+    });
+  }
+  
   // This was the first button handler in my code. Hence the basic name. It exists in App.js, and triggers a couple of other functions. Those functions add the chosen filter to the state filters list, and remove it from the cocktailIngredList
   render() {
     const buttonHandler = this.props.buttonHandler;
@@ -24,24 +32,13 @@ class SearchResults extends Component {
     ).length;
      
     return (
-      <div>
+      <div style={{minHeight: '1000'}}>
         <p>Number of ingredients found: {numberResults}<br /></p>
 
           <div className="ingredient-list">
           {cocktailIngredList.filter(ingredientFilterFunction(searchTermFromProps)).sort(compareAbc).map(i => 
           ingredientButtons(i.strIngredient1, i.strIngredient1, buttonHandler))}
           </div>
-
-        {/* {cocktailIngredList
-          .filter(this.ingredientFilterFunction(searchTermFromProps)).sort(compareAbc).map(a => (
-            <button
-              onClick={() => buttonHandler(a.strIngredient1)}
-              key={a.strIngredient1 + "srch"}
-              className="orange"
-            >
-              <b>{a.strIngredient1}</b>
-            </button>
-          ))} */}
       </div>
     );
   }

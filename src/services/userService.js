@@ -1,7 +1,7 @@
 import http from './httpService';
 import {apiUrl} from '../config.json';
 
-// handles users api endpoint req
+// handles users api endpoint req //post /put endpoints are auth protected
 
 const apiUserEndpoint = `${apiUrl}/api/users/`;
 

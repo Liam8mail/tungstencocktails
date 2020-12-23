@@ -4,10 +4,10 @@ import { updateUserPantry } from '../services/userService';
 import { getCancelToken } from '../services/httpService';
 
 // Hook for retrieving user details from jwt token and updating users pantry// not used at the moment
-export default function useUpdateUser(){
+export default function useUpdateUserPantry(newPantry){
 
     const [user, setUser] = useState();
-    
+    const [status, setStatus] = useState();
     
     useEffect(() => {
         
@@ -18,11 +18,11 @@ export default function useUpdateUser(){
             try{
                 let currentUser = getUserObject();
                 if(!isMounted || !currentUser || typeof currentUser === 'undefined') return setUser(null);
-                currentUser = await updateUserPantry(currentUser, { cancelToken: source.token });
+                currentUser = await updateUserPantry(currentUser, newPantry,  { cancelToken: source.token });
                 console.log(currentUser);
             }
             catch(err){
-                setUser(null);
+                console.log(err);
             }
 
         }
@@ -33,10 +33,11 @@ export default function useUpdateUser(){
             source.cancel("canceled"); //cancel request on unmount
         };
 
-    },);
+    },[newPantry]);
 
     return {
-        user
+        user,
+        status
     }
 
 }

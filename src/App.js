@@ -35,7 +35,6 @@ function App (){
           </div>
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar>
               <Route path="/about" />
-              <Route path="/signup"/>
               <Route path="/somethingelse"/>
               <Route path="/search" render={(props) => (<SearchCocktail {...props} isAuthed={onLineStatus} setDisplay={"searchPage"} key={Date.now()} />)} />
             { !onLineStatus && <Route path="/login" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}

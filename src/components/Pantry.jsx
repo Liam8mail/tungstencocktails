@@ -69,7 +69,7 @@ export default function Pantry(props){
             return renderLoading(addIngredients);
 
             case 'received': 
-            return renderPantry(pantry, addIngredients, selected, setSelected, ingredients, removeIngredients); //if ingredients recieved from database then we can render them.
+            return renderPantry(pantry, addIngredients, selected, setSelected, ingredients, removeIngredients); //if ingredients received from database then we can render them.
        
             case 'invalid token': // Need to test 
             return  <h1> Please Login </h1>

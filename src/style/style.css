@@ -343,10 +343,14 @@ button.goclear {
 
 
 button.pantryOption {
-  background: url('https://icon-library.com/images/chef-icon-png/chef-icon-png-4.jpg') no-repeat;
-  background-size: cover; 
+  background: url('../img/save-orange.svg') no-repeat;
+  background-size: 60% 60%;
+  background-position: center;
+  opacity: 100%;
+  /* background-size: cover;  */
 /*  width: 70px;*/
 }
+
 
 
 
@@ -437,5 +441,10 @@ input[type=password] {
 
 *:focus {
   outline: none;
+}
+
+.recipeText {
+  color: white;
+  font-size: 1em;
 }
 

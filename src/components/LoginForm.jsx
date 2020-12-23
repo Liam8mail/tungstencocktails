@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { login } from '../services/authService';
 import { createAccount } from '../services/userService';
 import useFormInput from '../hooks/useFormInput';
-import { loadIngredientUrl } from '../util/imgPicker';
+import { loadUrl } from '../util/imgPicker';
 import { useLocation, Link } from 'react-router-dom';
 import '../style/style.css';
 
@@ -24,8 +24,7 @@ export default function Loginform(props) {
     const loginPage = '/login';
     
     useEffect(() => {
-        if (status === 'idle' || status ==='error')
-        return;
+        if (status === 'idle' || status ==='error') return;
         let isMounted = true;
         
         async function update(){
@@ -120,7 +119,7 @@ export default function Loginform(props) {
                         <button onClick={() => submit()} type="submit" className="signIn" >Sign in</button>
                     </div> 
                         <div>
-                        {location === loginPage ? <Link to="/signup" class="create-link">Create Account</Link> : location === signupPage ? <Link to="/login">previous</Link> : <p></p>}
+                        {location === loginPage ? <Link to="/signup" className="create-link">Create Account</Link> : location === signupPage ? <Link to="/login">previous</Link> : <p></p>}
                     </div>
 
 
@@ -132,8 +131,8 @@ export default function Loginform(props) {
     
 }
 
-const loggingImages = (status) => { // function that retruns the log in image conditionally based on login status
-    return <img src={status === 'idle'? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : loadIngredientUrl} alt="profile-img" className="profile-img-card"
+const loggingImages = (status) => { // function that returns the log in image conditionally based on login status
+    return <img src={status === 'idle'? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : loadUrl} alt="profile-img" className="profile-img-card"
     />
 }
 

@@ -5,7 +5,7 @@ import useFormInput from "../hooks/useFormInput";
 import useGetIngredient from "../hooks/useGetIngredient";
 import '../style/style.css';
 import imgPicker, {
-  loadIngredientUrl,
+  loadUrl,
   ingError,
   noIngFound,
 } from "../util/imgPicker";
@@ -36,7 +36,7 @@ export default function AddIngredient(props) {
   };
 
   const loading = () =>{
-    return <img src={loadIngredientUrl} alt="tungsten" style={ingStyle}  width="80" height="80"></img>
+    return <img src={loadUrl} alt="tungsten" style={ingStyle}  width="80" height="80"></img>
   }
 
   const displayResult = () => {
@@ -54,7 +54,7 @@ export default function AddIngredient(props) {
               <div>
                 <h1> </h1>
                
-                <button key={ing.idIngredient} class="ingredientButtons" style={ingStyle} 
+                <button key={ing.idIngredient} className="ingredientButtons" style={ingStyle} 
                 onClick={() => props.update(ing)}>{imgPicker(ing.strIngredient)}<br /><span className="ingredientsList">{ing.strIngredient}</span><br /></button>
                 
               </div>
@@ -75,7 +75,7 @@ export default function AddIngredient(props) {
 
   return (
     <div >
-      <button onClick={open} class="pantryPlus">
+      <button onClick={open} className="pantryPlus">
         {" "}
         &nbsp;+&nbsp;{" "}
       </button>{" "}

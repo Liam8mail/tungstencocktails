@@ -1,18 +1,5 @@
-/*
-NO API KEY!? ...no worries!
-NB: In case you missed the description:
-This code may not include the required API key to display results. The pvt API key is stored in a file ".env" which IS included in the GitHub.
-
-The code works with/without the API key though, for:
-  1) display, search and selection of possible ingredients.
-  2) add/removal of search filters (ingredients).
-  3) searching cocktail database for cocktails with chosen ingredients (will be dummy results if API key is not present)
-  4) Returning a list of cocktails which contain those ingredients. (will be dummy results if API key is not present)
-  5) Selecting a cocktail and loading the approprate page from the database, and displaying the instructions/recipe.
-*/
 
 import React, { useEffect, useState } from "react";
-
 // The following two components are shown on the first/start page of the search (they could probably do with being merged really):
 import SearchResults from "./search-results"; // NB: this search results is list of INGREDIENTS. Recipe search results is below.
 import SearchForm from "./search-form";
@@ -24,7 +11,7 @@ import apiFetch from '../../services/apiService';
 import '../../style/style.css'; // CSS
 import '../../index.css';
 import useGetPantry from "../../hooks/useGetPantry";
-import imgPicker from '../../util/imgPicker';
+import {ingredientButtons} from '../../util/imgPicker';
 
 
 const API_KEY = true; // import API key from .env file
@@ -44,16 +31,11 @@ export default function SearchCocktail(props) {
 
     const  [usePantry, setUsePantry] = useState();
     const  {status, ingredients} = useGetPantry(usePantry);
+    const  searchPage = "searchPage";
+    const  recipeResults = "recipe-results";
+    const  recipeViewer = "recipe-viewer";
     
-    // Binding functions in order to pass them to components:
-    // this.onSearchFormChange = this.onSearchFormChange.bind(this);
-    // this.handleFilterSelection = this.handleFilterSelection.bind(this);
-    // this.compareAbc = this.compareAbc.bind(this);
-    // this.returnToSearch = this.returnToSearch.bind(this);
-    // this.makeInstructionsURL = this.makeInstructionsURL.bind(this);
-    // this.returnFromRecipe = this.returnFromRecipe.bind(this);
   
-
   function onSearchFormChange(e) { // this detects user input in the search bar and updates state with the current search info
     setSearchTerm(e.target.value);
     let sTerm = e.target.value;
@@ -61,26 +43,6 @@ export default function SearchCocktail(props) {
     setLen(numChars);
   }
 
-  // 
-  // async componentDidMount() { // this loads the API / JSON data for the start of the search: the list of 100 ingredients
-  //   try {
-  //     const jsonResult = await apiFetch('/list.php?i=list');
-  //     console.log(jsonResult);
-  //     this.setState({ apiData: jsonResult.drinks });
-  //     this.setState({ isFetched: true });
-  //   } catch (error) {
-  //     this.setState({ isFetched: false });
-  //     this.setState({ errorMsg: error });
-  //   }
-  // }
-    // useEffect(() => {
-    //   if (!usePantry) return;
-
-      
-    // },[status, ingredients, usePantry])
-    
-    
-    
     useEffect(() => {
         
       let isMounted = true;
@@ -114,13 +76,12 @@ export default function SearchCocktail(props) {
               
               return () => {
             isMounted = false;
+            
         };
 
     },[usePantry, ingredients, status]);
 
-
-
-
+  
   function findFilterObject(filterId) { // this is a utility finder function, to find an object with an identifying parameter of the object: filterId
     return function(filterObj) {
       return filterObj.strIngredient1 === filterId;
@@ -228,6 +189,8 @@ export default function SearchCocktail(props) {
       console.log("received drink ID is null"); // please stop trying to break the API call
     }
   }
+  
+  
    // display main App parent component, details here
     // comments inside the return field are finicky.
     /*
@@ -238,30 +201,19 @@ export default function SearchCocktail(props) {
     return (
       <div className="searchCocktail">
       <hr />
-        {display === "searchPage" &&
+        {display === searchPage &&
           <div className="searchPageMain">
             <h1>Search Cocktails By Ingredient</h1>
-            <p>Click on an ingredient from the Ingredients list below, to add it to your search filters. Then, click GO to search for cocktails which contain those ingredients!</p>
-            <p>Use the search bar to narrow down the list.</p>
+            {/* <p>Click on an ingredient from the Ingredients list below, to add it to your search filters. Then, click GO to search for cocktails which contain those ingredients!</p>
+            <p>Use the search bar to narrow down the list.</p> */}
             <div>
               <h3>Selected Ingredients</h3><br />
-              {filters.length === 0 && <p className="grey">(Your chosen ingredients will appear here)</p>}
+              {filters.length === 0 && <p className="grey"> (Your chosen ingredients will appear here)</p>}
+              <div className="ingredientList">
+              {filters.sort(compareAbc).map( i => ingredientButtons(i.strIngredient1, `${i.strIngredient1}filt`, removeFilter, undefined, "70"))}
+              </div>
+              {/* <p> <br />When you're ready, click GO to search for cocktails using these ingredients. To remove active filters, click on them to remove them one-by-one, or click CLEAR to remove them all. </p> */}
 
-              {filters.sort(compareAbc).map( i => <button key={`${i.strIngredient1}filt`} style={ingStyle}
-                onClick={() => removeFilter(i.strIngredient1)}>{imgPicker(i.strIngredient1)}<h4 style={btntxt}>{i.strIngredient1}</h4></button>)}
-                
-                {/* <button
-                  onClick={() => removeFilter(a.strIngredient1)}
-                  key={a.strIngredient1 + "filt"}
-                  className="orange"
-                >
-                  <b>{a.strIngredient1}</b>
-                </button>
-              ))} */}
-
-              <p>
-                <br />When you're ready, click GO to search for cocktails using these ingredients. To remove active filters, click on them to remove them one-by-one, or click CLEAR to remove them all.
-              </p>
               <div className="ButtonsUseFilters">
               <button className="pantryOption" style={pantryButtonStyle(usePantry)}
                 onClick={() => { if(props.isAuthed){setUsePantry(!usePantry); clearActiveFilters();}}}
@@ -287,16 +239,17 @@ export default function SearchCocktail(props) {
               searchTerm={searchTerm}
               onChange={onSearchFormChange}
             />
-            { !usePantry && <SearchResults style={{minHeight: '200px'}}  // Quick Merge
+            { !isFetched && <><div style={{padding: 1000}}></div><img src="https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif" alt="tungsten" height="200"></img></>}
+            { !usePantry && isFetched && 
+            <SearchResults 
               searchTerm={searchTerm}
-              //globalArray={globalArray}
               buttonHandler={handleFilterSelection}
               cocktailIngredList={apiData}
               compareAbc={compareAbc}
-            />}
-            { usePantry && status === 'received' && props.isAuthed && <SearchResults // Quick Merge
+            />
+            }
+            { usePantry && status === 'received' && props.isAuthed && <SearchResults
               searchTerm={searchTerm}
-              //globalArray={globalArray}
               buttonHandler={handleFilterSelection}
               cocktailIngredList={apiData}
               compareAbc={compareAbc}
@@ -307,7 +260,7 @@ export default function SearchCocktail(props) {
            
           </div>
         }
-        {display === "recipe-results" &&
+        {display === recipeResults &&
           <RecipeResults
             isAuthed={props.isAuthed}
             userPantry={ingredients}
@@ -315,14 +268,16 @@ export default function SearchCocktail(props) {
             makeInstructionsURL = {makeInstructionsURL}
             filters = {filters}
             resultsURL = {resultsURL}
+            backButtonText = {"Return to search"}
           />
         }
-        {display === "recipe-viewer" &&
+        {display === recipeViewer && 
           <RecipeViewer
             isAuthed={props.isAuthed}
             userPantry={ingredients}
             returnFromRecipe={returnFromRecipe}
             recipeURL = {recipeURL}
+            backButtonText = {"Return to search"}
           />
         }
       </div>

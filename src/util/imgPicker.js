@@ -6,30 +6,18 @@ import loginWhite from '../img/user-white.svg';
 import questionIcon from '../img/question-white.svg';
 import pant from '../img/save-white.svg';
 import heart from '../img/heart-white.svg';
-import trash from '../img/trash.svg';
+
 
 // Place to manage urls for img elements etc. 
 
-export default function imgPicker(ing){ 
+export default function imgPicker(ing,imgsize){ 
     if (ing === 'Midori') //doesn't exist in api database
     ing = 'Midori Melon Liqueur';
 
     const url = `https://www.thecocktaildb.com/images/ingredients/${ing}-Small.png`; //  (100x100 pixels)
-    return  <img src={url} alt="tungsten" width="120" height="120" onError={handleOnError()} key={ing}></img>
+    return  <img src={url} alt="tungsten" width={imgsize? imgsize:"80"} height={imgsize? imgsize:"80"} onError={handleOnError()} key={ing}></img>
 
 }
-
-
-export function ingredientButtons(i,index, buttonHandler,measure){ return <button key={index} class="ingredientButtons" style={ingStyle}
-          onClick={() => buttonHandler(i)}>{imgPicker(i)}<br /><span className="ingredientsList">{i}</span><br />{measure!==undefined && <span className="ingredientsList">{" Measure: "+measure}</span>}</button>
-}
-
-export function ingCheckButtons(i,index, buttonHandler,measure){ return <button className="ingredientButtons" key={index} style={ingStyle}
-          onClick={() => buttonHandler(i)}>{imgPicker(i)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle}></img>
-          <br /><span className="ingredientsList">{i}</span><br />{measure!==undefined && <span className="ingredientsList">{" Measure: "+measure}</span>}</button>
-}
-
-export const logo = () => { return (<div style={{textAlign: 'center', marginTop: '100px'}}><img src={TungstenLogo} alt="tungsten" style={logoStyle}></img></div>)}
 
 
 export function ingImageUrl(ing){ 
@@ -37,17 +25,31 @@ export function ingImageUrl(ing){
 
 }
 
+
+export function ingredientButtons(i,index, buttonHandler,measure,imgsize){ return <button key={index} className="ingredientButtons" style={ingStyle}
+          onClick={() => buttonHandler(i)}>{imgPicker(i,imgsize)}<br /><span className="ingredients-list">{i}</span><br />{measure && <span className="ingredients-list">{" Measure: "+measure}</span>}</button>
+}
+
+export function ingCheckButtons(i,index, buttonHandler,measure,imgsize){ return <button className="ingredientButtons" key={index} style={ingStyle}
+          onClick={() => buttonHandler(i)}>{imgPicker(i,imgsize)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle} key={`img${index}`}></img>
+          <br /><span className="ingredients-list">{i}</span><br />{measure && <span className="ingredients-list">{" Measure: "+measure}</span>}</button>
+}
+
+export const logo = () => { return (<div style={{textAlign: 'center', marginTop: '100px'}}><img src={TungstenLogo} alt="tungsten" style={logoStyle}></img></div>)}
+
+
+
 // Pantry Component
 export const loadPantryUrl = "https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif"; // loading gif displayed when loading pantry ingredients
 
 
 // Add Ingredient Component
 
-export const loadIngredientUrl = "https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif" // loading gif displayed when searching ingredient in Pantry
+export const loadUrl = "https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif" // loading gif displayed when searching ingredient in Pantry
 
-export const loadIng = () => { return( <img src={loadIngredientUrl} alt="tungsten" style={imgStyle}  width="100" height="100"></img>)}
+export const loadIng = () => { return( <img src={loadUrl} alt="tungsten" style={imgStyle}  width="100" height="100"></img>)}
 
-export const loadGen = () => { return( <img src={loadIngredientUrl} alt="tungsten" style={loadStyle} ></img>)}
+export const loadGen = () => { return( <img src={loadUrl} alt="tungsten" style={loadStyle} ></img>)}
 
 export const addIng = () => { return <img style={sAddButton} src={sAdd} alt="tungsten" onError={handleOnError()}></img> } //Small add icon for returned ingredient in search in Pantry Note: change to Image Url
 
@@ -69,12 +71,12 @@ const handleOnError = () => {
 
 // Log in form 
 
-export const loggingWait = () => { return( <img src={loadIngredientUrl} alt="tungsten" style={imgStyle}></img>)} // displayed when submitting log in request // replaces form display
+export const loggingWait = () => { return( <img src={loadUrl} alt="tungsten" style={imgStyle}></img>)} // displayed when submitting log in request // replaces form display
 
 // menu/helper urls
 
 export const backButtonUrl = "https://www.pngjoy.com/pngl/266/5094894_hamburger-menu-icon-white-back-icon-png-png.png";
-export const backButton = (buttonHandler) => { return ( <button class="backButtonSty" onClick={() => buttonHandler()}><img src={backButtonUrl} alt="tungsten"/> Return to search</button> )}
+export const backButton = (buttonHandler, backButtonText) => { return ( <button className="backButtonSty" onClick={() => buttonHandler()}><img src={backButtonUrl} alt="tungsten"/>{backButtonText}</button> )}
 
 //const likeIconUrl = "https://icon-library.com/images/heart-icon-free/heart-icon-free-4.jpg";
 export const likeIconUrl = heart;
@@ -142,11 +144,11 @@ const ingStyle = {
 }
 
 
-const btntxt = {
-    height: "10px",
-    margin: "10px",
-    fontWeight: 'normal'
-  }
+// const btntxt = {
+//     height: "10px",
+//     margin: "10px",
+//     fontWeight: 'normal'
+//   }
 
 const ingCheckButtonStyle = {
     position: 'absolute',

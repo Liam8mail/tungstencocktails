@@ -6,7 +6,7 @@ const apiEndpoint = apiUrl + "/api/auth"; //end point for making auth protected 
 
 export async function login(details) {
    
-    const { data } = await http.post(`${apiEndpoint}/login`, details); //data  will be jwt key returned drom server with encrypted secret;
+    const { data } = await http.post(`${apiEndpoint}/login`, details); //data  will be jwt key returned from server with encrypted secret;
     localStorage.setItem( "token" , data); // we store this in the browser local storage cache
     return data;
   
@@ -15,7 +15,6 @@ export async function login(details) {
 export function logout() {
     localStorage.removeItem("token");
 }
-
 
 export function getUserObject() {
     try{

@@ -110,7 +110,7 @@ const updateDB = async newPantry => {
 
     // responsibe for rendering the list of ingredients
     const renderPantry = (pantry, updatePantry,selected, setSelected, ingredients, removeIngredients) => {
-        let choice = pantry === undefined? ingredients : pantry; // pantry will always be undefined at init. we want to use database ingredients from useGetPantry. 
+        const choice = !pantry? ingredients : pantry; // pantry will always be undefined at init. we want to use database ingredients from useGetPantry. 
         if (choice.length > 0) // if we have something to show
         return (<React.Fragment><div style={{textAlign:'center', marginTop:'32px'}}><strong className='pantry-header'>
                 Ingredients</strong><button style={buttonRemoveStyle(selected)} onClick={()=>removeIngredients()}></button>
@@ -147,7 +147,7 @@ const updateDB = async newPantry => {
         let newSelection = [...selected] // copying array
 
         if (index === -1) // notFound;
-            newSelection = [...selected, ing]
+            newSelection = [...selected, ing] // add ing to list
         else
             newSelection.splice(index,1); // removing ingredient from array if deselected
         setSelected(newSelection); // updating state

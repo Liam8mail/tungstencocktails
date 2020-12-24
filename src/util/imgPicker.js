@@ -1,5 +1,6 @@
 import sAdd from '../img/sAdd.png';
 import TungstenLogo from '../img/TungstenLogo-Final-01.png';
+import TungstenText from '../img/TungstenText-01.png';
 import TungstenLogo_s from '../img/TungstenLogo_s.png';
 import searchIco from '../img/search-white.svg';
 import loginWhite from '../img/user-white.svg';
@@ -38,6 +39,8 @@ export function ingCheckButtons(i,index, buttonHandler,measure,imgsize){ return 
 export const logo = () => { return (<div style={{textAlign: 'center', marginTop: '100px'}}><img src={TungstenLogo} alt="tungsten" style={logoStyle}></img></div>)}
 
 
+export const logoImg = TungstenLogo
+export const logoText = TungstenText;
 
 // Pantry Component
 export const loadPantryUrl = "https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif"; // loading gif displayed when loading pantry ingredients

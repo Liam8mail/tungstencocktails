@@ -102,7 +102,7 @@ export default function Fav(props){
                 return renderLoading(); // shows loading display
   
               case 'received': 
-              return <Route path="/fav/recipes">{renderFavs(cocktails,loaded, placeholder, handleImageLoaded, image, makeInstructionsURL, filtList, filtAlc, input, handleAlcFilt, isNonAlc)}</Route>; 
+              return <Route path="/fav/recipes">{renderFavs(favs, cocktails,loaded, placeholder, handleImageLoaded, image, makeInstructionsURL, filtList, filtAlc, input, handleAlcFilt, isNonAlc)}</Route>; 
          
               case 'invalid token': // Need to test 
               return  <h1> Please Login </h1>
@@ -129,15 +129,15 @@ export default function Fav(props){
     }
     
     // responsibe for rendering favs
-      const renderFavs = (cocktails,loaded, placeholder, handleImageLoaded, image, makeInstructionsURL, filtList, filtAlc, input, handleAlcFilt, isNonAlc) => {
+      const renderFavs = (favs, cocktails,loaded, placeholder, handleImageLoaded, image, makeInstructionsURL, filtList, filtAlc, input, handleAlcFilt, isNonAlc) => {
           //console.log(cocktails)
-          
-          if (cocktails.length > 0)
+          const choice = cocktails ? cocktails : favs;
+          if (choice.length > 0)
           return (<React.Fragment><div className="SearchFormForm">
       
                   <div className="favsOptions">
                   <form>
-                    <h4 style={{margin: '0 0 12px 0'}}>Search Favourites: </h4> 
+                    <h4 style={{margin: '0 0 12px 0'}}>Search Favourites </h4> 
                     <input {...input} type="search" placeholder="Search"/>
                   </form>
       
@@ -151,10 +151,10 @@ export default function Fav(props){
                   </div>
                 { }
       
-                <p>Number of cocktails found: {cocktails.filter(filtList).filter(filtAlc).length}<br /></p>
+                <p>Number of cocktails found: {choice.filter(filtList).filter(filtAlc).length}<br /></p>
               </div>
-      
-              {cocktails.filter(filtList).filter(filtAlc).sort((a,b) => sort(a.strDrink,b.strDrink)).map((i,index) => ( <button
+              <div className="cocktails-list">
+              {choice.filter(filtList).filter(filtAlc).sort((a,b) => sort(a.strDrink,b.strDrink)).map((i,index) => ( <button
                 onClick={() => makeInstructionsURL(i)}
                 key={index}
                 className="cocktails"
@@ -165,6 +165,7 @@ export default function Fav(props){
                 <span className="IngredientsList">{i.strDrink}</span>
               </button>  
               ))}
+              </div>
           </React.Fragment>);
           else
           return <small style={{ position:'absolute', margin: '10% 0'}}> {'<empty>'} </small> 
@@ -183,7 +184,7 @@ export default function Fav(props){
 const cocktail = {
     display:'block',
     marginBottom:'20px',
-    marginTop:'40px',
+    marginTop:'0px',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '120%',
@@ -206,7 +207,7 @@ const favCheckButtonStyle = {
   backgroundColor: 'transparent',
   background: 'transparent',
   width: '12px',
-  margin: '0 10% -60% 90%',
+  margin: '100% 80% -10% 90%',
   outline:'none'
   
 }

@@ -7,11 +7,32 @@ html{
   text-align:center;
   vertical-align: middle;
   margin: 0 auto;
+  overflow-y: scroll; 
   background-color:rgb(40,40,40);
   color: rgb(220,220,220);
   font-family: Helvetica, Arial, Sans-Serif;
   font-size:16px;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+ 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(80, 80, 80);
+  border-radius: 10px;
+}
+
+
 @media screen and (max-width: 480px){
   html{
     font-size:12px;
@@ -386,7 +407,7 @@ button.orange:active {
 }
 
 
-
+.cocktails-list
 .ingredient-list {
   display: table;
   margin: 0 auto;
@@ -396,6 +417,7 @@ button.orange:active {
   overflow-y: auto;
   overflow: auto;
 }
+
 
 .pantry-header {
   text-align: center;
@@ -417,15 +439,31 @@ input[type=text] {
 }
 
 input[type=search] {
-  padding: 15px;
+  padding: 15px 15px 15px 40px;
+  background: url('../img/search-white.svg') no-repeat;
+  background-color: rgb(60,60,60);
+  background-size: 17px auto;
+  background-position: 4%;
   padding-bottom:14px;
   width: 250px;
   height: 40px;
+  color: whitesmoke;
   border-radius:26px;
   border-width: 3px;
   border-style: none;
   box-shadow:0 0 2px 4px rgba(0,0,0,0.06);
   
+}
+
+input[type=search]::-webkit-search-cancel-button{
+  position:relative;
+  left:4px;  
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  background: url('https://icon-library.net/images/x-icon-white/x-icon-white-17.jpg') no-repeat;
+  background-position: 1%;
+  background-size: 18px auto; 
 }
 
 input[type=password] {
@@ -436,7 +474,7 @@ input[type=password] {
 }
 
 input:focus {
-  box-shadow: 0 0 5px rgb(220, 166, 40);
+  box-shadow: 0 0 4px rgb(220, 166, 40);
 }
 
 .rounded-input {
@@ -456,6 +494,7 @@ input:focus {
 .favsOptions {
 
   justify-content: center;
+  margin: 18px 0;
   align-items: center;
   position: relative;
   border: none;

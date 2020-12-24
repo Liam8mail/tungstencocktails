@@ -7,8 +7,8 @@ import LoginForm from './components/LoginForm';
 import { getToken } from './services/authService';
 import NavBar from "./components/SimpleNav";
 import { ping } from './services/userService';
-import TungstenLogo from './img/TungstenLogo-Final-01.png';
-import TungstenText from './img/TungstenText-01.png';
+import {logoImg, logoText} from './util/imgPicker';
+
 
 // responsible for rendering navbar, controlling online status and rendering the routes conditionally. 
 
@@ -28,8 +28,8 @@ function App (){
     return (
       <div className="body" >
           <div className="logoDivTop">
-            <img src={TungstenLogo} alt="tungsten logo" />
-            <img src={TungstenText} alt="tungsten" className="logoText"/>
+            <img src={logoImg} alt="tungsten logo" />
+            <img src={logoText} alt="tungsten" className="logoText"/>
           </div>
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar>
             <Switch>

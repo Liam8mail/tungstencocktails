@@ -47,10 +47,11 @@ function RecipeViewer (props) {
   },[favsStatus,status,favs,drink])
 
   const toggleFav = async() => {
-    //REMOVE
-    const { idDrink, strDrink, strDrinkThumb } = drink;
-    const cocktail = { idDrink, strDrink, strDrinkThumb }
+   
+    const { idDrink, strDrink, strDrinkThumb, strAlcoholic } = drink;
+    const cocktail = { idDrink, strDrink, strDrinkThumb, strAlcoholic }
     
+     //REMOVE
     if (favs.some(i => i.idDrink === drink.idDrink)){
       const index = favs.findIndex(i => i.idDrink === cocktail.idDrink);
       favs.splice(index,1);

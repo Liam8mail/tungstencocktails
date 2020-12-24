@@ -14,8 +14,10 @@ export default function Fav(props){
     const [display, setDisplay] = useState(props.setDisplay);
     const [loaded, setLoaded ] = useState(false);
     const [recipeURL, setRecipeURL] = useState();
+    const [cocktails, setCocktails] = useState();
+    const [isNonAlc, setIsNonAlc] = useState(false);
 
-    const {status: favsStatus, favs: cocktails } = useGetFavs();
+    const {status: favsStatus, favs } = useGetFavs();
     const {status: pantryStatus, ingredients } = useGetPantry();
     const image = React.createRef();
     const input = useFormInput('');
@@ -33,8 +35,7 @@ export default function Fav(props){
       }
     },[setDisplay,props.location.pathname])
 
-
-    
+   
     const makeInstructionsURL = (i) =>  {
       
       if (pantryStatus === 'received'){
@@ -52,8 +53,7 @@ export default function Fav(props){
       
     }
     const updated = (favs) => { // function to update fav component according to recipeViewer changes 
-      cocktails.length = 0;
-      favs.forEach(e => cocktails.push(e));
+      setCocktails(favs);
     }
     
     const returnFromRecipe = () => { // function to change active component to the cocktails which include chosen ingredients
@@ -62,6 +62,14 @@ export default function Fav(props){
     
     const filtList = cocktail => {
       return input.value ? cocktail.strDrink.toLowerCase().includes(input.value.toLowerCase()) :  cocktail
+    }
+
+    const filtAlc = cocktail => {
+      return isNonAlc ? cocktail.strAlcoholic.includes('Non alcoholic') : cocktail;
+    }
+
+    const handleAlcFilt = () =>{
+      setIsNonAlc(!isNonAlc);
     }
 
 
@@ -77,32 +85,34 @@ export default function Fav(props){
       recipeURL = {recipeURL} />)}>
       </Route>)
     }
+
+    if (favsStatus === 'received' && !cocktails) setCocktails(favs);
     
     if (display === 'Favourites'){
       try{
-          if (!props.isAuthed) 
-          return  <h1> Please Login </h1>
-          
-          switch(favsStatus){
+        if (!props.isAuthed) 
+        return  <h1> Please Login </h1>
+        
+        switch(favsStatus){
               
-              case 'init':
+          case 'init':
               return renderLoading(); // shows loading display
-  
+              
               case 'requesting':
-              return renderLoading(); // shows loading display
+                return renderLoading(); // shows loading display
   
               case 'received': 
-              return <Route path="/fav/recipes">{renderFavs(cocktails,loaded, placeholder, handleImageLoaded, image, makeInstructionsURL, filtList, input)}</Route>; 
+              return <Route path="/fav/recipes">{renderFavs(cocktails,loaded, placeholder, handleImageLoaded, image, makeInstructionsURL, filtList, filtAlc, input, handleAlcFilt, isNonAlc)}</Route>; 
          
               case 'invalid token': // Need to test 
               return  <h1> Please Login </h1>
   
               case 'error': // Tested
               throw new Error();
-  
+              
               default:
               return <><small style={style}>your favs is empty</small></>
-  
+              
               }
           }catch(err){
                   console.log(err);
@@ -117,45 +127,59 @@ export default function Fav(props){
     const renderLoading = () => {
       return <img src={loadUrl} alt="tungsten" style={{width:'10%', paddingTop:'200px'}}></img>
     }
-
+    
     // responsibe for rendering favs
-    const renderFavs = (cocktails,loaded, placeholder, handleImageLoaded, image, makeInstructionsURL, filtList, input) => {
-        //console.log(cocktails)
-        
-        if (cocktails.length > 0)
-        return (<React.Fragment><div className="SearchFormForm">
-              <form>
-                <h4 style={{margin: '0 0 12px 0'}}>Search Favourites: </h4> 
-                <input {...input} type="search" placeholder="Search"/>
-              </form>
-              <p>Number of cocktails found: {cocktails.filter(filtList).length}<br /></p>
-            </div>
-            {cocktails.filter(filtList).sort((a,b) => sort(a.strDrink,b.strDrink)).map((i,index) => ( <button
-              onClick={() => makeInstructionsURL(i)}
-              key={index}
-              className="cocktails"
-              style={{margin: '1.5%'}}
-            >
-              <img src={likeIconUrl} alt="tungsten" style={favCheckButtonStyle}></img>
-              <img src={loaded? i.strDrinkThumb : placeholder} key={i.idDrink+index} style={cocktail} alt='tungsten' ref={image} onLoad={handleImageLoaded}></img>
-              <span className="IngredientsList">{i.strDrink}</span>
-            </button>  
-            ))}
-        </React.Fragment>);
-        else
-        return <small style={{ marginTop: '420px'}}> empthy </small> 
-}
+      const renderFavs = (cocktails,loaded, placeholder, handleImageLoaded, image, makeInstructionsURL, filtList, filtAlc, input, handleAlcFilt, isNonAlc) => {
+          //console.log(cocktails)
+          
+          if (cocktails.length > 0)
+          return (<React.Fragment><div className="SearchFormForm">
+      
+                  <div className="favsOptions">
+                  <form>
+                    <h4 style={{margin: '0 0 12px 0'}}>Search Favourites: </h4> 
+                    <input {...input} type="search" placeholder="Search"/>
+                  </form>
+      
+                    <div style={{position: 'absolute',left:'63%'}}>
+                    <h4 style={{margin: '0 0 12px 0'}}>Non-Alcoholic</h4>
+                    <label className="switch" >
+                      <input type="checkbox" onClick={handleAlcFilt} defaultChecked={isNonAlc}/>
+                      <span className="slider round"></span>
+                    </label>
+                    </div>
+                  </div>
+                { }
+      
+                <p>Number of cocktails found: {cocktails.filter(filtList).filter(filtAlc).length}<br /></p>
+              </div>
+      
+              {cocktails.filter(filtList).filter(filtAlc).sort((a,b) => sort(a.strDrink,b.strDrink)).map((i,index) => ( <button
+                onClick={() => makeInstructionsURL(i)}
+                key={index}
+                className="cocktails"
+                style={{margin: '1.5%'}}
+              >
+                <img src={likeIconUrl} alt="tungsten" style={favCheckButtonStyle}></img>
+                <img src={loaded? i.strDrinkThumb : placeholder} key={i.idDrink+index} style={cocktail} alt='tungsten' ref={image} onLoad={handleImageLoaded}></img>
+                <span className="IngredientsList">{i.strDrink}</span>
+              </button>  
+              ))}
+          </React.Fragment>);
+          else
+          return <small style={{ position:'absolute', margin: '10% 0'}}> {'<empty>'} </small> 
+      }
 
 
-function sort(a, b){
-    if(a > b) return 1
+    function sort(a, b){
+      if(a > b) return 1
     if(a < b) return -1
     return 0;
-}
-
-
-
-
+  }
+  
+  
+  
+  
 const cocktail = {
     display:'block',
     marginBottom:'20px',

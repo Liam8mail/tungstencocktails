@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from "react";
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Pantry from './components/Pantry';
 import Fav from './components/Fav';
 import SearchCocktail from './components/mergeComp/SearchCocktail';
@@ -27,20 +27,20 @@ function App (){
 
     return (
       <div className="body" >
-
-          
           <div className="logoDivTop">
             <img src={TungstenLogo} alt="tungsten logo" />
             <img src={TungstenText} alt="tungsten" className="logoText"/>
           </div>
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar>
+            <Switch>
               <Route path="/about" />
               <Route path="/somethingelse"/>
               <Route path="/search" render={(props) => (<SearchCocktail {...props} isAuthed={onLineStatus} setDisplay={"searchPage"} key={Date.now()} />)} />
             { !onLineStatus && <Route path="/login" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}
             { !onLineStatus && <Route path="/signup" render={(props) => (<LoginForm {...props} isAuthed={setOnlineStatus} />)} />}
-            { onLineStatus &&   <Route path="/pantry" render={(props) => (<Pantry {...props} isAuthed={onLineStatus} />)}/>}
-            { onLineStatus &&   <Route path="/fav" render={(props) => (<Fav {...props} isAuthed={onLineStatus} />)}/>}
+            { onLineStatus && <Route path="/pantry" render={(props) => (<Pantry {...props} isAuthed={onLineStatus} />)}/>}
+            { onLineStatus && <Route path={"/fav/recipes"} render={(props) => (<Fav {...props} isAuthed={onLineStatus} setDisplay={"Favourites"}/>)}/>}
+            </Switch>
       </div>
     );
   }

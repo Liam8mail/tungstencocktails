@@ -11,8 +11,6 @@ export default function useGetFavs(props){
     const [status, setStatus] = useState('init');
     const [favs, setFavs] = useState();
     
-    if (props)
-    console.log(props);
     useEffect(() => {
         let isMounted = true;
         const source = getCancelToken(); // we need to cancel the request if user the component unmounts. 

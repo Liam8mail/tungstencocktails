@@ -39,7 +39,7 @@ export default function Pantry(props){
             const cachedIng = [...ingredients];  //caching previous state
             ingredients.length = 0; // clearing ingredients
 
-            newPantry.forEach(e => { ingredients.push(e); }); // updating ingredients list to new pantry
+            newPantry.forEach(e => ingredients.push(e)); // updating ingredients list to new pantry
             const cachedSelected = [...selected]; //caching selected ingredients
             selected.length = 0; // clearing selected/focused  ingredients array
             

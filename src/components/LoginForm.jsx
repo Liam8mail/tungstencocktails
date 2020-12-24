@@ -3,7 +3,7 @@ import { login } from '../services/authService';
 import { createAccount } from '../services/userService';
 import useFormInput from '../hooks/useFormInput';
 import { loadUrl } from '../util/imgPicker';
-import { useLocation, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../style/style.css';
 
 // responsible for logging in or creating a user account and then navigating the user to the page that they came from. 
@@ -19,7 +19,7 @@ export default function Loginform(props) {
     const [status, setStatus] = useState('idle');
     const [error, setError] = useState('');
 
-    const location = useLocation().pathname;
+    const location = props.location.pathname;
     const signupPage = '/signup';
     const loginPage = '/login';
     

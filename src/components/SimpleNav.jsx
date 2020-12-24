@@ -23,9 +23,9 @@ export default function NavBar(props){
                         {!logged && <li><button className="user-status"> <Link to="/login" className="nav-text">{loginIcon()}<br />Login</Link></button></li>}
                         {logged && <li><button className="nav-icon"><Link to="/pantry" className="nav-text">{pantryNav(logged)}<br />Pantry</Link></button></li>}
                         <li><button className="nav-icon"><Link to="/search" className="nav-text">{searchNav()}<br />Search</Link></button></li>
-                        {logged && <li><button className="nav-icon"><Link to="/fav" className="nav-text">{likeNav()}<br />Fav</Link></button></li>}
+                        {logged && <li><button className="nav-icon"><Link to="/fav/recipes" className="nav-text">{likeNav()}<br />Fav</Link></button></li>}
                         <li><button className="nav-icon"><Link to="/about" className="nav-text">{qMark()}<br />About</Link></button></li>
-                        {logged && <li><button className={"logout"} onClick={() => logged? setLoggingout() : null}><p>Logout</p></button></li>}
+                        {logged && <li><button className={"logout"} onClick={() => logged && setLoggingout()}><p>Logout</p></button></li>}
                     </ul>
             </div> 
             );

@@ -11,7 +11,7 @@ import apiFetch from '../../services/apiService';
 import '../../style/style.css'; // CSS
 import '../../index.css';
 import useGetPantry from "../../hooks/useGetPantry";
-import {ingredientButtons} from '../../util/imgPicker';
+import {ingredientButtons, loadUrl} from '../../util/imgPicker';
 
 
 const API_KEY = true; // import API key from .env file
@@ -234,12 +234,12 @@ export default function SearchCocktail(props) {
               </button>
               </div>
             </div>
-            <h3>Ingredients List</h3>
+            {/* <h3>Ingredients List</h3> */}
             <SearchForm
               searchTerm={searchTerm}
               onChange={onSearchFormChange}
             />
-            { !isFetched && <><div style={{padding: 1000}}></div><img src="https://media.giphy.com/media/fxk77fLi2ZPQU6kHKx/giphy.gif" alt="tungsten" height="200"></img></>}
+            { !isFetched && <><div style={{padding: 1000}}></div><img src={loadUrl} alt="tungsten" height="200"></img></>}
             { !usePantry && isFetched && 
             <SearchResults 
               searchTerm={searchTerm}

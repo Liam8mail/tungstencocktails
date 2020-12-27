@@ -160,7 +160,7 @@ export default RecipeViewer;
 
 function styleInstruction(instructions){ // mapping instructions to single lines.
 
-  const lines = instructions.split(/\.\s|\.$/);
+  const lines = instructions.split(/\.\s|\.$|\d\./);
   return(<p style={{lineHeight: '200%', whitSpace: 'pre-wrap', color:'white', padding:' 0 32px', maxWidth:'600px', margin: 'auto'}}>
   
     {lines.map((i,index )=> (

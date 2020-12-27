@@ -200,7 +200,6 @@ export default function SearchCocktail(props) {
     */ 
     return (
       <div className="searchCocktail">
-      <hr />
         {display === searchPage &&
           <div className="searchPageMain">
             <h1>Search Cocktails By Ingredient</h1>

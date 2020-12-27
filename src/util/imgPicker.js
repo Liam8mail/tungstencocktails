@@ -28,12 +28,12 @@ export function ingImageUrl(ing){
 
 
 export function ingredientButtons(i,index, buttonHandler,measure,imgsize){ return <button key={index} className="ingredientButtons" style={ingStyle}
-          onClick={() => buttonHandler(i)}>{imgPicker(i,imgsize)}<br /><span className="ingredients-list">{i}</span><br />{measure && <span className="ingredients-list">{" Measure: "+measure}</span>}</button>
+          onClick={() => buttonHandler(i)}>{imgPicker(i,imgsize)}<br /><div style={{ingInfoStyle}}>{i}</div><br />{measure && <div style={{ingInfoStyle}}>{" Measure: "+measure}</div>}</button>
 }
 
 export function ingCheckButtons(i,index, buttonHandler,measure,imgsize){ return <button className="ingredientButtons" key={index} style={ingStyle}
           onClick={() => buttonHandler(i)}>{imgPicker(i,imgsize)}<img src={pantryIconUrl} alt="tungsten" style={ingCheckButtonStyle} key={`img${index}`}></img>
-          <br /><span className="ingredients-list">{i}</span><br />{measure && <span className="ingredients-list">{" Measure: "+measure}</span>}</button>
+          <br /><div style={{ingInfoStyle}}>{i}</div><br />{measure && <div style={{ingInfoStyle}}>{" Measure: "+measure}</div>}</button>
 }
 
 export const logo = () => { return (<div style={{textAlign: 'center', marginTop: '100px'}}><img src={TungstenLogo} alt="tungsten" style={logoStyle}></img></div>)}
@@ -139,11 +139,12 @@ const navIconUnactiveStyle = {
 const ingStyle = {
     backgroundColor: 'transparent',
     background: 'transparent',
-    // margin: '20px',
-    // border: 'none',
-    // fontSize: '12px',
-    // padding: '20px',
-    outline:'none'
+    outline:'none',
+}
+
+const ingInfoStyle = {
+    display:'block',
+    marginTop: '25px',
 }
 
 

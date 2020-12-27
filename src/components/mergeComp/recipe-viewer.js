@@ -48,10 +48,10 @@ function RecipeViewer (props) {
 
   const toggleFav = async() => {
    
-    const { idDrink, strDrink, strDrinkThumb, strAlcoholic } = drink;
-    const cocktail = { idDrink, strDrink, strDrinkThumb, strAlcoholic }
+    const { idDrink, strDrink, strDrinkThumb, strAlcoholic, strCategory } = drink;
+    const cocktail = { idDrink, strDrink, strDrinkThumb, strAlcoholic, strCategory }
     
-     //REMOVE
+    
     if (favs.some(i => i.idDrink === drink.idDrink)){
       const index = favs.findIndex(i => i.idDrink === cocktail.idDrink);
       favs.splice(index,1);
@@ -116,7 +116,6 @@ function RecipeViewer (props) {
 
   const favIcon = () => { return <><button onClick={handleLike} style={{background: 'transparent', border: 'none'}}><img src={likeIconUrl} alt = "tungsten" style={ fav? favIconStyle : unFavIconStyle}></img></button></>}
 
-    
     return(
       <div className="RecipeViewer">
       {backButton(returnFromRecipe, backButtonText)}    
@@ -125,13 +124,18 @@ function RecipeViewer (props) {
           <ScrollToTopOnMount/>
 
           <div className="recipeImage" >
-            <h1>Recipe: {drink.strDrink}</h1><br />
+            <h1>{drink.strDrink}</h1><br />
             <>
             {favIcon()}
             <img src= {loaded? drink.strDrinkThumb : TungstenLogo_s} alt="tungsten" style={imgStyle} ref={image} onLoad={handleImageLoaded}/>
             </>
+            <h3>Glass</h3><div style={{color:'whitesmoke'}}><p >
+                { drink.strGlass }
+                { (!drink.strGlass || drink.strGlass === null) && 'any' }
+                </p>
+                </div>
           </div>
-            <h3>Ingredients:</h3><br />
+            <h3>Ingredients</h3><br />
             <div className="ingredientsList">
             {ingredientNames.sort().map((i,index) => {// Checking ingredients against ingredients in pantry
                 if (isAuthed && userPantry && userPantry.some(e => e.strIngredient.toLowerCase() === i.name.toLowerCase())) // cocktail api has some issues with consistency in naming 
@@ -139,19 +143,12 @@ function RecipeViewer (props) {
                 return ingredientButtons(i.name,i.name+index,function(){},i.measure,"60");//displays reg ing
             })}
             </div>
-            </React.Fragment>
-            }
-
-             { status === 'received' && drink.strGlass !== null && // renders glass details 
-              <div>
-                <h3>Type of glass:</h3><p className="recipeText">
-                    { drink.strGlass }
-                    { !drink.strGlass && 'any' }
-                    </p>
-            <h3>Instructions:</h3>
+            <h3>Instructions</h3>
+            <div style={{textAlign:'center', float: 'center'}}>
                 { styleInstruction(drink.strInstructions) }
-              </div>
-          }   
+            </div><hr></hr>
+            </React.Fragment>
+            } 
       </div>
     );
     
@@ -163,9 +160,11 @@ export default RecipeViewer;
 
 function styleInstruction(instructions){ // mapping instructions to single lines.
 
-  const lines = instructions.split('.');
-  return(<p style={{lineHeight: '200%', whitSpace: 'pre-wrap'}}>{lines.map((i,index )=> (
-    i !== '' && <span key={index}><li className="recipeText">{i}</li><br></br></span>
+  const lines = instructions.split(/\.\s|\.$/);
+  return(<p style={{lineHeight: '200%', whitSpace: 'pre-wrap', color:'white', padding:' 0 32px', maxWidth:'600px', width:'100%', margin: 'auto'}}>
+  
+    {lines.map((i,index )=> (
+    i !== '' && <span key={index}><li className="recipe-text">{i}</li><br></br></span>
  ))}</p>
     
   )

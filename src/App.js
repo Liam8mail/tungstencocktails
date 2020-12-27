@@ -31,7 +31,7 @@ function App (){
             <img src={logoImg} alt="tungsten logo" />
             <img src={logoText} alt="tungsten" className="logoText"/>
           </div>
-          <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar>
+          <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar><hr />
             <Switch>
               <Route path="/about" />
               <Route path="/somethingelse"/>

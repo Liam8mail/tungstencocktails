@@ -198,12 +198,12 @@ export default function Fav(props){
                   </div>
                 <p>Number of cocktails found: {choice.filter(filtList).filter(filtAlc).filter(filtCat).length}<br /></p>
               </div>
-              <div className="cocktails-list" style={{margin:'100px 0'}}>
+              <div className="fav-cocktails-list">
               {choice.filter(filtList).filter(filtAlc).filter(filtCat).sort((a,b) => sort(a.strDrink,b.strDrink)).map((i,index) => ( <button
                 onClick={() => makeInstructionsURL(i)}
                 key={index}
                 className="cocktails"
-                style={{margin: '1.2% 1.5%'}}
+                
               >
                 <img src={likeIconUrl} alt="tungsten" style={favCheckButtonStyle}></img>
                 <img src={loaded? i.strDrinkThumb : placeholder} key={i.idDrink+index} alt='tungsten' ref={image} onLoad={handleImageLoaded}></img>
@@ -234,10 +234,11 @@ const style = {
 const favCheckButtonStyle = {
   position: 'relative',
   left: '65%',
-  bottom:'122px',
+  bottom:'-40%',
+  float:'top',
   backgroundColor: 'transparent',
   background: 'transparent',
-  width: '12px',
+  width: '10%',
   outline:'none',
   
 }

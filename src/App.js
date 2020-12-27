@@ -27,10 +27,10 @@ function App (){
 
     return (
       <div className="body" >
-          <div className="logoDivTop">
+          {/* <div className="logoDivTop">
             <img src={logoImg} alt="tungsten logo" />
             <img src={logoText} alt="tungsten" className="logoText"/>
-          </div>
+          </div> */}
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar><hr />
             <Switch>
               <Route path="/about" />

@@ -35,13 +35,39 @@ html{
 
 @media screen and (max-width: 480px){
   html{
-    font-size:12px;
+    font-size:8px;
+  }
+  .recipeview-inglist button{
+
+    height:140px;
+    width:100px;
+
   }
 }
 @media screen and (max-width: 640px){
   html{
-    font-size:14px;
+    font-size:10px;
   }
+
+  .recipeview-inglist button{
+
+    height:100px;
+    width:80px;
+
+  }
+  .recipeview-inglist img{
+    height:40px;
+    width:40px;
+  }
+
+ 
+  .cocktails-list button.cocktails {
+
+    margin:12px 0;
+    width:25%;
+    height:auto;
+  }
+
 }
 
 ul{
@@ -109,7 +135,14 @@ a:hover, a:active{
   padding:20px;
   text-align:center;
 }
-.cocktails .IngredientsList{
+
+.cocktails {
+
+  margin: 1.2% 1.5%;
+
+}
+
+.cocktails .recipeview-inglist{
   text-align:center;
 }
 
@@ -126,15 +159,25 @@ a:hover, a:active{
 .ingredient-list button{
   height:120px;
 }
+
 @media screen and (min-width: 600px){
   .ingredient-list button{
     height:180px;
     width:180px;
   }
+  
+}
 
+.fav-cocktails-list{
+  margin: 8% 0;
+}
+
+.fav-cocktails-list button.cocktails{
+  margin: 1% 0.2%;
 }
 
 button.cocktails{
+  
   border:none;  
   text-align: center;
   background: transparent;
@@ -585,14 +628,15 @@ input:checked + .slider:before {
 
 
 .dropdown-wrapper{
-  width: 180px;
+  width: 120px;
   text-align: left;
   
 }
 
 .dropdown-header{
-  width: 160px;
-  float:left;
+  width: 80px;
+  position: relative;
+  padding: 0 0%;
   color: rgb(220,220,220);
   background: transparent;
   margin-bottom: 12px;
@@ -604,6 +648,7 @@ input:checked + .slider:before {
   width: 10px;
   position: absolute;
   left:86%;
+  top:0%
   
 }
 
@@ -620,7 +665,7 @@ input:checked + .slider:before {
   box-shadow: 0 0 4px rgb(220, 166, 40);
   top: 32px;
   padding: 12px;
-  min-width: 200px;
+  min-width: 110%;
   overflow: auto;
   border-radius:26px;
   border-width: 3px;

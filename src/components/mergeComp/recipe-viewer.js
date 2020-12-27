@@ -136,7 +136,7 @@ function RecipeViewer (props) {
                 </div>
           </div>
             <h3>Ingredients</h3><br />
-            <div className="ingredientsList">
+            <div className="recipeview-inglist">
             {ingredientNames.sort().map((i,index) => {// Checking ingredients against ingredients in pantry
                 if (isAuthed && userPantry && userPantry.some(e => e.strIngredient.toLowerCase() === i.name.toLowerCase())) // cocktail api has some issues with consistency in naming 
                 return ingCheckButtons(i.name,i.name+index,function(){},i.measure,"60"); //displays pantry icon beside ing that user has
@@ -161,7 +161,7 @@ export default RecipeViewer;
 function styleInstruction(instructions){ // mapping instructions to single lines.
 
   const lines = instructions.split(/\.\s|\.$/);
-  return(<p style={{lineHeight: '200%', whitSpace: 'pre-wrap', color:'white', padding:' 0 32px', maxWidth:'600px', width:'100%', margin: 'auto'}}>
+  return(<p style={{lineHeight: '200%', whitSpace: 'pre-wrap', color:'white', padding:' 0 32px', maxWidth:'600px', margin: 'auto'}}>
   
     {lines.map((i,index )=> (
     i !== '' && <span key={index}><li className="recipe-text">{i}</li><br></br></span>

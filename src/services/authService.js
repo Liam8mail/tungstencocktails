@@ -9,6 +9,7 @@ export async function login(details) {
     const { data } = await http.post(`${apiEndpoint}/login`, details); //data  will be jwt key returned from server with encrypted secret;
     localStorage.setItem( "token" , data); // we store this in the browser local storage cache
     return data;
+    
   
 }
 

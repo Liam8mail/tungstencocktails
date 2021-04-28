@@ -95,8 +95,8 @@ export default function AddIngredient(props) {
         {/* Modal content */}
         <div style={{textAlign:'center'}}>
         <h2 style = {{margin: '8% 0'}}>Add Ingredient</h2>
-        <input {...input} id="InputText" type="search" />
-        <button className="signIn" onClick={() => submit(input)} style={{ display:'block', marginLeft:'45%' }}>
+        <input {...input} id="InputText" type="search" autoComplete="false" />
+        <button className="signIn" onClick={() => submit(input)} style={{ display:'block', margin:'1rem auto' }}>
           search
         </button>
         <div style={{marginBottom: '8%'}}>{displayResult()}</div>
@@ -114,38 +114,3 @@ const ingStyle = {
     width:'120px'
 }
 
-const customStyles = {
-  //modal style
-
-  overlay: {
-    position: "fixed",
-    top: 100,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgb(80,80,40);"
-  },
-
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "rgb(80,80,40);"
-  }
-};
-
-const ingstyle = {
-  backgroundColor: "transparent",
-  margin: "5px",
-  borderRadius: "10%",
-  border: "none"
-};
-
-const btntxt = {
-  height: "100px",
-  margin: "5px",
-  fontSize: "16px"
-};

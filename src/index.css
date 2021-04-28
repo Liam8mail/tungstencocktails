@@ -11,12 +11,41 @@ code {
     monospace;
 }
 .menu-outer {
-  height: 110px;
+  height: fit-content;
   width:100%;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.menu-outer{
+  position:relative;
+}
+
+
+.logoDivTop{
+  display:flex;
+  flex-flow:row;
+  position:absolute;
+  float:left;
+  left: 2%;
+  align-items: center;
+  height: fit-content;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.logoDivTop img{
+  width:70px;
+  height:70px;
+}
+
+img.logoText{
+  margin: 0 0.5rem;
+  width:255px;
+  height:34px;
+  display:inline;
 }
 
 
@@ -33,24 +62,44 @@ ul#horizontal-list {
     vertical-align: bottom;
     width:100px;
   }
-  ul#horizontal-list li:first-of-type{
-/*    margin-right:calc(50px / 20%);*/
-    margin-right:50px;
-  }
-  ul#horizontal-list li:last-of-type{
-/*    margin-left:calc(50px / 20%);
-*/    margin-left:50px;
 
-  }
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 1500px){
+  
+    .logoDivTop {
+      flex-flow: column;
+    }
 
-    ul#horizontal-list li:first-of-type{
-      margin-right:10px;
+    .logoDivTop img{
+      width:50px;
+      height:50px;
     }
-    ul#horizontal-list li:last-of-type{
-      margin-left:10px;
+
+    img.logoText{
+      width:127px;
+      height:17px;
+      margin-top: 0.5rem;
     }
   }
+  
+  @media screen and (max-width: 1000px){
+    
+    .logoDivTop{
+      left: 0%;
+    }
+
+    .logoDivTop img{
+      width:42px;
+      height:42px;
+    }
+
+    img.logoText{
+      width:102px;
+      height:14px;
+      margin-top: 0.5rem;
+    }
+  }
+  
+  
   @media screen and (max-width: 800px){
     ul#horizontal-list li:first-of-type{
       margin-right:20px;
@@ -64,9 +113,31 @@ ul#horizontal-list {
       word-wrap: normal;
 
     }
+
+    .logoDivTop img {
+      height: 0;
+      visibility: hidden;
+    }
+
+    @media screen and (max-width: 400px) {
+
+      ul#horizontal-list li:first-of-type{
+        margin-right:10px;
+      }
+      ul#horizontal-list li:last-of-type{
+        margin-left:10px;
+      }
+  
+     
+    }
+
+
+    ul#horizontal-list li{
+      width: fit-content;
+    }
     ul#horizontal-list li button {
       text-align:middle;
-      width: 100%;
+      width: fit-content;
       white-space: inherit;
       word-wrap: normal;
     }
@@ -74,7 +145,7 @@ ul#horizontal-list {
     ul#horizontal-list li button a {
       text-align:middle;
       display:inline-block;
-      width: 100%;
+      width: fit-content;
       word-wrap: break-word;
       white-space:initial;
     }
@@ -83,13 +154,13 @@ ul#horizontal-list {
       text-align:middle;
     }
   }
+
+
   @media screen and (max-width: 800px){
   }
   
 
-.width {
-  /*width: 40%;*/
-}
+
 
 
 .nav-bar {
@@ -137,4 +208,16 @@ button.logout {
   display: inline-block;
   text-align: center;
   overflow:hidden;
+}
+
+
+
+
+
+
+
+
+
+#menu-hr{
+  margin: 0 auto;
 }

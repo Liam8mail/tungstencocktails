@@ -97,6 +97,13 @@ export const qMark = () => { return ( <img src={questionIcon} alt = "about icon"
 export const pantryIconUrl = pant;
 export const pantryNav = (status) => { return ( <img src={pantryIconUrl} alt="tungsten" style={status? navIconActiveStyle : navIconUnactiveStyle }></img> )};
 
+//Logo
+
+export const appLogo = () => (<div className="logoDivTop">
+<img src={logoImg} alt="tungsten logo" />
+<img src={logoText} alt="tungsten" className="logoText"/>
+</div>)
+
 
 const imgStyle = {
     display:'block',

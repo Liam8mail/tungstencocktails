@@ -3,9 +3,10 @@ import { getUserObject } from '../../services/authService';
 import { updateUserFavs } from '../../services/userService';
 import useGetFavs from '../../hooks/useGetFavs';
 import useGetDrinkRecipe from '../../hooks/useGetDrinkRecipe';
-import {ingredientButtons, backButton, ingCheckButtons, likeIconUrl} from '../../util/imgPicker';
+import {ingredientButtons, backButton, ingCheckButtons, likeIconUrl, loadRecipes} from '../../util/imgPicker';
 import TungstenLogo_s from '../../img/TungstenLogo_s.png';
 import '../../style/style.css'; // CSS
+
 
 
 // NB: the state item drinks, inside recipeInstructionsApiData, hsa been filled with blank data in a format that matches the actual JSON data we hope to render.
@@ -41,10 +42,10 @@ function RecipeViewer (props) {
   
   useEffect(() => {
     
-    if (favsStatus === 'received' && status === 'received'){
+    if (isAuthed && favsStatus === 'received' && status === 'received'){
       setFav(favs.some(i => i.idDrink === drink.idDrink));
     }
-  },[favsStatus,status,favs,drink])
+  },[favsStatus,status,favs,drink, isAuthed])
 
   const toggleFav = async() => {
    
@@ -115,18 +116,18 @@ function RecipeViewer (props) {
   }
 
   const favIcon = () => { return <><button onClick={handleLike} style={{background: 'transparent', border: 'none'}}><img src={likeIconUrl} alt = "tungsten" style={ fav? favIconStyle : unFavIconStyle}></img></button></>}
-
+  
     return(
       <div className="RecipeViewer">
       {backButton(returnFromRecipe, backButtonText)}    
-      {(status === 'idle' || status === 'requesting')  && <></>}   
-      {status === 'received' && favsStatus === 'received' && <React.Fragment> {/* display details once api has been sucessfully loaded */ } 
+      {(status === 'idle' || status === 'requesting')  && loadRecipes()}   
+      {status === 'received' && <React.Fragment> {/* display details once api has been sucessfully loaded */ } 
           <ScrollToTopOnMount/>
 
           <div className="recipeImage" >
             <h1>{drink.strDrink}</h1><br />
             <>
-            {favIcon()}
+            {isAuthed && favsStatus === 'received' && favIcon()}
             <img src= {loaded? drink.strDrinkThumb : TungstenLogo_s} alt="tungsten" style={imgStyle} ref={image} onLoad={handleImageLoaded}/>
             </>
             <h3>Glass</h3><div style={{color:'whitesmoke'}}><p >

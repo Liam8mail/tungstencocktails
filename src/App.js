@@ -7,7 +7,7 @@ import LoginForm from './components/LoginForm';
 import { getToken } from './services/authService';
 import NavBar from "./components/SimpleNav";
 import { ping } from './services/userService';
-import {logoImg, logoText} from './util/imgPicker';
+import { appLogo } from './util/imgPicker';
 
 
 // responsible for rendering navbar, controlling online status and rendering the routes conditionally. 
@@ -16,7 +16,6 @@ function App (){
 
   
   const [onLineStatus, setOnlineStatus] = useState(false);
-
 
   useEffect(() => { // -- QUICK IMPLEMENTATION -- we should check token in server although any auth protected routes will reject invalid/modified tokens. 
     if (getToken()) 
@@ -27,11 +26,7 @@ function App (){
 
     return (
       <div className="body" >
-          {/* <div className="logoDivTop">
-            <img src={logoImg} alt="tungsten logo" />
-            <img src={logoText} alt="tungsten" className="logoText"/>
-          </div> */}
-          <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}></NavBar><hr />
+          <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}>{appLogo()}</NavBar><hr id="menu-hr"/>
             <Switch>
               <Route path="/about" />
               <Route path="/somethingelse"/>

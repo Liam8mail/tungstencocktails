@@ -112,7 +112,7 @@ const updateDB = async newPantry => {
     const renderPantry = (pantry, updatePantry,selected, setSelected, ingredients, removeIngredients) => {
         const choice = !pantry? ingredients : pantry; // pantry will always be undefined at init. we want to use database ingredients from useGetPantry. 
         if (choice.length > 0) // if we have something to show
-        return (<React.Fragment><div style={{textAlign:'center', marginTop:'32px'}}><strong className='pantry-header'>
+        return (<React.Fragment><div style={{textAlign:'center', marginTop:'32px','position': 'relative'}}><strong className='pantry-header'>
                 Ingredients</strong><button style={buttonRemoveStyle(selected)} onClick={()=>removeIngredients()}></button>
                 </div>
                 <div  style={style}>
@@ -183,22 +183,14 @@ const updateDB = async newPantry => {
     function buttonRemoveStyle(selected){  // will do for now , hides shows trash icon
         if (selected && !selected.length > 0){
             return {
-
                 position: 'absolute',
-                backgroundColor: "transparent",
-                width: '80px',
-                marginLeft: '20%',
-                minHeight: '80px',
-                border: 'none',
-                borderWidth : '1px',
-                display: 'inlineBlock',
                 opacity: '0',
             }
         }else{
             return {
 
                 position: 'absolute',
-                top : '40%',
+                top : '0%',
                 background: `url('https://media2.giphy.com/media/H9iBUt1bPrsfWBUeLQ/giphy.gif?cid=ecf05e47q3h6s7f77fnud3pa363x6nzi9lpbw8c6wy230sic&rid=giphy.gif') no-repeat`,
                 backgroundSize: 'contain',
                 marginLeft: '20%',
@@ -206,8 +198,8 @@ const updateDB = async newPantry => {
                 height: '80px',
                 border: 'none',
                 borderWidth : '1px',
-                display: 'inlineBlock',
                 opacity: '100',
+                cursor: 'pointer',
             }
         }
        

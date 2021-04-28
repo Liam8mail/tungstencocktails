@@ -177,12 +177,18 @@ export default function Fav(props){
           return (<React.Fragment><div className="SearchFormForm" style={{marginTop: '64px'}}>
       
                   <div className="favsOptions">
+
+                  <div id="categories">
+                  {/* <h4 style={{margin: '0 0 12px 0'}}>Category</h4> */}
+                   {DropDownList()}
+                </div>
+                
                   <form>
-                    <h4 style={{marginBottom: '12px'}}>Search Favourites </h4> 
+                    <h4 style={{marginBottom: 'auto'}}>Search Favourites </h4> 
                     <input {...input} type="search" placeholder="Search"/>
                   </form>
       
-                    <div style={{position: 'absolute',left:'63%'}}>
+                    <div id="alc-filter">
                     <h4 style={{marginBottom: '12px'}}>Non-Alcoholic</h4>
                     <label className="switch" >
                       <input type="checkbox" onClick={handleAlcFilt} defaultChecked={isNonAlc}/>
@@ -190,10 +196,6 @@ export default function Fav(props){
                     </label>
                     </div>
 
-                  <div style={{position: 'absolute',right:'63%', top:'0%'}}>
-                  {/* <h4 style={{margin: '0 0 12px 0'}}>Category</h4> */}
-                   {DropDownList()}
-                </div>
 
                   </div>
                 <p>Number of cocktails found: {choice.filter(filtList).filter(filtAlc).filter(filtCat).length}<br /></p>
@@ -232,10 +234,10 @@ const style = {
 
 
 const favCheckButtonStyle = {
-  position: 'relative',
+  position: 'absolute',
   left: '65%',
-  bottom:'-40%',
-  float:'top',
+  top:'-6%',
+  
   backgroundColor: 'transparent',
   background: 'transparent',
   width: '10%',

@@ -15,10 +15,12 @@ export default function NavBar(props){
     }
     const LoginStatus = useLoginStatus; // retrives user name
     const logged = props.onLineStatus; // current login status from app.js for conditional rendering. perhaps use a context
+    const children = props.children;
 
     return (
             <div className="menu-outer">
                     <ul id="horizontal-list">
+                    {children}
                         {logged && <li><LoginStatus className="user-status" isAuthed={logged}></LoginStatus></li>}
                         {!logged && <li><button className="user-status"> <Link to="/login" className="nav-text">{loginIcon()}<br />Login</Link></button></li>}
                         {logged && <li><button className="nav-icon"><Link to="/pantry" className="nav-text">{pantryNav(logged)}<br />Pantry</Link></button></li>}

@@ -28,7 +28,7 @@ function App (){
     return (
       <div className="body" >
       hi
-        <BrowserRouter basename="/tungstencocktails">
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}>{appLogo()}</NavBar><hr id="menu-hr"/>
             <Switch>
               <Route path="/about" />

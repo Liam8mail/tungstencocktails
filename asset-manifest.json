@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/tungstencocktails/static/css/main.16b2c9e4.chunk.css",
-    "main.js": "/tungstencocktails/static/js/main.640a8a68.chunk.js",
-    "main.js.map": "/tungstencocktails/static/js/main.640a8a68.chunk.js.map",
+    "main.css": "/tungstencocktails/static/css/main.510b9f29.chunk.css",
+    "main.js": "/tungstencocktails/static/js/main.1588beb9.chunk.js",
+    "main.js.map": "/tungstencocktails/static/js/main.1588beb9.chunk.js.map",
     "runtime-main.js": "/tungstencocktails/static/js/runtime-main.b8574295.js",
     "runtime-main.js.map": "/tungstencocktails/static/js/runtime-main.b8574295.js.map",
     "static/js/2.d7963b1f.chunk.js": "/tungstencocktails/static/js/2.d7963b1f.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.e23d3cdb.chunk.js": "/tungstencocktails/static/js/3.e23d3cdb.chunk.js",
     "static/js/3.e23d3cdb.chunk.js.map": "/tungstencocktails/static/js/3.e23d3cdb.chunk.js.map",
     "index.html": "/tungstencocktails/index.html",
-    "static/css/main.16b2c9e4.chunk.css.map": "/tungstencocktails/static/css/main.16b2c9e4.chunk.css.map",
+    "static/css/main.510b9f29.chunk.css.map": "/tungstencocktails/static/css/main.510b9f29.chunk.css.map",
     "static/js/2.d7963b1f.chunk.js.LICENSE.txt": "/tungstencocktails/static/js/2.d7963b1f.chunk.js.LICENSE.txt",
     "static/media/TungstenLogo-Final-01.bcbbf5fb.png": "/tungstencocktails/static/media/TungstenLogo-Final-01.bcbbf5fb.png",
     "static/media/TungstenLogo_s.db898371.png": "/tungstencocktails/static/media/TungstenLogo_s.db898371.png",
@@ -24,7 +24,7 @@
   "entrypoints": [
     "static/js/runtime-main.b8574295.js",
     "static/js/2.d7963b1f.chunk.js",
-    "static/css/main.16b2c9e4.chunk.css",
-    "static/js/main.640a8a68.chunk.js"
+    "static/css/main.510b9f29.chunk.css",
+    "static/js/main.1588beb9.chunk.js"
   ]
 }

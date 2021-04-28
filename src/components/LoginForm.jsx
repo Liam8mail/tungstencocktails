@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { login } from '../services/authService';
 import { createAccount } from '../services/userService';
 import useFormInput from '../hooks/useFormInput';
-import { loggingWait } from '../util/imgPicker';
-import { useLocation} from 'react-router-dom';
+import { loadUrl } from '../util/imgPicker';
+import { Link } from 'react-router-dom';
+import '../style/style.css';
 
+// responsible for logging in or creating a user account and then navigating the user to the page that they came from. 
 
 export default function Loginform(props) {
     
@@ -15,52 +17,56 @@ export default function Loginform(props) {
 
     const submit = () => setStatus('logging'); // form submit button funtion call
     const [status, setStatus] = useState('idle');
+    const [error, setError] = useState('');
 
-    const location = useLocation().pathname;
+    const location = props.location.pathname;
     const signupPage = '/signup';
     const loginPage = '/login';
     
     useEffect(() => {
-        if (status === 'idle' || status ==='error')
-        return;
+        if (status === 'idle' || status ==='error') return;
         let isMounted = true;
         
         async function update(){
             try{ //email: "sally@gmail.com", password: "tungsten"
                 setStatus('logging'); //update display for display render loading image
-
                 
-                if (location === loginPage){
-                    
-                    const result = await login({email: email.value, password: password.value}); // auth user details as json object
-                    if (result && isMounted){
-                        props.history.replace('/'); // https://reactrouter.com/web/api/history // remove login page from history 
-                        props.history.go(-1); // return to the page they where viewing before logging in
-                        setStatus('complete');
-                        console.log(result);
-                        return props.isAuthed(true);
+                switch (location){
+                    case signupPage:
+                        await createAccount({name: name.value,email: email.value, password: password.value, pantry: [] }); //new userJson with only mandatory values
+                        await login({email: email.value, password: password.value}); // Added Quick auto login implementaion // 
+                        if (isMounted){
+                            props.history.replace('/');
+                            props.history.go(-1);
+                            //console.log('created');
+                        }
+                        break;
+
+                    case loginPage:
+                        const result = await login({email: email.value, password: password.value}); // auth user details as json object
+                        if (result && isMounted){ // Will do for now
+                        }
+                        break;
+                        default: break;
                     }
                     
-                }
-                else if (location === signupPage){
-                    const result = await createAccount({name: name.value,email: email.value, password: password.value, pantry: [] }); //new userJson with only mandatory values
                     props.history.replace('/'); // https://reactrouter.com/web/api/history // remove login page from history 
-                    props.history.go(-2); // return to the page they where viewing before logging in
+                    props.history.go(-1); // return to the page they where viewing before logging in
                     setStatus('complete');
-                    console.log(result);
-                    return props.isAuthed(true);
+                    //console.log('logged');
+                    props.isAuthed(true);
+
                 }
-                
-              }
               catch(err){
                 
                 if (err.response && err.response.status ===400){
                   setStatus('error'); // Need To Implement
-                  console.log(err.response.data); // use this result to display reason : ie password too short etc 
+                  setError(err.response.data);
+                  //console.log(err.response.data); // use this result to display reason : ie password too short etc // Should do client side validation
                   return err.response.data; 
                 }
                 setStatus('error');
-                console.log(err) // Internal Error
+                //console.log(err) // Internal Server Error // display friendly error
                 return err 
                 
               }
@@ -73,63 +79,60 @@ export default function Loginform(props) {
         };
 
         
-      },[status, email.value, password.value, props,location,name.value]); // dependencys
+      },[status, email.value, password.value, props,location, name.value]); // dependencys
       
-
-      //if (location === '/login') // For login 
+      // standard form nothing new here.
+     
       return (
           
-          <div>
-            {location === loginPage  && <h1 style={{textAlign:'center'}}>Login</h1>}
-            {location === signupPage  && <h1 style={{textAlign:'center'}}>Create Account</h1>}
-                {status === 'logging' && loggingWait()} {/* conditional for loading image upon submit log request */}
-                {status === 'idle' && <>
+          <div className="boxme">
+          {/* conditionally render header */}
+            {location === loginPage ? <h1 style={{textAlign:'center'}}>Login</h1> : location === signupPage? <h1 style={{textAlign:'center'}}>Create Account</h1> : <p></p>} 
+                <div>
+                    {loggingImages(status)} {/* {function below} */}
 
-
-                 {/* Please Fix This Shitty Form XD*/}
-
-                <img
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                alt="profile-img"
-                className="profile-img-card"
-                style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}}
-                />
                      {location === signupPage &&
                     <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
-                        <label htmlFor="InputName">Name  </label>
-                        <input {...name} type="default" className="form-control" id="InputName" aria-describedby="nameHelp"></input>
-                        <small id="emailHelp" className="form-text text-muted"></small>
+                        <input {...name} type="text" className="form-control" id="InputName" aria-describedby="nameHelp" placeholder="Name"></input>
+                        <small id="nameHelp" className="form-text text-muted" role="alert"></small>
                     </div>}
 
                     <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
-                        <label htmlFor="InputEmail">Email address  </label>
-                        <input {...email} type="default" className="form-control" id="InputEmail" aria-describedby="emailHelp"></input>
+                       
+                        <input {...email} type="text" className="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Email"></input>
                         <small id="emailHelp" className="form-text text-muted"></small>
                     </div>
 
 
                     <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
-                        <label htmlFor="InputPassword">Password   </label>
-                        <input {...password} type="password" className="form-control" id="InputPassword"></input>
+                      
+                        <input {...password} type="password" className="form-control" id="InputPassword" placeholder="Password"></input>
                         <small id="passwordHelp" className="form-text text-muted"></small>
                     </div>
 
+                    <div style={{textAlign:'center', margin:'16px 0 0 0'}}>
+                        <small id="help" className="form-text text-muted">{error}</small>
+                    </div>
 
-                    <div style={{display: "flex", justifyContent: "center",textAlign: "center", margin:'32px'}}>
-                        <button onClick={() => submit()} type="submit" className="btn btn-primary" >Submit</button>
+
+                    <div>
+                        <button onClick={() => submit()} type="submit" className="signIn" >Sign in</button>
                     </div> 
-                        <div style={{textAlign: "center",  margin:'64px 0 0 0'}}>
-                        {location === loginPage && <a style={{margin:'32px'}} href="signup">Create account</a>}
-                        {location === signupPage && <a style={{margin:'32px'}} href="login">previous</a>}
-                        </div>
-                {/* --------- */}
+                        <div>
+                        {location === loginPage ? <Link to="/signup" className="create-link">Create Account</Link> : location === signupPage ? <Link to="/login">previous</Link> : <p></p>}
+                    </div>
 
 
-            </>
-            }
+            </div>
+            
         </div>
     );
 
     
+}
+
+const loggingImages = (status) => { // function that returns the log in image conditionally based on login status
+    return <img src={status === 'idle'? "//ssl.gstatic.com/accounts/ui/avatar_2x.png" : loadUrl} alt="profile-img" className="profile-img-card"
+    />
 }
 

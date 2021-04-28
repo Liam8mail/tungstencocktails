@@ -1,4 +1,5 @@
 import {useState} from 'react';
+// simple hook for hadnling form onchange and storing the input values. 
 
 function useFormInput(props) {   // https://reactjs.org/docs/hooks-intro.html --> At React Conf 2018
     

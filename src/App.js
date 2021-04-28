@@ -8,6 +8,7 @@ import { getToken } from './services/authService';
 import NavBar from "./components/SimpleNav";
 import { ping } from './services/userService';
 import { appLogo } from './util/imgPicker';
+import { BrowserRouter } from 'react-router-dom';
 
 
 // responsible for rendering navbar, controlling online status and rendering the routes conditionally. 
@@ -26,6 +27,8 @@ function App (){
 
     return (
       <div className="body" >
+      hi
+        <BrowserRouter>
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}>{appLogo()}</NavBar><hr id="menu-hr"/>
             <Switch>
               <Route path="/about" />
@@ -36,6 +39,7 @@ function App (){
             { onLineStatus && <Route path="/pantry" render={(props) => (<Pantry {...props} isAuthed={onLineStatus} />)}/>}
             { onLineStatus && <Route path={"/fav/recipes"} render={(props) => (<Fav {...props} isAuthed={onLineStatus} setDisplay={"Favourites"}/>)}/>}
             </Switch>
+          </BrowserRouter>
       </div>
     );
   }

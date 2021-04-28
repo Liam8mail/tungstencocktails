@@ -49,10 +49,10 @@ class RecipeResults extends Component {
 
         this.setState({status: "received"});
 
-        window.scrollTo({
-          top: window.innerHeight*0.33,
-          behavior: 'smooth'
-        });
+        // window.scrollTo({
+        //   top: window.innerHeight*0.33,
+        //   behavior: 'smooth'
+        // });
         
       
       } catch (error) {

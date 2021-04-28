@@ -23,16 +23,16 @@ function RecipeViewer (props) {
 
       
   
-  function ScrollToTopOnMount() {
-    useEffect(() => {
-      window.scrollTo({
-        top: window.innerHeight*0.33,
-        behavior: 'smooth'
-      });
-    }, []);
+  // function ScrollToTopOnMount() {
+  //   useEffect(() => {
+  //     window.scrollTo({
+  //       top: window.innerHeight*0.33,
+  //       behavior: 'smooth'
+  //     });
+  //   }, []);
   
-    return null;
-  }
+  //   return null;
+  // }
 
   const handleImageLoaded = () => { // changes img source from placeholder once image has loaded
     if(!loaded){
@@ -122,7 +122,7 @@ function RecipeViewer (props) {
       {backButton(returnFromRecipe, backButtonText)}    
       {(status === 'idle' || status === 'requesting')  && loadRecipes()}   
       {status === 'received' && <React.Fragment> {/* display details once api has been sucessfully loaded */ } 
-          <ScrollToTopOnMount/>
+          {/* <ScrollToTopOnMount/> */}
 
           <div className="recipeImage" >
             <h1>{drink.strDrink}</h1><br />

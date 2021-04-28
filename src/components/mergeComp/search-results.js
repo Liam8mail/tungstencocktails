@@ -10,12 +10,12 @@ class SearchResults extends Component {
     };
   }
 
-  componentDidMount(){
-    window.scrollTo({
-      top: window.innerHeight*0.33,
-      behavior: 'smooth'
-    });
-  }
+  // componentDidMount(){
+  //   window.scrollTo({
+  //     top: window.innerHeight*0.33,
+  //     behavior: 'smooth'
+  //   });
+  // }
   
   // This was the first button handler in my code. Hence the basic name. It exists in App.js, and triggers a couple of other functions. Those functions add the chosen filter to the state filters list, and remove it from the cocktailIngredList
   render() {

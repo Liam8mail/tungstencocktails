@@ -122,7 +122,7 @@ function RecipeViewer (props) {
       {backButton(returnFromRecipe, backButtonText)}    
       {(status === 'idle' || status === 'requesting')  && loadRecipes()}   
       {status === 'received' && <React.Fragment> {/* display details once api has been sucessfully loaded */ } 
-          {/* <ScrollToTopOnMount/> */}
+        
 
           <div className="recipeImage" >
             <h1>{drink.strDrink}</h1><br />

@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.83fc6ff9.chunk.css",
-    "main.js": "/static/js/main.54cf409b.chunk.js",
-    "main.js.map": "/static/js/main.54cf409b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c5fe21e1.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c5fe21e1.js.map",
-    "static/js/2.d7963b1f.chunk.js": "/static/js/2.d7963b1f.chunk.js",
-    "static/js/2.d7963b1f.chunk.js.map": "/static/js/2.d7963b1f.chunk.js.map",
-    "static/js/3.e23d3cdb.chunk.js": "/static/js/3.e23d3cdb.chunk.js",
-    "static/js/3.e23d3cdb.chunk.js.map": "/static/js/3.e23d3cdb.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.83fc6ff9.chunk.css.map": "/static/css/main.83fc6ff9.chunk.css.map",
-    "static/js/2.d7963b1f.chunk.js.LICENSE.txt": "/static/js/2.d7963b1f.chunk.js.LICENSE.txt",
-    "static/media/TungstenLogo-Final-01.bcbbf5fb.png": "/static/media/TungstenLogo-Final-01.bcbbf5fb.png",
-    "static/media/TungstenLogo_s.db898371.png": "/static/media/TungstenLogo_s.db898371.png",
-    "static/media/TungstenText-01.80597e9e.png": "/static/media/TungstenText-01.80597e9e.png",
-    "static/media/heart-white.5ea40eec.svg": "/static/media/heart-white.5ea40eec.svg",
-    "static/media/question-white.882cf8ba.svg": "/static/media/question-white.882cf8ba.svg",
-    "static/media/style.css": "/static/media/search-white.776b1209.svg",
-    "static/media/save-white.84e71e7f.svg": "/static/media/save-white.84e71e7f.svg",
-    "static/media/user-white.a171912b.svg": "/static/media/user-white.a171912b.svg"
+    "main.css": "/tungstencocktails/static/css/main.16b2c9e4.chunk.css",
+    "main.js": "/tungstencocktails/static/js/main.640a8a68.chunk.js",
+    "main.js.map": "/tungstencocktails/static/js/main.640a8a68.chunk.js.map",
+    "runtime-main.js": "/tungstencocktails/static/js/runtime-main.b8574295.js",
+    "runtime-main.js.map": "/tungstencocktails/static/js/runtime-main.b8574295.js.map",
+    "static/js/2.d7963b1f.chunk.js": "/tungstencocktails/static/js/2.d7963b1f.chunk.js",
+    "static/js/2.d7963b1f.chunk.js.map": "/tungstencocktails/static/js/2.d7963b1f.chunk.js.map",
+    "static/js/3.e23d3cdb.chunk.js": "/tungstencocktails/static/js/3.e23d3cdb.chunk.js",
+    "static/js/3.e23d3cdb.chunk.js.map": "/tungstencocktails/static/js/3.e23d3cdb.chunk.js.map",
+    "index.html": "/tungstencocktails/index.html",
+    "static/css/main.16b2c9e4.chunk.css.map": "/tungstencocktails/static/css/main.16b2c9e4.chunk.css.map",
+    "static/js/2.d7963b1f.chunk.js.LICENSE.txt": "/tungstencocktails/static/js/2.d7963b1f.chunk.js.LICENSE.txt",
+    "static/media/TungstenLogo-Final-01.bcbbf5fb.png": "/tungstencocktails/static/media/TungstenLogo-Final-01.bcbbf5fb.png",
+    "static/media/TungstenLogo_s.db898371.png": "/tungstencocktails/static/media/TungstenLogo_s.db898371.png",
+    "static/media/TungstenText-01.80597e9e.png": "/tungstencocktails/static/media/TungstenText-01.80597e9e.png",
+    "static/media/heart-white.5ea40eec.svg": "/tungstencocktails/static/media/heart-white.5ea40eec.svg",
+    "static/media/question-white.882cf8ba.svg": "/tungstencocktails/static/media/question-white.882cf8ba.svg",
+    "static/media/style.css": "/tungstencocktails/static/media/search-white.776b1209.svg",
+    "static/media/save-white.84e71e7f.svg": "/tungstencocktails/static/media/save-white.84e71e7f.svg",
+    "static/media/user-white.a171912b.svg": "/tungstencocktails/static/media/user-white.a171912b.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.c5fe21e1.js",
+    "static/js/runtime-main.b8574295.js",
     "static/js/2.d7963b1f.chunk.js",
-    "static/css/main.83fc6ff9.chunk.css",
-    "static/js/main.54cf409b.chunk.js"
+    "static/css/main.16b2c9e4.chunk.css",
+    "static/js/main.640a8a68.chunk.js"
   ]
 }

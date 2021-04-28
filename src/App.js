@@ -27,8 +27,6 @@ function App (){
 
     return (
       <div className="body" >
-      hi
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <NavBar onLineStatus={onLineStatus} setOnlineStatus={setOnlineStatus}>{appLogo()}</NavBar><hr id="menu-hr"/>
             <Switch>
               <Route path="/about" />
@@ -39,7 +37,6 @@ function App (){
             { onLineStatus && <Route path="/pantry" render={(props) => (<Pantry {...props} isAuthed={onLineStatus} />)}/>}
             { onLineStatus && <Route path={"/fav/recipes"} render={(props) => (<Fav {...props} isAuthed={onLineStatus} setDisplay={"Favourites"}/>)}/>}
             </Switch>
-          </BrowserRouter>
       </div>
     );
   }

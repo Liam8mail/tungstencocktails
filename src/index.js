@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-  <App />
+  <BrowserRouter basename={process.env.PUBLIC_URL}><App /></BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
